@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>12</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>444</x>
+      <y>204</y>
+      <w>168</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>Card
+-
+- suit : Suit
+- rank : Rank
+- deck : Deck
+- player : Player
+-
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>864</x>
+      <y>204</y>
+      <w>264</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>Deck
+-
+- cards : List&lt;Card&gt;
+- game : Game
+-
++ ShuffleCards();</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>600</x>
+      <y>252</y>
+      <w>288</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..1
+m2=0..52
+&lt; Exists of</panel_attributes>
+    <additional_attributes>220.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>444</x>
+      <y>504</y>
+      <w>288</w>
+      <h>300</h>
+    </coordinates>
+    <panel_attributes>Player
+-
+- playerNumber : int	
+- playerName : string
+- wins : int
+- games : int
+- currentGame : Game
+- cardsOnHand : Queue&lt;Card&gt;
+-
++ResetCardsOnHand()
++RecieveCard()
++PlayCard()
++AddScore(bool win)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>156</x>
+      <y>204</y>
+      <w>168</w>
+      <h>156</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Enumeration&gt;&gt;
+Suit
+--
+Hearts
+Diamonds
+Clubs
+Cloves</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>156</x>
+      <y>396</y>
+      <w>168</w>
+      <h>324</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Enumeration&gt;&gt;
+Rank
+--
+One
+Two
+Three
+Four
+Five
+Six
+Seven
+Eight
+Nine
+Ten
+Jack
+Queen
+King
+Ace</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>852</x>
+      <y>504</y>
+      <w>288</w>
+      <h>348</h>
+    </coordinates>
+    <panel_attributes>Game
+-
+- deck : Deck
+- playerOne : Player
+- playerOneCards : Stack&lt;Cards&gt;
+- playerTwo : Player
+- playerTwoCards : Stack&lt;Cards&gt;
+- winner : Player
+-
++ StartGame(Player1, Player2)
+- DealCards()
+- DetermineStartPlayer()
++ PlayRound()
++ EndGame()
+- DetermineHighest(Card1, Card2)
+- HandCardsToWinningPlayer(Player)
+- PlayWar()
+- FinishGame()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>948</x>
+      <y>360</y>
+      <w>84</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+has ^</panel_attributes>
+    <additional_attributes>10.0;120.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>468</x>
+      <y>360</y>
+      <w>144</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..1
+m2=0..52
+has on hand ^</panel_attributes>
+    <additional_attributes>10.0;120.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>720</x>
+      <y>564</y>
+      <w>156</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=2
+m2=0..1
+Plays &gt; </panel_attributes>
+    <additional_attributes>10.0;20.0;110.0;20.0</additional_attributes>
+  </element>
+</diagram>
