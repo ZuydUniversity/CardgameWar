@@ -12,8 +12,8 @@ Oorlog is een zeer eenvoudig spel zonder veel strategie of tactiek, maar het is 
 
 ## Requirements
 ### Functionele requirements
-- Een speler kan worden aangemaakt
-- Een speler kan worden verwijderd
+- Een speler wordt aangemaakt
+- Een speler wordt verwijderd
 - Een speler heeft een unieke naam
 - De gegevens van de speler worden opgeslagen in de database voor toekomstig gebruik
 - Een nieuw spel kan gestart worden
