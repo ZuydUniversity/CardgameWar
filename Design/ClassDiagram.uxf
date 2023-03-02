@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>12</zoom_level>
+  <zoom_level>10</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>444</x>
-      <y>204</y>
-      <w>168</w>
-      <h>168</h>
+      <x>520</x>
+      <y>40</y>
+      <w>140</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>Card
 -
@@ -22,10 +22,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>864</x>
-      <y>204</y>
-      <w>264</w>
-      <h>168</h>
+      <x>870</x>
+      <y>40</y>
+      <w>220</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>Deck
 -
@@ -38,10 +38,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>600</x>
-      <y>252</y>
-      <w>288</w>
-      <h>60</h>
+      <x>650</x>
+      <y>80</y>
+      <w>240</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=0..1
@@ -52,10 +52,10 @@ m2=0..52
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>444</x>
-      <y>504</y>
-      <w>288</w>
-      <h>300</h>
+      <x>520</x>
+      <y>290</y>
+      <w>240</w>
+      <h>250</h>
     </coordinates>
     <panel_attributes>Player
 -
@@ -69,16 +69,17 @@ m2=0..52
 +ResetCardsOnHand()
 +RecieveCard()
 +PlayCard()
++PlayWarCards()
 +AddScore(bool win)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>156</x>
-      <y>204</y>
-      <w>168</w>
-      <h>156</h>
+      <x>280</x>
+      <y>40</y>
+      <w>140</w>
+      <h>130</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Enumeration&gt;&gt;
 Suit
@@ -92,10 +93,10 @@ Cloves</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>156</x>
-      <y>396</y>
-      <w>168</w>
-      <h>324</h>
+      <x>280</x>
+      <y>200</y>
+      <w>140</w>
+      <h>270</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Enumeration&gt;&gt;
 Rank
@@ -119,10 +120,10 @@ Ace</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>852</x>
-      <y>504</y>
-      <w>288</w>
-      <h>348</h>
+      <x>860</x>
+      <y>290</y>
+      <w>240</w>
+      <h>290</h>
     </coordinates>
     <panel_attributes>Game
 -
@@ -141,16 +142,17 @@ Ace</panel_attributes>
 - DetermineHighest(Card1, Card2)
 - HandCardsToWinningPlayer(Player)
 - PlayWar()
-- FinishGame()</panel_attributes>
+- FinishGame()
++ GetWinner()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>948</x>
-      <y>360</y>
-      <w>84</w>
-      <h>168</h>
+      <x>940</x>
+      <y>170</y>
+      <w>70</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
@@ -161,10 +163,10 @@ has ^</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>468</x>
-      <y>360</y>
-      <w>144</w>
-      <h>168</h>
+      <x>540</x>
+      <y>170</y>
+      <w>120</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=0..1
@@ -175,15 +177,42 @@ has on hand ^</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>720</x>
-      <y>564</y>
-      <w>156</w>
-      <h>60</h>
+      <x>750</x>
+      <y>340</y>
+      <w>130</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=2
 m2=0..1
 Plays &gt; </panel_attributes>
     <additional_attributes>10.0;20.0;110.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>520</x>
+      <y>610</y>
+      <w>240</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>Cheater
+-
+
+-
++PlayCard()
++PlayWarCards()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>610</x>
+      <y>530</y>
+      <w>30</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
   </element>
 </diagram>
