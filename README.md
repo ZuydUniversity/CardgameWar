@@ -38,7 +38,7 @@ MoSCoW in afkorting toegevoegd
 - (C) De speler bekijkt een ranking met alle spelers en hun score van hoge score naar lage score
 - (C) Het spel kan automatisch gespeeld worden zonder gebruikers interactie (kaarten worden automatisch gelegd)
 - (C) Een speler kan een valsspeler zijn
-- (C) De valsspeler maakt bij het spelen van een kaart een kaart aan die hoger is dan de door de tegenstander gespeelde kaart en speelt deze
+- (C) De valsspeler speelt in zijn beurt een kaart uit zijn stapel die net hoger is dan de door de tegenstander gespeelde kaart, indien beschikbaar
 
 
 ### Niet functionele requirements
