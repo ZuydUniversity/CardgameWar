@@ -54,4 +54,8 @@ MoSCoW in afkorting toegevoegd
 
 ### Usecase diagram
 
+### Usecase desciptions
+
 ### Sequence diagrams
+
+### Wireframes
