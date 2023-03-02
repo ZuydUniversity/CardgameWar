@@ -1,4 +1,4 @@
-﻿namespace OorlogUI
+﻿namespace WarUI
 {
     partial class AnderForm
     {

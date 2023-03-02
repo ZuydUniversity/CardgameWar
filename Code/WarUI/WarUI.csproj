@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Cardgame\Oorlog.csproj" />
+    <ProjectReference Include="..\War\War.csproj" />
   </ItemGroup>
 
 </Project>

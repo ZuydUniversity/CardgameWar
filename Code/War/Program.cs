@@ -1,4 +1,4 @@
-﻿namespace Oorlog
+﻿namespace War
 {
     public class Program
     {

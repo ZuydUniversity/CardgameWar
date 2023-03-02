@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oorlog", "Cardgame\Oorlog.csproj", "{63ED8A8C-CD31-4F8F-BC95-B18F60AEFA2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "War", "War\War.csproj", "{63ED8A8C-CD31-4F8F-BC95-B18F60AEFA2E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OorlogUI", "CardGameUI\OorlogUI.csproj", "{031F311C-CD22-40C6-AED1-B893874B5C57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WarUI", "WarUI\WarUI.csproj", "{031F311C-CD22-40C6-AED1-B893874B5C57}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

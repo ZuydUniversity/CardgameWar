@@ -1,6 +1,6 @@
-using Oorlog;
+using War;
 
-namespace OorlogUI
+namespace WarUI
 {
     public partial class MainForm : Form
     {

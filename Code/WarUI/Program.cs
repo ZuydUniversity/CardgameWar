@@ -1,4 +1,4 @@
-namespace OorlogUI
+namespace WarUI
 {
     internal static class Program
     {
