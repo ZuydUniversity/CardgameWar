@@ -1,4 +1,4 @@
-# CardGameOorlog
+# CardGameWar
 
 ## Speluitleg
 Oorlog is een kaartspel dat meestal door twee spelers wordt gespeeld en het doel is om alle kaarten te verzamelen. Hier zijn de regels voor het kaartspel oorlog:
