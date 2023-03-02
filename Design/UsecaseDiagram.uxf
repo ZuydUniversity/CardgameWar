@@ -17,8 +17,8 @@
     <coordinates>
       <x>270</x>
       <y>100</y>
-      <w>530</w>
-      <h>570</h>
+      <w>510</w>
+      <h>650</h>
     </coordinates>
     <panel_attributes>CardgameWar
 halign=left</panel_attributes>
@@ -28,7 +28,7 @@ halign=left</panel_attributes>
     <id>UMLActor</id>
     <coordinates>
       <x>110</x>
-      <y>470</y>
+      <y>590</y>
       <w>120</w>
       <h>110</h>
     </coordinates>
@@ -41,16 +41,16 @@ halign=left</panel_attributes>
       <x>160</x>
       <y>300</y>
       <w>30</w>
-      <h>180</h>
+      <h>280</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;160.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;260.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
       <x>330</x>
-      <y>150</y>
+      <y>200</y>
       <w>140</w>
       <h>70</h>
     </coordinates>
@@ -61,7 +61,7 @@ halign=left</panel_attributes>
     <id>UMLUseCase</id>
     <coordinates>
       <x>330</x>
-      <y>250</y>
+      <y>300</y>
       <w>140</w>
       <h>70</h>
     </coordinates>
@@ -72,7 +72,7 @@ halign=left</panel_attributes>
     <id>UMLUseCase</id>
     <coordinates>
       <x>610</x>
-      <y>190</y>
+      <y>240</y>
       <w>140</w>
       <h>70</h>
     </coordinates>
@@ -83,7 +83,7 @@ halign=left</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>460</x>
-      <y>220</y>
+      <y>270</y>
       <w>170</w>
       <h>80</h>
     </coordinates>
@@ -95,7 +95,7 @@ halign=left</panel_attributes>
     <id>UMLUseCase</id>
     <coordinates>
       <x>330</x>
-      <y>360</y>
+      <y>410</y>
       <w>140</w>
       <h>70</h>
     </coordinates>
@@ -106,7 +106,7 @@ halign=left</panel_attributes>
     <id>UMLUseCase</id>
     <coordinates>
       <x>330</x>
-      <y>460</y>
+      <y>550</y>
       <w>140</w>
       <h>70</h>
     </coordinates>
@@ -117,7 +117,7 @@ halign=left</panel_attributes>
     <id>UMLUseCase</id>
     <coordinates>
       <x>610</x>
-      <y>290</y>
+      <y>340</y>
       <w>140</w>
       <h>70</h>
     </coordinates>
@@ -129,7 +129,7 @@ autoplay</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>460</x>
-      <y>280</y>
+      <y>330</y>
       <w>170</w>
       <h>60</h>
     </coordinates>
@@ -141,7 +141,7 @@ autoplay</panel_attributes>
     <id>UMLUseCase</id>
     <coordinates>
       <x>610</x>
-      <y>410</y>
+      <y>460</y>
       <w>140</w>
       <h>70</h>
     </coordinates>
@@ -152,7 +152,7 @@ autoplay</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>460</x>
-      <y>390</y>
+      <y>440</y>
       <w>170</w>
       <h>60</h>
     </coordinates>
@@ -161,22 +161,10 @@ autoplay</panel_attributes>
     <additional_attributes>150.0;40.0;10.0;10.0</additional_attributes>
   </element>
   <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>460</x>
-      <y>450</y>
-      <w>180</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>lt=.&gt;
-&lt;&lt;extends&gt;&gt;</panel_attributes>
-    <additional_attributes>160.0;10.0;10.0;40.0</additional_attributes>
-  </element>
-  <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>330</x>
-      <y>560</y>
+      <x>460</x>
+      <y>120</y>
       <w>140</w>
       <h>70</h>
     </coordinates>
@@ -188,55 +176,90 @@ leaderboard</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>190</x>
-      <y>180</y>
+      <y>220</y>
       <w>160</w>
-      <h>80</h>
+      <h>40</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>10.0;60.0;140.0;10.0</additional_attributes>
+    <additional_attributes>10.0;20.0;140.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>190</x>
       <y>230</y>
+      <w>160</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;140.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>190</x>
+      <y>230</y>
+      <w>160</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;140.0;210.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>190</x>
+      <y>230</y>
+      <w>160</w>
+      <h>370</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;140.0;350.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>190</x>
+      <y>140</y>
+      <w>290</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;100.0;270.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>380</x>
+      <y>470</y>
+      <w>100</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;includes&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>330</x>
+      <y>650</y>
+      <w>140</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>UC8: Play cheat
+card</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>190</x>
+      <y>630</y>
       <w>160</w>
       <h>70</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes>10.0;10.0;140.0;50.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>190</x>
-      <y>230</y>
-      <w>160</w>
-      <h>180</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>10.0;10.0;140.0;160.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>190</x>
-      <y>230</y>
-      <w>160</w>
-      <h>280</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>10.0;10.0;140.0;260.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>190</x>
-      <y>230</y>
-      <w>160</w>
-      <h>380</h>
-    </coordinates>
-    <panel_attributes/>
-    <additional_attributes>10.0;10.0;140.0;360.0</additional_attributes>
   </element>
 </diagram>

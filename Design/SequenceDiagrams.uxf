@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLSequenceAllInOne</id>
+    <coordinates>
+      <x>126</x>
+      <y>0</y>
+      <w>513</w>
+      <h>225</h>
+    </coordinates>
+    <panel_attributes>title=SD: Register player
+obj=:Player~a ACTOR EXECUTION
+obj=:Player~b CREATED_LATER EXECUTION
+
+a.&gt;b : Player(Name)
+b.&gt;a : Player;
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLSequenceAllInOne</id>
+    <coordinates>
+      <x>144</x>
+      <y>891</y>
+      <w>1035</w>
+      <h>342</h>
+    </coordinates>
+    <panel_attributes>title=SD: Play round
+obj=:Game~a 
+obj=:Player1~b 
+obj=:Player2~c
+
+gate-&gt;a.a1 :PlayRound(); on=a
+a-&gt;&gt;&gt;b : PlayCard(); on=b
+b.&gt;a : Card1; off=b;
+a-&gt;&gt;&gt;c : PlayCard(); on=c
+c.&gt;a : Card2; off=c;
+
+a-&gt;a + :DetermineHighest()
+a: [Card1 &gt; Card2]</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLSequenceAllInOne</id>
+    <coordinates>
+      <x>144</x>
+      <y>261</y>
+      <w>1125</w>
+      <h>621</h>
+    </coordinates>
+    <panel_attributes>title=SD: Start game
+obj=:Player1~a ACTOR EXECUTION
+obj=:Game~b 
+obj=:Deck~c CREATED_LATER EXECUTION
+obj=:Player1~d
+obj=:Player2~e
+a-&gt;&gt;&gt;b : StartGame(SecondPlayer); on=b
+b.&gt;c : Deck(); 
+
+b-&gt;&gt;&gt;c : ShuffleDeck();
+c.&gt;b; off=c
+combinedFragment=loop~loop1 b e; e:[Deck.Cards &gt; 0]
+	b-&gt;&gt;&gt;c : GiveCard(); on=c
+	c.&gt;b : Card; off=c
+	b-&gt;&gt;&gt;d : ReceiveCard(Card); on=d
+	d.&gt;b; off=d
+	b-&gt;&gt;&gt;c : GiveCard(); on=c
+	c.&gt;b : Card; off=c
+	b-&gt;&gt;&gt;e : ReceiveCard(Card); on=e
+	e.&gt;b; off=e
+--;
+b.&gt;a; off=b</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
