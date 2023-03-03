@@ -12,7 +12,7 @@ namespace War
 
         public Dealer(int id) : base(id) 
         {
-            this.DeckForTheGame = new Deck();
+            this.DeckForTheGame = new Deck(null);
         }
 
         public override Card? PlayCard()
@@ -21,7 +21,7 @@ namespace War
 
             if (resultaat == null) 
             {
-                return new Card() { Rank = "Ace", Suit = "Hearts" };
+                return new Card(Suit.Hearts, Rank.Ace, null);
             }
             else
             {

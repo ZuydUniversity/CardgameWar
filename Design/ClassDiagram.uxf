@@ -13,8 +13,8 @@
 -
 - suit : Suit
 - rank : Rank
-- deck : Deck
-- player : Player
+- deck? : Deck
+- player? : Player
 -
 </panel_attributes>
     <additional_attributes/>
@@ -34,7 +34,7 @@
 -
 + Deck()
 + void ShuffleCards();
-+ Card GiveCard();</panel_attributes>
++ Card GetCard();</panel_attributes>
     <additional_attributes/>
   </element>
   <element>

@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace War
 {
+    /// <summary>
+    /// Enum with all suits
+    /// </summary>
     public enum Suit
     {
-        Hearts, Clubs, Diamonds, Cloves
+        Hearts = 1,
+        Diamonds = 2,
+        Clubs = 3,
+        Cloves = 4
     }
 }

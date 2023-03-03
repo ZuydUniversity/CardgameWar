@@ -6,41 +6,71 @@ using System.Threading.Tasks;
 
 namespace War
 {
+    /// <summary>
+    /// A deck of cards
+    /// </summary>
     public class Deck
     {
-        public List<Card> Cards { get; set; }
+        /// <summary>
+        /// The cards
+        /// </summary>
+        private Queue<Card> Cards { get; set; }
+        /// <summary>
+        /// The game the deck is used in
+        /// </summary>
+        private Game Game { get; set; }
 
-        public Deck()
+        /// <summary>
+        /// Constructor: create the full deck of cards
+        /// </summary>
+        public Deck(Game game)
         {
-            Cards = new List<Card>();
+            // initialize
+            Game = game;
+            Cards = new Queue<Card>();
 
-            var c = new Card();
-            c.Rank = "jack";
-            c.Suit = "hearts";
-
-            for (int i = 1; i < 14; i++)
+            // create the deck
+            foreach (Suit s in Enum.GetValues(typeof(Suit)))
             {
-                Cards.Add(new Card() { Suit = "clubs", Rank = i.ToString() });
+                foreach (Rank r in Enum.GetValues(typeof(Rank)))
+                {
+                    Cards.Enqueue(new Card(s, r, this));
+                }
             }
-
-            Cards.Add(c);
         }
 
         /// <summary>
         /// Shuffle the cards
         /// </summary>
-        public void Shuffle()
+        public void ShuffleCards()
         {
+            var cardsToList = Cards.ToList();
             var random = new Random();
-            var newShuffledList = new List<Card>();
-            var listcCount = Cards.Count;
-            for (int i = 0; i < listcCount; i++)
+            var newQueue = new Queue<Card>();
+            var cnt = Cards.Count;
+            for (int i = 0; i < cnt; i++)
             {
-                var randomElementInList = random.Next(0, Cards.Count);
-                newShuffledList.Add(Cards[randomElementInList]);
-                Cards.Remove(Cards[randomElementInList]);
+                var randomElementInList = random.Next(0, cardsToList.Count);
+                newQueue.Enqueue(cardsToList[randomElementInList]);
+                cardsToList.Remove(cardsToList[randomElementInList]);
             }
-            Cards = newShuffledList;
+            Cards = newQueue;
+        }
+
+        /// <summary>
+        /// Give a 
+        /// </summary>
+        /// <returns>The card or null when no cards on deck</returns>
+        public Card? GetCard()
+        {
+            if (Cards.Count > 0)
+            {
+                var c = Cards.Dequeue();
+                // card will leave the deck so set to null
+                c.Deck = null;
+                return c;
+            }
+            return null;
         }
     }
 }
