@@ -22,7 +22,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>870</x>
+      <x>920</x>
       <y>40</y>
       <w>220</w>
       <h>140</h>
@@ -34,7 +34,7 @@
 -
 + Deck()
 + void ShuffleCards();
-+ Card GetCard();</panel_attributes>
++ Card? GetCard();</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -42,14 +42,14 @@
     <coordinates>
       <x>650</x>
       <y>80</y>
-      <w>240</w>
+      <w>290</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=0..1
 m2=0..52
 &lt; Exists of</panel_attributes>
-    <additional_attributes>220.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>270.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -123,7 +123,7 @@ Ace</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>860</x>
+      <x>910</x>
       <y>290</y>
       <w>240</w>
       <h>290</h>
@@ -152,7 +152,7 @@ Ace</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>940</x>
+      <x>990</x>
       <y>170</y>
       <w>70</w>
       <h>140</h>
@@ -182,14 +182,14 @@ has on hand ^</panel_attributes>
     <coordinates>
       <x>790</x>
       <y>340</y>
-      <w>90</w>
+      <w>140</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=2
 m2=0..1
 Plays &gt; </panel_attributes>
-    <additional_attributes>10.0;20.0;70.0;20.0</additional_attributes>
+    <additional_attributes>10.0;20.0;120.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
