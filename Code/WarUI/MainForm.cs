@@ -16,8 +16,7 @@ namespace WarUI
 
         private void buttonCreateDeck_Click(object sender, EventArgs e)
         {
-            TheDeck = new Deck(null);
-            TheDeck.ShuffleCards();
+
             Form form = new AnderForm();
             this.Hide();
             form.ShowDialog();

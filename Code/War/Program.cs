@@ -2,14 +2,12 @@
 {
     public class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             Console.WriteLine("Let's play war!");
 
-            Deck deck = new Deck(null);
-            deck.ShuffleCards();
-            
-            var tst = deck.GetCard();
+   
+ 
         }
     }
 }
