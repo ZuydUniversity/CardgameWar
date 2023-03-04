@@ -30,7 +30,7 @@ namespace War
         /// <summary>
         /// The current game of the player
         /// </summary>
-        private Game? CurrentGame { get; set; }
+        public Game? CurrentGame { private get; set; }
         /// <summary>
         /// The cards the player has on hand
         /// </summary>

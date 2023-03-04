@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>10</zoom_level>
+  <zoom_level>9</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>520</x>
-      <y>40</y>
-      <w>140</w>
-      <h>140</h>
+      <x>549</x>
+      <y>54</y>
+      <w>126</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>Card
 -
@@ -22,10 +22,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>920</x>
-      <y>40</y>
-      <w>220</w>
-      <h>140</h>
+      <x>909</x>
+      <y>54</y>
+      <w>198</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>Deck
 -
@@ -40,10 +40,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>650</x>
-      <y>80</y>
-      <w>290</w>
-      <h>50</h>
+      <x>666</x>
+      <y>90</y>
+      <w>261</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=0..1
@@ -54,10 +54,10 @@ m2=0..52
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>520</x>
-      <y>290</y>
-      <w>280</w>
-      <h>250</h>
+      <x>549</x>
+      <y>279</y>
+      <w>252</w>
+      <h>225</h>
     </coordinates>
     <panel_attributes>Player
 -
@@ -70,8 +70,8 @@ m2=0..52
 -
 + void ResetCardsOnHand()
 + void RecieveCard()
-+ Card PlayCard()
-+ List&lt;Card&gt; PlayWarCards()
++ Card? PlayCard()
++ Queue&lt;Card&gt;? PlayWarCards()
 + AddScore(bool win)
 </panel_attributes>
     <additional_attributes/>
@@ -79,27 +79,26 @@ m2=0..52
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>280</x>
-      <y>40</y>
-      <w>140</w>
-      <h>130</h>
+      <x>351</x>
+      <y>450</y>
+      <w>126</w>
+      <h>117</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Enumeration&gt;&gt;
-Suit
+PlayerTurn
 --
-Hearts
-Diamonds
-Clubs
-Cloves</panel_attributes>
+None
+PlayerOne
+PlayerTwo</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>280</x>
-      <y>200</y>
-      <w>140</w>
-      <h>270</h>
+      <x>351</x>
+      <y>198</y>
+      <w>126</w>
+      <h>243</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Enumeration&gt;&gt;
 Rank
@@ -123,10 +122,10 @@ Ace</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>910</x>
-      <y>290</y>
-      <w>240</w>
-      <h>290</h>
+      <x>900</x>
+      <y>279</y>
+      <w>216</w>
+      <h>261</h>
     </coordinates>
     <panel_attributes>Game
 -
@@ -136,13 +135,15 @@ Ace</panel_attributes>
 - playerTwo : Player
 - playerTwoCards : Stack&lt;Cards&gt;
 - winner : Player
+- turn : PlayerTurn
 -
-+ StartGame(Player1, Player2)
++ Game(Player1, Player2)
++ StartGame()
 - DealCards()
 - DetermineStartPlayer()
 + PlayRound()
 + EndGame()
-- DetermineHighest(Card1, Card2)
+- PlayerTurn DetermineHighest()
 - HandCardsToWinningPlayer(Player)
 - PlayWar()
 - FinishGame()
@@ -152,10 +153,10 @@ Ace</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>990</x>
-      <y>170</y>
-      <w>70</w>
-      <h>140</h>
+      <x>972</x>
+      <y>171</y>
+      <w>63</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
@@ -166,10 +167,10 @@ has ^</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>540</x>
-      <y>170</y>
-      <w>120</w>
-      <h>140</h>
+      <x>567</x>
+      <y>171</y>
+      <w>108</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=0..1
@@ -180,10 +181,10 @@ has on hand ^</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>790</x>
-      <y>340</y>
-      <w>140</w>
-      <h>50</h>
+      <x>792</x>
+      <y>324</y>
+      <w>126</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=2
@@ -194,28 +195,45 @@ Plays &gt; </panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>520</x>
-      <y>610</y>
-      <w>240</w>
-      <h>100</h>
+      <x>549</x>
+      <y>567</y>
+      <w>216</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>Cheater
 -
 
 -
-+PlayCard()
-+PlayWarCards()</panel_attributes>
++Card? PlayCard()
++Queue&lt;Card&gt;? PlayWarCards()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>610</x>
-      <y>530</y>
-      <w>30</w>
-      <h>100</h>
+      <x>630</x>
+      <y>495</y>
+      <w>27</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>351</x>
+      <y>72</y>
+      <w>126</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Enumeration&gt;&gt;
+Suit
+--
+Hearts
+Diamonds
+Clubs
+Cloves</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>

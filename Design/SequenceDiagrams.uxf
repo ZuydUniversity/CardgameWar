@@ -4,7 +4,7 @@
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates>
-      <x>126</x>
+      <x>36</x>
       <y>0</y>
       <w>513</w>
       <h>225</h>
@@ -22,7 +22,7 @@ b.&gt;a : Player; off=b
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates>
-      <x>126</x>
+      <x>36</x>
       <y>873</y>
       <w>1071</w>
       <h>477</h>
@@ -51,7 +51,7 @@ combinedFragment=loop~loop1 a b; a:[Player2Cards &gt; 0]
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates>
-      <x>126</x>
+      <x>36</x>
       <y>234</y>
       <w>1125</w>
       <h>621</h>
@@ -65,14 +65,14 @@ obj=:Player2~e
 a-&gt;&gt;&gt;b : StartGame(SecondPlayer); on=b
 b.&gt;c : Deck(); 
 
-b-&gt;&gt;&gt;c : ShuffleDeck();
+b-&gt;&gt;&gt;c : ShuffleCards();
 c.&gt;b; off=c
 combinedFragment=loop~loop1 b e; e:[Deck.Cards &gt; 0]
-	b-&gt;&gt;&gt;c : GiveCard(); on=c
+	b-&gt;&gt;&gt;c : GetCard(); on=c
 	c.&gt;b : Card; off=c
 	b-&gt;&gt;&gt;d : ReceiveCard(Card); on=d
 	d.&gt;b; off=d
-	b-&gt;&gt;&gt;c : GiveCard(); on=c
+	b-&gt;&gt;&gt;c : GetCard(); on=c
 	c.&gt;b : Card; off=c
 	b-&gt;&gt;&gt;e : ReceiveCard(Card); on=e
 	e.&gt;b; off=e
