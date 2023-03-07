@@ -25,7 +25,7 @@ b.&gt;a : Player; off=b
       <x>36</x>
       <y>873</y>
       <w>1071</w>
-      <h>477</h>
+      <h>504</h>
     </coordinates>
     <panel_attributes>title=SD: Play round (Player1 wins)
 obj=:Game~a 
@@ -44,7 +44,8 @@ combinedFragment=loop~loop1 a b; a:[Player2Cards &gt; 0]
 	a-&gt;&gt;&gt;b : ReceiveCard(Card); on=b
 	b.&gt;a; off=b
 	--;
-	
+
+a.&gt;gate; off=a
 </panel_attributes>
     <additional_attributes/>
   </element>

@@ -117,7 +117,11 @@ namespace War
             turn = (PlayerTurn)(r.Next(1) + 1);
         }
 
-        public void PlayRound()
+        /// <summary>
+        /// Play a round
+        /// </summary>
+        /// <returns>true when round played, false when game ended or winner.</returns>
+        public bool PlayRound()
         {
             if (endGame)
             {
@@ -127,12 +131,15 @@ namespace War
                 Deck = null;
                 PlayerOneCards = null;
                 PlayerTwoCards = null;
+                return false;
+            }
+            else if (Winner != null)
+            {
+                return false;
             }
             else
             {
                 // play a round
-
-                // todo hier gebleven
                 switch (turn)
                 {
                     case PlayerTurn.PlayerOne:
@@ -146,7 +153,28 @@ namespace War
                     default:
                         break;
                 }
+                // check win
+                var winner = DetermineHighest();
+                switch (winner)
+                {
+                    case PlayerTurn.None:
+                        // no winner so play war
+                        return PlayWar();
+                    case PlayerTurn.PlayerOne:
+                    case PlayerTurn.PlayerTwo:
+                        HandCardsToWinningPlayer(winner);
+                        break;
+                    default:
+                        break;
+                }
             }
+            return true;
+        }
+
+        private bool PlayWar()
+        {
+            // todo implementeren
+            return true;
         }
 
         /// <summary>

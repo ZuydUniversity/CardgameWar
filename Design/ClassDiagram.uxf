@@ -141,7 +141,7 @@ Ace</panel_attributes>
 + StartGame()
 - DealCards()
 - DetermineStartPlayer()
-+ PlayRound()
++ bool PlayRound()
 + EndGame()
 - PlayerTurn DetermineHighest()
 - HandCardsToWinningPlayer(Player)
