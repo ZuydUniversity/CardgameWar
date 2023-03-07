@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace War
+namespace War.Model
 {
     /// <summary>
     /// Represents the actual game to be played
@@ -40,7 +40,7 @@ namespace War
         /// Wich players turn? 1 or 2
         /// </summary>
         PlayerTurn turn = PlayerTurn.None;
-        
+
         /// <summary>
         /// While endGame is false the game continues
         /// </summary>
@@ -52,7 +52,7 @@ namespace War
                 throw new ArgumentNullException(nameof(playerOne));
             if (playerTwo == null)
                 throw new ArgumentNullException(nameof(playerTwo));
-            
+
             PlayerOne = playerOne;
             PlayerOne.CurrentGame = this;
             PlayerOneCards = new Stack<Card>();
@@ -75,7 +75,7 @@ namespace War
             Deck.ShuffleCards();
 
             //deal cards
-            this.DealCards();
+            DealCards();
         }
 
         /// <summary>

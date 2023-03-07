@@ -1,4 +1,4 @@
-﻿namespace War
+﻿namespace War.Model
 {
     public class Program
     {

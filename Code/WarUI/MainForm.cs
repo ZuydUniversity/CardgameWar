@@ -1,4 +1,4 @@
-using War;
+using War.Model;
 
 namespace WarUI
 {
@@ -16,6 +16,9 @@ namespace WarUI
 
         private void buttonCreateDeck_Click(object sender, EventArgs e)
         {
+            Deck d = new Deck(null);
+            d.ShuffleCards();
+
 
             Form form = new AnderForm();
             this.Hide();

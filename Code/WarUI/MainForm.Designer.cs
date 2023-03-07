@@ -33,9 +33,10 @@
             // 
             // buttonCreateDeck
             // 
-            buttonCreateDeck.Location = new Point(104, 74);
+            buttonCreateDeck.Location = new Point(26, 26);
+            buttonCreateDeck.Margin = new Padding(3, 2, 3, 2);
             buttonCreateDeck.Name = "buttonCreateDeck";
-            buttonCreateDeck.Size = new Size(209, 72);
+            buttonCreateDeck.Size = new Size(183, 54);
             buttonCreateDeck.TabIndex = 0;
             buttonCreateDeck.Text = "Create deck";
             buttonCreateDeck.UseVisualStyleBackColor = true;
@@ -43,10 +44,11 @@
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(700, 338);
             Controls.Add(buttonCreateDeck);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "MainForm";
             Text = "Card game";
             ResumeLayout(false);

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace War
+namespace War.Model
 {
     /// <summary>
     /// A deck of cards

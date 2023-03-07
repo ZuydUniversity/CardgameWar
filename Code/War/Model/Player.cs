@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace War
+namespace War.Model
 {
     /// <summary>
     /// Represents a player of the game
@@ -44,7 +44,7 @@ namespace War
         public Player(string playerName)
         {
             if (string.IsNullOrEmpty(playerName))
-            { 
+            {
                 throw new ArgumentNullException(nameof(playerName), playerName);
             }
             PlayerName = playerName;
@@ -72,7 +72,7 @@ namespace War
                 CardsOnHand.Enqueue(card);
             }
         }
-        
+
         /// <summary>
         /// Play the first card on hand
         /// </summary>
