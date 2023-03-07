@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             buttonCreateDeck = new Button();
+            dataGridViewPlayer = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewPlayer).BeginInit();
             SuspendLayout();
             // 
             // buttonCreateDeck
@@ -42,20 +44,33 @@
             buttonCreateDeck.UseVisualStyleBackColor = true;
             buttonCreateDeck.Click += buttonCreateDeck_Click;
             // 
+            // dataGridViewPlayer
+            // 
+            dataGridViewPlayer.CellBorderStyle = DataGridViewCellBorderStyle.Sunken;
+            dataGridViewPlayer.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewPlayer.Location = new Point(250, 26);
+            dataGridViewPlayer.Name = "dataGridViewPlayer";
+            dataGridViewPlayer.RowTemplate.Height = 25;
+            dataGridViewPlayer.Size = new Size(427, 215);
+            dataGridViewPlayer.TabIndex = 1;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(700, 338);
+            Controls.Add(dataGridViewPlayer);
             Controls.Add(buttonCreateDeck);
             Margin = new Padding(3, 2, 3, 2);
             Name = "MainForm";
             Text = "Card game";
+            ((System.ComponentModel.ISupportInitialize)dataGridViewPlayer).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
         private Button buttonCreateDeck;
+        private DataGridView dataGridViewPlayer;
     }
 }

@@ -14,19 +14,19 @@ namespace War.Model
         /// <summary>
         /// The unique number of the player
         /// </summary>
-        private int PlayerNumber { get; set; }
+        public int PlayerNumber { get; private set; }
         /// <summary>
         /// The unique name of the player
         /// </summary>
-        private string PlayerName { get; set; }
+        public string PlayerName { get; private set; }
         /// <summary>
         /// The number of wins of the player
         /// </summary>
-        private int Wins { get; set; }
+        public int Wins { get; private set; }
         /// <summary>
         /// The number of games the player played
         /// </summary>
-        private int Games { get; set; }
+        public int Games { get; private set; }
         /// <summary>
         /// The current game of the player
         /// </summary>
