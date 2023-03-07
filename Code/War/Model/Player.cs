@@ -52,6 +52,14 @@ namespace War.Model
             CardsOnHand = new Queue<Card>();
         }
 
+        public Player(int playerNumber, string playerName, int wins, int games) : this(playerName)
+        {
+            PlayerNumber = playerNumber;
+            playerName ??= string.Empty;
+            Wins = wins;
+            Games = games;
+        }
+
         /// <summary>
         /// Reset the cards on hand (empty)
         /// </summary>

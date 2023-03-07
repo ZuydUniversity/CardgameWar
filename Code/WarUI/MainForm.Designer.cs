@@ -30,6 +30,7 @@
         {
             buttonCreateDeck = new Button();
             dataGridViewPlayer = new DataGridView();
+            buttonLoadPlayers = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewPlayer).BeginInit();
             SuspendLayout();
             // 
@@ -54,11 +55,22 @@
             dataGridViewPlayer.Size = new Size(427, 215);
             dataGridViewPlayer.TabIndex = 1;
             // 
+            // buttonLoadPlayers
+            // 
+            buttonLoadPlayers.Location = new Point(29, 101);
+            buttonLoadPlayers.Name = "buttonLoadPlayers";
+            buttonLoadPlayers.Size = new Size(180, 53);
+            buttonLoadPlayers.TabIndex = 2;
+            buttonLoadPlayers.Text = "Load players";
+            buttonLoadPlayers.UseVisualStyleBackColor = true;
+            buttonLoadPlayers.Click += buttonLoadPlayers_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(700, 338);
+            Controls.Add(buttonLoadPlayers);
             Controls.Add(dataGridViewPlayer);
             Controls.Add(buttonCreateDeck);
             Margin = new Padding(3, 2, 3, 2);
@@ -72,5 +84,6 @@
 
         private Button buttonCreateDeck;
         private DataGridView dataGridViewPlayer;
+        private Button buttonLoadPlayers;
     }
 }

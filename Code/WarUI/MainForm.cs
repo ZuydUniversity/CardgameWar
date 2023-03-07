@@ -17,12 +17,16 @@ namespace WarUI
 
         private void buttonCreateDeck_Click(object sender, EventArgs e)
         {
-            
+
             //Form form = new AnderForm();
             //this.Hide();
             //form.ShowDialog();
             //this.Show();
         }
 
+        private void buttonLoadPlayers_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
