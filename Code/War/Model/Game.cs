@@ -22,7 +22,7 @@ namespace War.Model
         /// <summary>
         /// Cards played by player one. Stack because order should be contained (LIFO)
         /// </summary>
-        private Stack<Card> PlayerOneCards { get; set; }
+        private Stack<Card> PlayerOnePlayedCards { get; set; }
         /// <summary>
         /// Player two
         /// </summary>
@@ -30,7 +30,7 @@ namespace War.Model
         /// <summary>
         /// Cards played by player two. Stack because order should be contained (LIFO)
         /// </summary>
-        private Stack<Card> PlayerTwoCards { get; set; }
+        private Stack<Card> PlayerTwoPlayedCards { get; set; }
         /// <summary>
         /// The winner of the game, null when game in progress/ no winner
         /// </summary>
@@ -39,12 +39,12 @@ namespace War.Model
         /// <summary>
         /// Wich players turn? 1 or 2
         /// </summary>
-        PlayerTurn turn = PlayerTurn.None;
+        PlayerTurn turn;
 
         /// <summary>
         /// While endGame is false the game continues
         /// </summary>
-        bool endGame = false;
+        bool endGame;
 
         
         public Game(Player playerOne, Player playerTwo)
@@ -56,12 +56,14 @@ namespace War.Model
 
             PlayerOne = playerOne;
             PlayerOne.CurrentGame = this;
-            PlayerOneCards = new Stack<Card>();
+            PlayerOnePlayedCards = new Stack<Card>();
             PlayerTwo = playerTwo;
             PlayerTwo.CurrentGame = this;
-            PlayerTwoCards = new Stack<Card>();
+            PlayerTwoPlayedCards = new Stack<Card>();
 
             Winner = null;
+            endGame = false;
+            turn = PlayerTurn.None;
 
             Deck = new Deck(this);
             Deck.ShuffleCards();
@@ -76,6 +78,14 @@ namespace War.Model
             Winner = null;
             DetermineStartPlayer();
             DealCards();
+            while (Winner == null && endGame == false)
+            {
+                PlayRound();
+            }
+            if (endGame)
+            {
+                EndGame();
+            }
         }
 
         /// <summary>
@@ -119,68 +129,64 @@ namespace War.Model
         /// <summary>
         /// Play a round
         /// </summary>
-        /// <returns>true when round played, false when game ended or winner.</returns>
-        public bool PlayRound()
+        public void PlayRound()
         {
-            if (endGame)
+            // play a round
+            // stop as soon there is a winner
+            bool noGameWinner = true;
+            PlayerTurn roundWinner = PlayerTurn.None;
+            switch (turn)
             {
-                // the game is set to end so actually end the game
-                EndGame();
-                return false;
-            }
-            else if (Winner != null)
-            {
-                // there is a winner set so don't play the round, game finished
-                return false;
-            }
-            else
-            {
-                // play a round
-                // stop as soon there is a winner
-                bool noGameWinner = true;
-                PlayerTurn roundWinner = PlayerTurn.None;
-                switch (turn)
-                {
-                    case PlayerTurn.PlayerOne:
-                        noGameWinner = noGameWinner && PlayCard(PlayerOne, PlayerOneCards);
-                        if (noGameWinner)
-                        {
-                            noGameWinner = noGameWinner && PlayCard(PlayerTwo, PlayerTwoCards);
-                        }
-                        else
-                        {
-                            // player one has no cards so player two wins
-                            roundWinner = PlayerTurn.PlayerTwo;
-                        }
-                        break;
-                    case PlayerTurn.PlayerTwo:
-                        noGameWinner = noGameWinner && PlayCard(PlayerTwo, PlayerTwoCards);
-                        if (noGameWinner)
-                        {
-                            noGameWinner = noGameWinner && PlayCard(PlayerOne, PlayerOneCards);
-                        }
-                        else
-                        {
-                            // player two has nog cards so player one wins
-                            roundWinner= PlayerTurn.PlayerOne;
-                        }
-                        break;
-                    default:
-                        break;
-                }
-                if (noGameWinner)
-                {
-                    // check win
-                    roundWinner = DetermineHighest();
-                    if (roundWinner == PlayerTurn.None)
+                case PlayerTurn.PlayerOne:
+                    noGameWinner = noGameWinner && PlayCard(PlayerOne, PlayerOnePlayedCards);
+                    if (noGameWinner)
                     {
-                        // todo hier verder
-                        roundWinner = PlayWar();
+                        noGameWinner = noGameWinner && PlayCard(PlayerTwo, PlayerTwoPlayedCards);
+                        if (!noGameWinner)
+                        {
+                            roundWinner = PlayerTurn.PlayerOne;
+                            Winner = PlayerOne;
+                        }
                     }
-                }
-                HandCardsToWinningPlayer(roundWinner);
-                return noGameWinner;
+                    else
+                    {
+                        // player one has no cards so player two wins
+                        roundWinner = PlayerTurn.PlayerTwo;
+                        Winner = PlayerTwo;
+                    }
+                    break;
+                case PlayerTurn.PlayerTwo:
+                    noGameWinner = noGameWinner && PlayCard(PlayerTwo, PlayerTwoPlayedCards);
+                    if (noGameWinner)
+                    {
+                        noGameWinner = noGameWinner && PlayCard(PlayerOne, PlayerOnePlayedCards);
+                        if (!noGameWinner)
+                        {
+                            roundWinner = PlayerTurn.PlayerTwo;
+                            Winner = PlayerTwo;
+                        }
+                    }
+                    else
+                    {
+                        // player two has no cards so player one wins
+                        roundWinner = PlayerTurn.PlayerOne;
+                        Winner = PlayerOne;
+                    }
+                    break;
+                default:
+                    break;
             }
+            if (Winner == null)
+            {
+                // check win
+                roundWinner = DetermineHighest();
+                if (roundWinner == PlayerTurn.None)
+                {
+                    // todo hier verder
+                    roundWinner = PlayWar();
+                }
+            }
+            HandCardsToWinningPlayer(roundWinner);
         }
 
         /// <summary>
@@ -231,32 +237,36 @@ namespace War.Model
             switch (turn)
             {
                 case PlayerTurn.PlayerOne:
-                    noWinner = noWinner && PlayWarCards(PlayerOne, PlayerOneCards);
+                    noWinner = noWinner && PlayWarCards(PlayerOne, PlayerOnePlayedCards);
                     if (noWinner)
                     {
-                        noWinner = noWinner && PlayWarCards(PlayerTwo, PlayerTwoCards);
+                        noWinner = noWinner && PlayWarCards(PlayerTwo, PlayerTwoPlayedCards);
                         if (!noWinner)
                         {
+                            Winner = PlayerOne;
                             return PlayerTurn.PlayerOne;
                         }
                     }
                     else
                     {
+                        Winner = PlayerTwo;
                         return PlayerTurn.PlayerTwo;
                     }
                     break;
                 case PlayerTurn.PlayerTwo:
-                    noWinner = noWinner && PlayWarCards(PlayerTwo, PlayerTwoCards);
+                    noWinner = noWinner && PlayWarCards(PlayerTwo, PlayerTwoPlayedCards);
                     if (noWinner)
                     {
-                        noWinner = noWinner && PlayWarCards(PlayerOne, PlayerOneCards);
+                        noWinner = noWinner && PlayWarCards(PlayerOne, PlayerOnePlayedCards);
                         if (!noWinner)
                         {
+                            Winner = PlayerTwo;
                             return PlayerTurn.PlayerTwo;
                         }
                     }
                     else
                     {
+                        Winner = PlayerOne;
                         return PlayerTurn.PlayerOne;
                     }
                     break;
@@ -264,7 +274,7 @@ namespace War.Model
                     break;
             }
 
-            if (noWinner)
+            if (Winner == null)
             {
                 warWinner = DetermineHighest();
                 if (warWinner == PlayerTurn.None)
@@ -272,7 +282,7 @@ namespace War.Model
                     return PlayWar();
                 }
             }
-            return PlayerTurn.None;
+            return warWinner;
         }
 
         /// <summary>
@@ -327,16 +337,16 @@ namespace War.Model
             switch (winningPlayer)
             {
                 case PlayerTurn.PlayerOne:
-                    fromPlayer = PlayerOne;
-                    fromPlayerCards = PlayerOneCards;
-                    toPlayer = PlayerTwo;
-                    toPlayerCards = PlayerTwoCards;
+                    fromPlayer = PlayerTwo;
+                    fromPlayerCards = PlayerTwoPlayedCards;
+                    toPlayer = PlayerOne;
+                    toPlayerCards = PlayerOnePlayedCards;
                     break;
                 case PlayerTurn.PlayerTwo:
-                    fromPlayer = PlayerTwo;
-                    fromPlayerCards = PlayerTwoCards;
-                    toPlayer = PlayerOne;
-                    toPlayerCards = PlayerOneCards;
+                    fromPlayer = PlayerOne;
+                    fromPlayerCards = PlayerOnePlayedCards;
+                    toPlayer = PlayerTwo;
+                    toPlayerCards = PlayerTwoPlayedCards;
                     break;
                 default:
                     break;

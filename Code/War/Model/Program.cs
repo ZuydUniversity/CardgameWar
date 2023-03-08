@@ -7,7 +7,7 @@
             Console.WriteLine("Let's play war!");
 
             Player one = new Player("Rob");
-            Player two = new Player("Rob");
+            Player two = new Player("Piet");
 
             Game game = new Game(one, two);
 
