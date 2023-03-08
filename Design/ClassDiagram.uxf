@@ -4,7 +4,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>549</x>
+      <x>261</x>
       <y>54</y>
       <w>126</w>
       <h>126</h>
@@ -22,7 +22,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>936</x>
+      <x>648</x>
       <y>54</y>
       <w>198</w>
       <h>126</h>
@@ -40,7 +40,7 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>666</x>
+      <x>378</x>
       <y>90</y>
       <w>288</w>
       <h>45</h>
@@ -54,7 +54,7 @@ m2=0..52
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>549</x>
+      <x>261</x>
       <y>279</y>
       <w>252</w>
       <h>225</h>
@@ -68,7 +68,6 @@ m2=0..52
 - currentGame : Game
 - cardsOnHand : Queue&lt;Card&gt;
 -
-+ void ResetCardsOnHand()
 + void RecieveCard()
 + Card? PlayCard()
 + Queue&lt;Card&gt;? PlayWarCards()
@@ -79,7 +78,7 @@ m2=0..52
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>351</x>
+      <x>63</x>
       <y>450</y>
       <w>126</w>
       <h>117</h>
@@ -95,7 +94,7 @@ PlayerTwo</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>351</x>
+      <x>63</x>
       <y>198</y>
       <w>126</w>
       <h>243</h>
@@ -122,7 +121,7 @@ Ace</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>927</x>
+      <x>639</x>
       <y>279</y>
       <w>216</w>
       <h>261</h>
@@ -142,9 +141,11 @@ Ace</panel_attributes>
 - DealCards()
 - DetermineStartPlayer()
 + bool PlayRound()
-+ EndGame()
++ SetEndGame()
+- EndGame()
 - PlayerTurn DetermineHighest()
 - HandCardsToWinningPlayer(Player)
+- ReturnCardsFromPlayer(Player)
 - PlayWar()
 - FinishGame()
 + GetWinner()</panel_attributes>
@@ -153,7 +154,7 @@ Ace</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>999</x>
+      <x>711</x>
       <y>171</y>
       <w>63</w>
       <h>126</h>
@@ -167,7 +168,7 @@ has ^</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>567</x>
+      <x>279</x>
       <y>171</y>
       <w>108</w>
       <h>126</h>
@@ -181,7 +182,7 @@ has on hand ^</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>792</x>
+      <x>504</x>
       <y>324</y>
       <w>153</w>
       <h>45</h>
@@ -195,7 +196,7 @@ Plays &gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>549</x>
+      <x>261</x>
       <y>567</y>
       <w>216</w>
       <h>90</h>
@@ -211,7 +212,7 @@ Plays &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>630</x>
+      <x>342</x>
       <y>495</y>
       <w>27</w>
       <h>90</h>
@@ -222,7 +223,7 @@ Plays &gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>351</x>
+      <x>63</x>
       <y>72</y>
       <w>126</w>
       <h>117</h>

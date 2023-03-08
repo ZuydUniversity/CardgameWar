@@ -72,5 +72,14 @@ namespace War.Model
             }
             return null;
         }
+
+        /// <summary>
+        /// Receive a card for the deck
+        /// </summary>
+        /// <param name="card">The card to receive</param>
+        public void ReceiveCard(Card card)
+        {
+            Cards.Enqueue((Card)card);
+        }
     }
 }

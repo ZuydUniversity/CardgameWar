@@ -46,6 +46,7 @@ namespace War.Model
         /// </summary>
         bool endGame = false;
 
+        
         public Game(Player playerOne, Player playerTwo)
         {
             if (playerOne == null)
@@ -62,6 +63,8 @@ namespace War.Model
 
             Winner = null;
 
+            Deck = new Deck(this);
+            Deck.ShuffleCards();
         }
 
         /// <summary>
@@ -70,16 +73,13 @@ namespace War.Model
         /// </summary>
         public void StartGame()
         {
-            //init
-            Deck = new Deck(this);
-            Deck.ShuffleCards();
-
-            //deal cards
+            Winner = null;
+            DetermineStartPlayer();
             DealCards();
         }
 
         /// <summary>
-        /// Deal the cards of the deck
+        /// Deal all the cards of the deck
         /// </summary>
         private void DealCards()
         {
@@ -87,25 +87,24 @@ namespace War.Model
                 throw new NullReferenceException(nameof(Deck));
 
             Card? card = Deck.GetCard();
-            turn = PlayerTurn.PlayerOne;
+            PlayerTurn startDealingPlayer = turn == PlayerTurn.PlayerOne ? PlayerTurn.PlayerTwo : PlayerTurn.PlayerOne;
             while (card != null)
             {
-                switch (turn)
+                switch (startDealingPlayer)
                 {
                     case PlayerTurn.PlayerOne:
                         PlayerOne.ReceiveCard(card);
-                        turn = PlayerTurn.PlayerTwo;
+                        startDealingPlayer = PlayerTurn.PlayerTwo;
                         break;
                     case PlayerTurn.PlayerTwo:
                         PlayerTwo.ReceiveCard(card);
-                        turn = PlayerTurn.PlayerOne;
+                        startDealingPlayer = PlayerTurn.PlayerOne;
                         break;
                     default:
                         break;
                 }
                 card = Deck.GetCard();
             }
-            turn = PlayerTurn.None;
         }
 
         /// <summary>
@@ -125,64 +124,187 @@ namespace War.Model
         {
             if (endGame)
             {
-                // if the game is set to end, reset all
-                PlayerOne.ResetCardsOnHand();
-                PlayerTwo.ResetCardsOnHand();
-                Deck = null;
-                PlayerOneCards = null;
-                PlayerTwoCards = null;
+                // the game is set to end so actually end the game
+                EndGame();
                 return false;
             }
             else if (Winner != null)
             {
+                // there is a winner set so don't play the round, game finished
                 return false;
             }
             else
             {
                 // play a round
+                // stop as soon there is a winner
+                bool noGameWinner = true;
+                PlayerTurn roundWinner = PlayerTurn.None;
                 switch (turn)
                 {
                     case PlayerTurn.PlayerOne:
-                        PlayerOne.PlayCard();
-                        PlayerTwo.PlayCard();
+                        noGameWinner = noGameWinner && PlayCard(PlayerOne, PlayerOneCards);
+                        if (noGameWinner)
+                        {
+                            noGameWinner = noGameWinner && PlayCard(PlayerTwo, PlayerTwoCards);
+                        }
+                        else
+                        {
+                            // player one has no cards so player two wins
+                            roundWinner = PlayerTurn.PlayerTwo;
+                        }
                         break;
                     case PlayerTurn.PlayerTwo:
-                        PlayerTwo.PlayCard();
-                        PlayerOne.PlayCard();
+                        noGameWinner = noGameWinner && PlayCard(PlayerTwo, PlayerTwoCards);
+                        if (noGameWinner)
+                        {
+                            noGameWinner = noGameWinner && PlayCard(PlayerOne, PlayerOneCards);
+                        }
+                        else
+                        {
+                            // player two has nog cards so player one wins
+                            roundWinner= PlayerTurn.PlayerOne;
+                        }
                         break;
                     default:
                         break;
                 }
-                // check win
-                var winner = DetermineHighest();
-                switch (winner)
+                if (noGameWinner)
                 {
-                    case PlayerTurn.None:
-                        // no winner so play war
-                        return PlayWar();
-                    case PlayerTurn.PlayerOne:
-                    case PlayerTurn.PlayerTwo:
-                        HandCardsToWinningPlayer(winner);
-                        break;
-                    default:
-                        break;
+                    // check win
+                    roundWinner = DetermineHighest();
+                    if (roundWinner == PlayerTurn.None)
+                    {
+                        // todo hier verder
+                        roundWinner = PlayWar();
+                    }
                 }
+                HandCardsToWinningPlayer(roundWinner);
+                return noGameWinner;
             }
-            return true;
         }
 
-        private bool PlayWar()
+        /// <summary>
+        /// Play a card on the player's stack.
+        /// </summary>
+        /// <param name="player">The pleyer that plays the card</param>
+        /// <param name="playerCards">The stack of that player in the game</param>
+        /// <returns>True when the player was able to play, false when no cards on hand (player lost)</returns>
+        private bool PlayCard(Player player, Stack<Card> playerCards)
         {
-            // todo implementeren
-            return true;
+            Card? card = player.PlayCard();
+            if (card == null)
+            {
+                return false;
+            }
+            else
+            {
+                playerCards.Push(card);
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Play war cards ont the player's stack
+        /// </summary>
+        /// <param name="player">The pleyer that plays the cards</param>
+        /// <param name="playerCards">The stack of that player in the game</param>
+        /// <returns>True when the player was able to play, false when no cards on hand (player lost)</returns>
+        private bool PlayWarCards(Player player, Stack<Card> playerCards)
+        {
+            Queue<Card> playedCards = player.PlayWarCards();
+            bool returnValue = playedCards.Count == 4;
+            foreach (Card card in playedCards)
+            {
+                playerCards.Push(card);
+            }
+            return returnValue;
+        }
+
+        /// <summary>
+        /// Play war
+        /// </summary>
+        /// <returns>The winner of the game if a player was unable to play the card</returns>
+        private PlayerTurn PlayWar()
+        {
+            PlayerTurn warWinner = PlayerTurn.None;
+            bool noWinner = true;
+            switch (turn)
+            {
+                case PlayerTurn.PlayerOne:
+                    noWinner = noWinner && PlayWarCards(PlayerOne, PlayerOneCards);
+                    if (noWinner)
+                    {
+                        noWinner = noWinner && PlayWarCards(PlayerTwo, PlayerTwoCards);
+                        if (!noWinner)
+                        {
+                            return PlayerTurn.PlayerOne;
+                        }
+                    }
+                    else
+                    {
+                        return PlayerTurn.PlayerTwo;
+                    }
+                    break;
+                case PlayerTurn.PlayerTwo:
+                    noWinner = noWinner && PlayWarCards(PlayerTwo, PlayerTwoCards);
+                    if (noWinner)
+                    {
+                        noWinner = noWinner && PlayWarCards(PlayerOne, PlayerOneCards);
+                        if (!noWinner)
+                        {
+                            return PlayerTurn.PlayerTwo;
+                        }
+                    }
+                    else
+                    {
+                        return PlayerTurn.PlayerOne;
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            if (noWinner)
+            {
+                warWinner = DetermineHighest();
+                if (warWinner == PlayerTurn.None)
+                {
+                    return PlayWar();
+                }
+            }
+            return PlayerTurn.None;
         }
 
         /// <summary>
         /// Sets the running game to end
         /// </summary>
-        public void EndGame()
+        public void SetEndGame()
         {
             endGame = false;
+        }
+
+        /// <summary>
+        /// Actually end the game
+        /// </summary>
+        private void EndGame()
+        {
+            // if the game is set to end, reset all
+            ReturnCardsFromPlayer(PlayerOne);
+            ReturnCardsFromPlayer(PlayerTwo);
+        }
+
+        /// <summary>
+        /// Get all the cards back from the player and put back in the deck
+        /// </summary>
+        /// <param name="player">The plater to get the cards for</param>
+        private void ReturnCardsFromPlayer(Player player)
+        {
+            Card? card = player.PlayCard();
+            while (card != null)
+            {
+                Deck.ReceiveCard(card);
+                card = player.PlayCard();
+            }
         }
 
         /// <summary>

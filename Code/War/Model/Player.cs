@@ -34,7 +34,7 @@ namespace War.Model
         /// <summary>
         /// The cards the player has on hand
         /// </summary>
-        public Queue<Card> CardsOnHand { get; set; }
+        private Queue<Card> CardsOnHand { get; set; }
 
         /// <summary>
         /// Constructor to create a player
@@ -59,14 +59,6 @@ namespace War.Model
             PlayerNumber = playerNumber;
             Wins = wins;
             Games = games;
-        }
-
-        /// <summary>
-        /// Reset the cards on hand (empty)
-        /// </summary>
-        public void ResetCardsOnHand()
-        {
-            CardsOnHand = new Queue<Card> { };
         }
 
         /// <summary>
@@ -98,26 +90,21 @@ namespace War.Model
         }
 
         /// <summary>
-        /// Play three war cards
+        /// Play four war cards. Play all cards if less than four cards available
         /// </summary>
-        /// <returns>The three cards to play, null when not enough cards</returns>
-        public virtual Queue<Card>? PlayWarCards()
+        /// <returns>The four cards to play</returns>
+        public virtual Queue<Card> PlayWarCards()
         {
             Queue<Card> cardsToPlay = new Queue<Card>();
-            if (CardsOnHand.Count > 2)
+
+            int count = Math.Min(CardsOnHand.Count, 4);
+            for (int i = 0; i < count; i++)
             {
-                for (int i = 0; i < 3; i++)
-                {
-                    var c = CardsOnHand.Dequeue();
-                    c.Player = null;
-                    cardsToPlay.Enqueue(c);
-                }
-                return CardsOnHand;
+                var c = CardsOnHand.Dequeue();
+                c.Player = null;
+                cardsToPlay.Enqueue(c);
             }
-            else
-            {
-                return null;
-            }
+            return cardsToPlay;
         }
 
         /// <summary>
