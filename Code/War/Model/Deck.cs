@@ -44,13 +44,13 @@ namespace War.Model
         /// </summary>
         public void ShuffleCards()
         {
-            var cardsToList = Cards.ToList();
-            var random = new Random();
-            var newQueue = new Queue<Card>();
-            var cnt = Cards.Count;
+            List<Card>? cardsToList = Cards.ToList();
+            Random random = new Random();
+            Queue<Card> newQueue = new Queue<Card>();
+            int cnt = Cards.Count;
             for (int i = 0; i < cnt; i++)
             {
-                var randomElementInList = random.Next(0, cardsToList.Count);
+                int randomElementInList = random.Next(0, cardsToList.Count);
                 newQueue.Enqueue(cardsToList[randomElementInList]);
                 cardsToList.Remove(cardsToList[randomElementInList]);
             }

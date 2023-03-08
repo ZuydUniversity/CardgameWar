@@ -36,10 +36,9 @@
             // 
             // buttonCreateDeck
             // 
-            buttonCreateDeck.Location = new Point(26, 26);
-            buttonCreateDeck.Margin = new Padding(3, 2, 3, 2);
+            buttonCreateDeck.Location = new Point(30, 35);
             buttonCreateDeck.Name = "buttonCreateDeck";
-            buttonCreateDeck.Size = new Size(183, 54);
+            buttonCreateDeck.Size = new Size(209, 72);
             buttonCreateDeck.TabIndex = 0;
             buttonCreateDeck.Text = "Create deck";
             buttonCreateDeck.UseVisualStyleBackColor = true;
@@ -49,17 +48,20 @@
             // 
             dataGridViewPlayer.CellBorderStyle = DataGridViewCellBorderStyle.Sunken;
             dataGridViewPlayer.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewPlayer.Location = new Point(250, 26);
+            dataGridViewPlayer.Location = new Point(286, 35);
+            dataGridViewPlayer.Margin = new Padding(3, 4, 3, 4);
             dataGridViewPlayer.Name = "dataGridViewPlayer";
+            dataGridViewPlayer.RowHeadersWidth = 51;
             dataGridViewPlayer.RowTemplate.Height = 25;
-            dataGridViewPlayer.Size = new Size(427, 215);
+            dataGridViewPlayer.Size = new Size(488, 287);
             dataGridViewPlayer.TabIndex = 1;
             // 
             // buttonLoadPlayers
             // 
-            buttonLoadPlayers.Location = new Point(29, 101);
+            buttonLoadPlayers.Location = new Point(33, 135);
+            buttonLoadPlayers.Margin = new Padding(3, 4, 3, 4);
             buttonLoadPlayers.Name = "buttonLoadPlayers";
-            buttonLoadPlayers.Size = new Size(180, 53);
+            buttonLoadPlayers.Size = new Size(206, 71);
             buttonLoadPlayers.TabIndex = 2;
             buttonLoadPlayers.Text = "Load players";
             buttonLoadPlayers.UseVisualStyleBackColor = true;
@@ -67,13 +69,12 @@
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(700, 338);
+            ClientSize = new Size(800, 451);
             Controls.Add(buttonLoadPlayers);
             Controls.Add(dataGridViewPlayer);
             Controls.Add(buttonCreateDeck);
-            Margin = new Padding(3, 2, 3, 2);
             Name = "MainForm";
             Text = "Card game";
             ((System.ComponentModel.ISupportInitialize)dataGridViewPlayer).EndInit();

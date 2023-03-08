@@ -39,7 +39,7 @@ namespace War.Model
         /// <summary>
         /// Constructor to create a player
         /// </summary>
-        /// <param name="playerName">The name of the player</param>
+        /// <param name="playerName">The required name of the player</param>
         /// <exception cref="ArgumentNullException"></exception>
         public Player(string playerName)
         {
@@ -50,12 +50,13 @@ namespace War.Model
             PlayerName = playerName;
             CurrentGame = null;
             CardsOnHand = new Queue<Card>();
+            Wins = 0;
+            Games = 0;
         }
 
         public Player(int playerNumber, string playerName, int wins, int games) : this(playerName)
         {
             PlayerNumber = playerNumber;
-            playerName ??= string.Empty;
             Wins = wins;
             Games = games;
         }

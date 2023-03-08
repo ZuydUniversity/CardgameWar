@@ -22,7 +22,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>909</x>
+      <x>936</x>
       <y>54</y>
       <w>198</w>
       <h>126</h>
@@ -42,14 +42,14 @@
     <coordinates>
       <x>666</x>
       <y>90</y>
-      <w>261</w>
+      <w>288</w>
       <h>45</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=0..1
 m2=0..52
 &lt; Exists of</panel_attributes>
-    <additional_attributes>270.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>300.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -122,7 +122,7 @@ Ace</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>900</x>
+      <x>927</x>
       <y>279</y>
       <w>216</w>
       <h>261</h>
@@ -153,7 +153,7 @@ Ace</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>972</x>
+      <x>999</x>
       <y>171</y>
       <w>63</w>
       <h>126</h>
@@ -183,14 +183,14 @@ has on hand ^</panel_attributes>
     <coordinates>
       <x>792</x>
       <y>324</y>
-      <w>126</w>
+      <w>153</w>
       <h>45</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=2
-m2=0..1
-Plays &gt; </panel_attributes>
-    <additional_attributes>10.0;20.0;120.0;20.0</additional_attributes>
+m2=0..n
+Plays &gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;150.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
