@@ -11,43 +11,49 @@ Oorlog is een kaartspel dat meestal door twee spelers wordt gespeeld en het doel
 Oorlog is een zeer eenvoudig spel zonder veel strategie of tactiek, maar het is leuk om te spelen voor kinderen en beginners die net beginnen met het spelen van kaartspellen.
 
 ## Requirements
+
+### Constraints
+Onderstaande zijn randvoorwaarden, geen requirements.
+- Gegevens worden opgeslagen in Microsoft SQL server
+- De applicatie wordt geprogrammeerd in dotnet core met winforms
+- Geldende wetgeving wordt nageleefd (eigenlijk overbodig te vermelden)
+
 ### Functionele requirements
-MoSCoW in afkorting toegevoegd
-- (S) De speler registreert een unieke naam
-- (S) De gegevens van de speler worden opgeslagen
-- (M) Een speler start een nieuw spel
-- (C) Een speler beindigt een lopend spel
-- (M) De speler kiest een tegenspeler voor het spel
-- (M) Het spel wordt gespeeld met een kaarspel
-- (M) Het kaartspel bestaat uit een standaard deck van 52 kaarten zonder jokers
-- (M) Voor het spel geldt dat 2 de laagste kaart is, gevolgd door 3, 4, 5, 6, 7, 8, 9, 10, B, V, H, A. Kleur is niet relevant
-- (M) De kaarten worden random verdeeld tussen de twee spelers bij aanvang van het spel
-- (M) Een speler heeft een stapel kaarten om mee te spelen waar de volgorde niet van veranderd wordt tijdens het spel
-- (S) De startspeler wordt random bepaald
-- (M) Een speler heeft een eigen speelplek in het spel waar hij kaarten kan leggen
-- (M) Een speler speelt een kaart op zijn speelplek als het zijn beurt is
-- (M) De speler met de hoogste kaart wint alle kaarten op de speelplekken van alle spelers op tafel
-- (M) De speler legt alle gewonnen kaarten onderaan zijn stapel kaarten bij winst waarbij eerst die van de tegenspeler en dan de eigen kaarten worden gelegd
-- (M) Bij gelijkspel wordt oorlog gevoerd om te bepalen welke speler wint
-- (M) De speler speelt vier kaarten bij het voeren van oorlog
-- (M) Bij het voeren van oorlog telt te waarde van de vierde kaart om te bepalen wie de winnaar is
-- (M) Het spel eindigt zodra één speler geen kaarten meer heeft
-- (M) De speler met alle kaarten in zijn bezit is de winnaar van het spel
-- (M) Het spel roept de winnaar uit 
-- (S) Het spel werkt de persoonlijke score van de speler bij
-- (C) De speler bekijkt een ranking met alle spelers en hun score van hoge score naar lage score
-- (C) Het spel kan automatisch gespeeld worden zonder gebruikers interactie (kaarten worden automatisch gelegd)
-- (C) Een speler kan een valsspeler zijn
-- (C) De valsspeler speelt in zijn beurt een kaart uit zijn stapel die net hoger is dan de door de tegenstander gespeelde kaart, indien beschikbaar
+Requirements geïdentificeerd door nummering met afkorting betekenend: **P**layer, **G**ame, **T**urn, **O**verall
+Prioritisering middels MoSCoW in afkorting tussen haakjes toegevoegd. Zie ook:[MoSCoW](https://nl.wikipedia.org/wiki/MoSCoW-methode). 
+Opdrachtgever is eigenaar van alle requirements.
+Requirements vloeien allen voort uit de bovenstaande speluitleg en doelstelling van het project.
+
+- P1 (S) De speler registreert een unieke naam
+- P2 (S) De speler slaat zijn gegevens op
+
+- G1 (C) De speler beëindigt een spel
+- G2 (M) De speler kiest een tegenspeler
+- G3 (M) De speler start een nieuw spel
+- G4 (M) Het spel heeft een standaard deck van 52 kaarten zonder jokers
+- G5 (M) De kaarten in het deck hebben een oplopende waarde van 2, 3, 4, 5, 6, 7, 8, 9, 10, B, V, H, A.
+- G6 (M) De kaarten worden evenredig random verdeeld
+- G8 (S) Het spel bepaalt random de startspeler
+- G9 (M) Het spel eindigt zodra één speler geen kaarten meer heeft
+- G10 (M) Het spel roept de winnaar uit 
+- G11 (S) Het spel werkt de persoonlijke score van de speler bij
+
+- T1 (M) De speler speelt de eerste kaart van zijn stapel op tafel
+- T2 (M) De speler met de hoogste kaart wint alle kaarten op tafel
+- T3 (M) De gespeelde kaart is van gelijke waarde waardoor oorlog wordt gevoerd
+- T3.1 (M) De speler speelt vier kaarten van zijn stapel bij het voeren van oorlog
+- T3.2 (M) De waarde van de vierde kaart bepaalt wie de winnaar is
+- T4 (M) De speler legt alle gewonnen kaarten onderaan zijn stapel speelkaarten
+- T5 (C) Een speler kan vals spelen
+- T5.1 (C) De valsspeler speelt in zijn beurt indien beschikbaar een kaart uit zijn stapel die hoger is dan de door de tegenstander gespeelde kaart
+
+- O1 (C) De speler bekijkt de score van alle spelers van hoge score naar lage score
+- O2 (C) Het spel kan automatisch gespeeld worden zonder gebruikers interactie (kaarten worden automatisch gelegd)
 
 
 ### Niet functionele requirements
-- De applicatie is gebruikersvriendelijk
-- Gegevens worden opgeslagen in een database
-- Bij de opslag van gegevens wordt de AVG in acht genomen
-- SQL server dient als database server
-- De applicatie wordt geprogrammeerd in dotnet core met winforms
-- Het moet mogelijk te zijn in de toekomst een web applicatie van het spel te maken, de code moet herbruikbaar zijn
+Niet functionele requirements gaan over kwaliteitskenmerken zoals omschreven in [ISO25010](https://nl.wikipedia.org/wiki/ISO_25010)
+- De code is herbruikbaar voor een toekomstige web applicatie (reusability)
 
 ## Ontwerp
 ### Class diagram
