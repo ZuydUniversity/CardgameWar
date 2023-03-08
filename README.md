@@ -19,7 +19,7 @@ Onderstaande zijn randvoorwaarden, geen requirements.
 - Geldende wetgeving wordt nageleefd (eigenlijk overbodig te vermelden)
 
 ### Functionele requirements
-Requirements geidentificeerd door nummering met afkorting betekenend: **P**layer, **G**ame, **T**urnn **O**verall
+Requirements geidentificeerd door nummering met afkorting betekenend: **P**layer, **G**ame, **T**urn, **O**verall
 Prioritisering middels MoSCoW in afkorting tussen haakjes toegevoegd [MoSCoW](https://nl.wikipedia.org/wiki/MoSCoW-methode). 
 Opdrachtgever is eigenaar van alle requirements.
 Requirements vloeien allen voort uit de bovenstaande speluitleg en doelstelling van het project.
