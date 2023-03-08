@@ -19,7 +19,11 @@ Onderstaande zijn randvoorwaarden, geen requirements.
 - Geldende wetgeving wordt nageleefd (eigenlijk overbodig te vermelden)
 
 ### Functionele requirements
-MoSCoW in afkorting toegevoegd. Nummering requirements: **P**layer, **G**ame, **T**urnn **O**verall
+Requirements geidentificeerd door nummering met afkorting betekenend: **P**layer, **G**ame, **T**urnn **O**verall
+Prioritisering middels MoSCoW in afkorting tussen haakjes toegevoegd [MoSCoW](https://nl.wikipedia.org/wiki/MoSCoW-methode). 
+Opdrachtgever is eigenaar van alle requirements.
+Requirements vloeien allen voort uit de bovenstaande speluitleg en doelstelling van het project.
+
 - P1 (S) De speler registreert een unieke naam
 - P2 (S) De speler slaat zijn gegevens op
 
