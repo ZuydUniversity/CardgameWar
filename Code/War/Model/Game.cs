@@ -15,7 +15,7 @@ namespace War.Model
         /// <summary>
         /// The deck to play with
         /// </summary>
-        private Deck? Deck { get; set; }
+        private Deck Deck { get; set; }
         /// <summary>
         /// Player one
         /// </summary>
@@ -50,15 +50,10 @@ namespace War.Model
         
         public Game(Player playerOne, Player playerTwo)
         {
-            if (playerOne == null)
-                throw new ArgumentNullException(nameof(playerOne));
-            if (playerTwo == null)
-                throw new ArgumentNullException(nameof(playerTwo));
-
-            PlayerOne = playerOne;
+            PlayerOne = playerOne ?? throw new ArgumentNullException(nameof(playerOne));
             PlayerOne.CurrentGame = this;
             PlayerOnePlayedCards = new Stack<Card>();
-            PlayerTwo = playerTwo;
+            PlayerTwo = playerTwo ?? throw new ArgumentNullException(nameof(playerTwo));
             PlayerTwo.CurrentGame = this;
             PlayerTwoPlayedCards = new Stack<Card>();
 
@@ -76,8 +71,26 @@ namespace War.Model
         /// </summary>
         public void StartGame()
         {
+            // reset winner
             Winner = null;
+
+            // get all cards back from players
+            ReturnCardsFromPlayer(PlayerOne);
+            ReturnCardsFromPlayer(PlayerTwo);
+
+            // check cards on table
+            for (int i = 0; i < PlayerOnePlayedCards.Count; i++)
+            {
+                Deck.ReceiveCard(PlayerOnePlayedCards.Pop());
+            }
+            for (int i = 0; i < PlayerTwoPlayedCards.Count; i++)
+            {
+                Deck.ReceiveCard(PlayerTwoPlayedCards.Pop());
+            }
+
+            // restart game
             DetermineStartPlayer();
+            Deck.ShuffleCards();
             DealCards();
         }
 
@@ -199,7 +212,7 @@ namespace War.Model
         /// <param name="player">The pleyer that plays the card</param>
         /// <param name="playerCards">The stack of that player in the game</param>
         /// <returns>True when the player was able to play, false when no cards on hand (player lost)</returns>
-        private bool PlayCard(Player player, Stack<Card> playerCards)
+        private static bool PlayCard(Player player, Stack<Card> playerCards)
         {
             Card? card = player.PlayCard();
             if (card == null)
@@ -219,7 +232,7 @@ namespace War.Model
         /// <param name="player">The pleyer that plays the cards</param>
         /// <param name="playerCards">The stack of that player in the game</param>
         /// <returns>True when the player was able to play, false when no cards on hand (player lost)</returns>
-        private bool PlayWarCards(Player player, Stack<Card> playerCards)
+        private static bool PlayWarCards(Player player, Stack<Card> playerCards)
         {
             Queue<Card> playedCards = player.PlayWarCards();
             bool returnValue = playedCards.Count == 4;
@@ -353,28 +366,25 @@ namespace War.Model
         /// </summary>
         /// <param name="rank">The rank</param>
         /// <returns>The value</returns>
-        private int RankToValue(Rank rank)
+        private static int RankToValue(Rank rank)
         {
             // enum value is the rank only ace is 14 instead of 1
             return rank == Rank.Ace ? 14 : (int)rank;
         }
         private void HandCardsToWinningPlayer(PlayerTurn winningPlayer)
         {
-            Player fromPlayer = null;
             Stack<Card> fromPlayerCards = new Stack<Card>();
-            Player toPlayer = null;
+            Player toPlayer = PlayerTwo;
             Stack<Card> toPlayerCards = new Stack<Card>();
 
             switch (winningPlayer)
             {
                 case PlayerTurn.PlayerOne:
-                    fromPlayer = PlayerTwo;
                     fromPlayerCards = PlayerTwoPlayedCards;
                     toPlayer = PlayerOne;
                     toPlayerCards = PlayerOnePlayedCards;
                     break;
                 case PlayerTurn.PlayerTwo:
-                    fromPlayer = PlayerOne;
                     fromPlayerCards = PlayerOnePlayedCards;
                     toPlayer = PlayerTwo;
                     toPlayerCards = PlayerTwoPlayedCards;
@@ -382,12 +392,16 @@ namespace War.Model
                 default:
                     break;
             }
-
             StackToPlayer(fromPlayerCards, toPlayer);
             StackToPlayer(toPlayerCards, toPlayer);
         }
 
-        private static void StackToPlayer(Stack<Card> stack, Player? destPlayer)
+        /// <summary>
+        /// Move a stack of cards to a player
+        /// </summary>
+        /// <param name="stack">The stack of cards (played cards)</param>
+        /// <param name="destPlayer">The player that receives the cards on hand</param>
+        private static void StackToPlayer(Stack<Card> stack, Player destPlayer)
         {
             while (stack.Count > 0)
             {
