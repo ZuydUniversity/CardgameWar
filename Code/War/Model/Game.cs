@@ -182,7 +182,6 @@ namespace War.Model
                 roundWinner = DetermineHighest();
                 if (roundWinner == PlayerTurn.None)
                 {
-                    // todo hier verder
                     roundWinner = PlayWar();
                 }
             }
@@ -309,6 +308,9 @@ namespace War.Model
         /// <param name="player">The plater to get the cards for</param>
         private void ReturnCardsFromPlayer(Player player)
         {
+            if (Deck == null)
+                throw new NullReferenceException();
+
             Card? card = player.PlayCard();
             while (card != null)
             {
@@ -323,10 +325,41 @@ namespace War.Model
         /// <returns>0 for equal cardvalue, 1 for player 1, 2 for player 2</returns>
         private PlayerTurn DetermineHighest()
         {
-            // todo maken
-            return PlayerTurn.PlayerOne;
+            int playerOneValue = 0;
+            int playerTwoValue = 0;
+
+            if (PlayerOnePlayedCards.Count > 0)
+            {
+                playerOneValue = RankToValue(PlayerOnePlayedCards.Peek().Rank);
+            }
+            if (PlayerTwoPlayedCards.Count > 0)
+            {
+                playerTwoValue = RankToValue(PlayerTwoPlayedCards.Peek().Rank);
+            }
+            if (playerOneValue == playerTwoValue)
+            {
+                return PlayerTurn.None;
+            }
+            if (playerOneValue > playerTwoValue)
+            {
+                return PlayerTurn.PlayerOne;
+            }
+            else
+            {
+                return PlayerTurn.PlayerTwo;
+            }
         }
 
+        /// <summary>
+        /// Convert the rank of the card to a value for this game
+        /// </summary>
+        /// <param name="rank">The rank</param>
+        /// <returns>The value</returns>
+        private int RankToValue(Rank rank)
+        {
+            // enum value is the rank only ace is 14 instead of 1
+            return rank == Rank.Ace ? 14 : (int)rank;
+        }
         private void HandCardsToWinningPlayer(PlayerTurn winningPlayer)
         {
             Player fromPlayer = null;

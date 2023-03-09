@@ -14,11 +14,11 @@ namespace War.Model
         /// <summary>
         /// Suit of the card
         /// </summary>
-        private Suit Suit { get; set; }
+        public Suit Suit { get; private set; }
         /// <summary>
         /// Rank of the card
         /// </summary>
-        private Rank Rank { get; set; }
+        public Rank Rank { get; private set; }
         /// <summary>
         /// The deck the card belongs to
         /// </summary>
