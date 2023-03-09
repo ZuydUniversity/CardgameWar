@@ -59,7 +59,7 @@ namespace War.Model
         /// <summary>
         /// Wich players turn? 1 or 2
         /// </summary>
-        private PlayerTurn turn;
+        public PlayerTurn Turn { get; private set; }
 
         /// <summary>
         /// While endGame is false the game continues
@@ -82,7 +82,7 @@ namespace War.Model
 
             Winner = null;
             endGame = false;
-            turn = PlayerTurn.None;
+            Turn = PlayerTurn.None;
 
             deck = new Deck(this);
             deck.ShuffleCards();
@@ -129,7 +129,7 @@ namespace War.Model
                 throw new NullReferenceException(nameof(deck));
 
             Card? card = deck.GetCard();
-            PlayerTurn startDealingPlayer = turn == PlayerTurn.PlayerOne ? PlayerTurn.PlayerTwo : PlayerTurn.PlayerOne;
+            PlayerTurn startDealingPlayer = Turn == PlayerTurn.PlayerOne ? PlayerTurn.PlayerTwo : PlayerTurn.PlayerOne;
             while (card != null)
             {
                 switch (startDealingPlayer)
@@ -155,7 +155,7 @@ namespace War.Model
         private void DetermineStartPlayer()
         {
             Random r = new Random();
-            turn = (PlayerTurn)(r.Next(1) + 1);
+            Turn = (PlayerTurn)(r.Next(1) + 1);
         }
 
         /// <summary>
@@ -182,7 +182,7 @@ namespace War.Model
             // stop as soon there is a winner
             bool noGameWinner = true;
             PlayerTurn roundWinner = PlayerTurn.None;
-            switch (turn)
+            switch (Turn)
             {
                 case PlayerTurn.PlayerOne:
                     noGameWinner = noGameWinner && PlayCard(playerOne, PlayerOnePlayedCards);
@@ -233,6 +233,8 @@ namespace War.Model
                 }
             }
             HandCardsToWinningPlayer(roundWinner);
+            // switch turn
+            Turn = Turn == PlayerTurn.PlayerOne ? PlayerTurn.PlayerTwo : PlayerTurn.PlayerOne;
             return roundWinner;
         }
 
@@ -281,7 +283,7 @@ namespace War.Model
         {
             PlayerTurn warWinner = PlayerTurn.None;
             bool noWinner = true;
-            switch (turn)
+            switch (Turn)
             {
                 case PlayerTurn.PlayerOne:
                     noWinner = noWinner && PlayWarCards(playerOne, PlayerOnePlayedCards);

@@ -6,12 +6,14 @@ namespace WarUI
     public partial class MainForm : Form
     {
         private Game game;
+        private Player p1;
+        private Player p2;
 
         public MainForm()
         {
             InitializeComponent();
             LoadPlayers();
-            SetControlsVisibility();
+            SetControls();
         }
 
         private void LoadPlayers()
@@ -31,21 +33,21 @@ namespace WarUI
             form.ShowDialog();
             // reload data
             LoadPlayers();
-            SetControlsVisibility();
+            SetControls();
         }
 
         private void MenuItemHighScore_Click(object sender, EventArgs e)
         {
             Form form = new HighScoreForm();
             form.ShowDialog();
-            SetControlsVisibility();
+            SetControls();
         }
 
         private void MenuItemAbout_Click(object sender, EventArgs e)
         {
             Form form = new AboutBoxForm();
             form.ShowDialog();
-            SetControlsVisibility();
+            SetControls();
         }
 
         private void ButtonCreateGame_Click(object sender, EventArgs e)
@@ -59,8 +61,10 @@ namespace WarUI
                 }
                 else
                 {
-                    game = new Game(p1, p2);
-                    SetControlsVisibility();
+                    this.p1 = p1;
+                    this.p2 = p2;
+                    game = new Game(this.p1, this.p2);
+                    SetControls();
                 }
             }
             else
@@ -70,8 +74,20 @@ namespace WarUI
 
         }
 
-        private void SetControlsVisibility()
+        private void SetControls()
         {
+            // values
+            labelPlayerOneOnTable.Text = $"Cards from {p1?.PlayerName} on table:";
+            labelPlayerOneCardsOnHand.Text = $"Cards on hand {p1?.CardCount}";
+            labelPlayerTwoOnTable.Text = $"Cards from {p2?.PlayerName} on table:";
+            labelPlayerTwoCardsOnHand.Text = $"Cards on hand {p2?.CardCount}";
+
+            // visibility
+            labelPlayerOneOnTable.Visible = p1 != null;
+            labelPlayerOneCardsOnHand.Visible = p1 != null;
+            labelPlayerTwoOnTable.Visible = p2 != null;
+            labelPlayerTwoCardsOnHand.Visible = p2 != null;
+
             comboPlayerOne.Enabled = game == null;
             comboPlayerTwo.Enabled = game == null;
             buttonCreateGame.Enabled = game == null;
@@ -84,29 +100,32 @@ namespace WarUI
         {
             game.EndGame();
             game = null;
-            SetControlsVisibility();
+            SetControls();
         }
 
-        private void buttonAutoPlay_Click(object sender, EventArgs e)
+        private void ButtonAutoPlay_Click(object sender, EventArgs e)
         {
             if (game != null)
             {
                 while (game.Winner == null)
                 {
                     game.PlayRound();
+                    SetControls();
+
                 }
                 MessageBox.Show($"Winner is {game.Winner.PlayerName}");
-                SetControlsVisibility();
+                SetControls();
             }
         }
 
-        private void buttonStartGame_Click(object sender, EventArgs e)
+        private void ButtonStartGame_Click(object sender, EventArgs e)
         {
             if (game != null)
             {
                 game.StartGame();
-                SetControlsVisibility();
+                SetControls();
             }
         }
+
     }
 }

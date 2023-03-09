@@ -33,14 +33,18 @@
             menuItemHighScore = new ToolStripMenuItem();
             MenuItemAbout = new ToolStripMenuItem();
             panelPlayerOne = new Panel();
+            labelPlayerOneCardsOnHand = new Label();
             labelPlayerOne = new Label();
             comboPlayerOne = new ComboBox();
             panelGame = new Panel();
+            labelPlayerTwoOnTable = new Label();
+            labelPlayerOneOnTable = new Label();
             buttonAutoPlay = new Button();
             buttonEndGame = new Button();
             buttonStartGame = new Button();
             buttonCreateGame = new Button();
             panelPlayerTwo = new Panel();
+            labelPlayerTwoCardsOnHand = new Label();
             labelPlayerTwo = new Label();
             comboPlayerTwo = new ComboBox();
             menuStripMain.SuspendLayout();
@@ -81,6 +85,7 @@
             // 
             // panelPlayerOne
             // 
+            panelPlayerOne.Controls.Add(labelPlayerOneCardsOnHand);
             panelPlayerOne.Controls.Add(labelPlayerOne);
             panelPlayerOne.Controls.Add(comboPlayerOne);
             panelPlayerOne.Dock = DockStyle.Left;
@@ -88,6 +93,15 @@
             panelPlayerOne.Name = "panelPlayerOne";
             panelPlayerOne.Size = new Size(200, 506);
             panelPlayerOne.TabIndex = 1;
+            // 
+            // labelPlayerOneCardsOnHand
+            // 
+            labelPlayerOneCardsOnHand.AutoSize = true;
+            labelPlayerOneCardsOnHand.Location = new Point(12, 131);
+            labelPlayerOneCardsOnHand.Name = "labelPlayerOneCardsOnHand";
+            labelPlayerOneCardsOnHand.Size = new Size(38, 15);
+            labelPlayerOneCardsOnHand.TabIndex = 2;
+            labelPlayerOneCardsOnHand.Text = "label1";
             // 
             // labelPlayerOne
             // 
@@ -108,6 +122,8 @@
             // 
             // panelGame
             // 
+            panelGame.Controls.Add(labelPlayerTwoOnTable);
+            panelGame.Controls.Add(labelPlayerOneOnTable);
             panelGame.Controls.Add(buttonAutoPlay);
             panelGame.Controls.Add(buttonEndGame);
             panelGame.Controls.Add(buttonStartGame);
@@ -118,6 +134,24 @@
             panelGame.Size = new Size(799, 506);
             panelGame.TabIndex = 1;
             // 
+            // labelPlayerTwoOnTable
+            // 
+            labelPlayerTwoOnTable.AutoSize = true;
+            labelPlayerTwoOnTable.Location = new Point(314, 106);
+            labelPlayerTwoOnTable.Name = "labelPlayerTwoOnTable";
+            labelPlayerTwoOnTable.Size = new Size(110, 15);
+            labelPlayerTwoOnTable.TabIndex = 3;
+            labelPlayerTwoOnTable.Text = "Player One on table";
+            // 
+            // labelPlayerOneOnTable
+            // 
+            labelPlayerOneOnTable.AutoSize = true;
+            labelPlayerOneOnTable.Location = new Point(32, 106);
+            labelPlayerOneOnTable.Name = "labelPlayerOneOnTable";
+            labelPlayerOneOnTable.Size = new Size(110, 15);
+            labelPlayerOneOnTable.TabIndex = 3;
+            labelPlayerOneOnTable.Text = "Player One on table";
+            // 
             // buttonAutoPlay
             // 
             buttonAutoPlay.Location = new Point(194, 27);
@@ -126,7 +160,7 @@
             buttonAutoPlay.TabIndex = 1;
             buttonAutoPlay.Text = "Autoplay";
             buttonAutoPlay.UseVisualStyleBackColor = true;
-            buttonAutoPlay.Click += buttonAutoPlay_Click;
+            buttonAutoPlay.Click += ButtonAutoPlay_Click;
             // 
             // buttonEndGame
             // 
@@ -146,7 +180,7 @@
             buttonStartGame.TabIndex = 0;
             buttonStartGame.Text = "Start game";
             buttonStartGame.UseVisualStyleBackColor = true;
-            buttonStartGame.Click += buttonStartGame_Click;
+            buttonStartGame.Click += ButtonStartGame_Click;
             // 
             // buttonCreateGame
             // 
@@ -160,6 +194,7 @@
             // 
             // panelPlayerTwo
             // 
+            panelPlayerTwo.Controls.Add(labelPlayerTwoCardsOnHand);
             panelPlayerTwo.Controls.Add(labelPlayerTwo);
             panelPlayerTwo.Controls.Add(comboPlayerTwo);
             panelPlayerTwo.Dock = DockStyle.Right;
@@ -167,6 +202,15 @@
             panelPlayerTwo.Name = "panelPlayerTwo";
             panelPlayerTwo.Size = new Size(200, 506);
             panelPlayerTwo.TabIndex = 1;
+            // 
+            // labelPlayerTwoCardsOnHand
+            // 
+            labelPlayerTwoCardsOnHand.AutoSize = true;
+            labelPlayerTwoCardsOnHand.Location = new Point(12, 131);
+            labelPlayerTwoCardsOnHand.Name = "labelPlayerTwoCardsOnHand";
+            labelPlayerTwoCardsOnHand.Size = new Size(38, 15);
+            labelPlayerTwoCardsOnHand.TabIndex = 2;
+            labelPlayerTwoCardsOnHand.Text = "label1";
             // 
             // labelPlayerTwo
             // 
@@ -203,6 +247,7 @@
             panelPlayerOne.ResumeLayout(false);
             panelPlayerOne.PerformLayout();
             panelGame.ResumeLayout(false);
+            panelGame.PerformLayout();
             panelPlayerTwo.ResumeLayout(false);
             panelPlayerTwo.PerformLayout();
             ResumeLayout(false);
@@ -227,5 +272,9 @@
         private Button button1;
         private Button buttonStartGame;
         private Button buttonAutoPlay;
+        private Label labelPlayerOneCardsOnHand;
+        private Label labelPlayerTwoOnTable;
+        private Label labelPlayerOneOnTable;
+        private Label labelPlayerTwoCardsOnHand;
     }
 }

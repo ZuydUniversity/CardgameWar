@@ -28,6 +28,11 @@ namespace War.Model
         /// </summary>
         public Player? Player { get; set; }
 
+        public override string ToString()
+        {
+            return $"{Suit}_{Rank}";
+        }
+
         /// <summary>
         /// Constructor
         /// </summary>
