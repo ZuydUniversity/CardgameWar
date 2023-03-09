@@ -37,6 +37,10 @@
             labelPlayerOne = new Label();
             comboPlayerOne = new ComboBox();
             panelGame = new Panel();
+            lvCardsPlayerTwo = new ListView();
+            card = new ColumnHeader();
+            lvCardsPlayerOne = new ListView();
+            playedCard = new ColumnHeader();
             labelPlayerTwoOnTable = new Label();
             labelPlayerOneOnTable = new Label();
             buttonAutoPlay = new Button();
@@ -55,6 +59,7 @@
             // 
             // menuStripMain
             // 
+            menuStripMain.ImageScalingSize = new Size(20, 20);
             menuStripMain.Items.AddRange(new ToolStripItem[] { menuItemManagePlayers, menuItemHighScore, MenuItemAbout });
             menuStripMain.Location = new Point(0, 0);
             menuStripMain.Name = "menuStripMain";
@@ -122,6 +127,8 @@
             // 
             // panelGame
             // 
+            panelGame.Controls.Add(lvCardsPlayerTwo);
+            panelGame.Controls.Add(lvCardsPlayerOne);
             panelGame.Controls.Add(labelPlayerTwoOnTable);
             panelGame.Controls.Add(labelPlayerOneOnTable);
             panelGame.Controls.Add(buttonAutoPlay);
@@ -133,6 +140,42 @@
             panelGame.Name = "panelGame";
             panelGame.Size = new Size(799, 506);
             panelGame.TabIndex = 1;
+            // 
+            // lvCardsPlayerTwo
+            // 
+            lvCardsPlayerTwo.BorderStyle = BorderStyle.None;
+            lvCardsPlayerTwo.Columns.AddRange(new ColumnHeader[] { card });
+            lvCardsPlayerTwo.HeaderStyle = ColumnHeaderStyle.None;
+            lvCardsPlayerTwo.Location = new Point(314, 131);
+            lvCardsPlayerTwo.Margin = new Padding(3, 2, 3, 2);
+            lvCardsPlayerTwo.Name = "lvCardsPlayerTwo";
+            lvCardsPlayerTwo.Size = new Size(203, 140);
+            lvCardsPlayerTwo.TabIndex = 5;
+            lvCardsPlayerTwo.UseCompatibleStateImageBehavior = false;
+            lvCardsPlayerTwo.View = View.Details;
+            // 
+            // card
+            // 
+            card.Text = "Card";
+            card.Width = 200;
+            // 
+            // lvCardsPlayerOne
+            // 
+            lvCardsPlayerOne.BorderStyle = BorderStyle.None;
+            lvCardsPlayerOne.Columns.AddRange(new ColumnHeader[] { playedCard });
+            lvCardsPlayerOne.HeaderStyle = ColumnHeaderStyle.None;
+            lvCardsPlayerOne.Location = new Point(32, 131);
+            lvCardsPlayerOne.Margin = new Padding(3, 2, 3, 2);
+            lvCardsPlayerOne.Name = "lvCardsPlayerOne";
+            lvCardsPlayerOne.Size = new Size(203, 140);
+            lvCardsPlayerOne.TabIndex = 4;
+            lvCardsPlayerOne.UseCompatibleStateImageBehavior = false;
+            lvCardsPlayerOne.View = View.Details;
+            // 
+            // playedCard
+            // 
+            playedCard.Text = "Card";
+            playedCard.Width = 200;
             // 
             // labelPlayerTwoOnTable
             // 
@@ -276,5 +319,9 @@
         private Label labelPlayerTwoOnTable;
         private Label labelPlayerOneOnTable;
         private Label labelPlayerTwoCardsOnHand;
+        private ListView lvCardsPlayerOne;
+        private ColumnHeader playedCard;
+        private ListView lvCardsPlayerTwo;
+        private ColumnHeader card;
     }
 }

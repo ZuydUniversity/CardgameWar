@@ -165,6 +165,9 @@ namespace War.Model
         /// <exception cref="GameStoppedException">The game has stopped</exception>
         public PlayerTurn PlayRound()
         {
+            // just in case there are still cards on the table
+            HandCardsToWinningPlayer();
+
             if (endGame)
             {
                 throw new GameStoppedException("Game has ended!");
@@ -232,10 +235,31 @@ namespace War.Model
                     roundWinner = PlayWar();
                 }
             }
-            HandCardsToWinningPlayer(roundWinner);
             // switch turn
             Turn = Turn == PlayerTurn.PlayerOne ? PlayerTurn.PlayerTwo : PlayerTurn.PlayerOne;
             return roundWinner;
+        }
+
+        /// <summary>
+        /// Hand cards to the winning player after a round
+        /// </summary>
+        public void HandCardsToWinningPlayer()
+        {
+            if (Winner == null)
+            {
+                HandCardsToWinningPlayer(DetermineHighest());
+            }
+            else
+            {
+                if (Winner.Equals(playerOne))
+                {
+                    HandCardsToWinningPlayer(PlayerTurn.PlayerOne);
+                }
+                else
+                {
+                    HandCardsToWinningPlayer(PlayerTurn.PlayerTwo);
+                }
+            }
         }
 
         /// <summary>

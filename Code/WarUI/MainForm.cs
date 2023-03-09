@@ -1,5 +1,6 @@
 using War.DataAccess;
 using War.Model;
+using static System.Windows.Forms.ListView;
 
 namespace WarUI
 {
@@ -81,6 +82,14 @@ namespace WarUI
             labelPlayerOneCardsOnHand.Text = $"Cards on hand {p1?.CardCount}";
             labelPlayerTwoOnTable.Text = $"Cards from {p2?.PlayerName} on table:";
             labelPlayerTwoCardsOnHand.Text = $"Cards on hand {p2?.CardCount}";
+            StackToListviewItemCollection(lvCardsPlayerOne.Items, game?.PlayerOnePlayedCards);
+            StackToListviewItemCollection(lvCardsPlayerTwo.Items, game?.PlayerTwoPlayedCards);
+
+            // refresh
+            lvCardsPlayerOne.Refresh();
+            lvCardsPlayerTwo.Refresh();
+            labelPlayerOneCardsOnHand.Refresh();
+            labelPlayerTwoCardsOnHand.Refresh();
 
             // visibility
             labelPlayerOneOnTable.Visible = p1 != null;
@@ -111,10 +120,28 @@ namespace WarUI
                 {
                     game.PlayRound();
                     SetControls();
-
+                    Thread.Sleep(3000);
                 }
                 MessageBox.Show($"Winner is {game.Winner.PlayerName}");
                 SetControls();
+            }
+        }
+
+        /// <summary>
+        /// Helper method to show cards in listview
+        /// </summary>
+        /// <param name="lvc"></param>
+        /// <param name="stack"></param>
+        private void StackToListviewItemCollection(ListViewItemCollection lvc, Stack<Card>? stack)
+        {
+            lvc.Clear();
+
+            if (stack == null)
+                return;
+
+            foreach (var item in stack.Select(c => c.ToString()))
+            {
+                lvc.Add(item);
             }
         }
 
