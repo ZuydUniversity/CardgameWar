@@ -76,7 +76,7 @@ Ontwerpen zijn gemaakt met UMLet en opgeslagen in de map "Design".
 
 
 ### Wireframes
-
+// todo
 
 ## Verdieping
 Verdiepingsopdrachten voor studenten.
