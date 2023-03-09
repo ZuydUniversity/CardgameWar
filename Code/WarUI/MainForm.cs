@@ -72,7 +72,6 @@ namespace WarUI
             {
                 MessageBox.Show("No player selected");
             }
-
         }
 
         private void SetControls()
@@ -84,6 +83,7 @@ namespace WarUI
             labelPlayerTwoCardsOnHand.Text = $"Cards on hand {p2?.CardCount}";
             StackToListviewItemCollection(lvCardsPlayerOne.Items, game?.PlayerOnePlayedCards);
             StackToListviewItemCollection(lvCardsPlayerTwo.Items, game?.PlayerTwoPlayedCards);
+            buttonPlayTurn.Text = game != null ? $"Play turn: {game.Turn} starts" : string.Empty;
 
             // refresh
             lvCardsPlayerOne.Refresh();
@@ -103,6 +103,7 @@ namespace WarUI
             buttonStartGame.Enabled = game != null && !game.GameStarted;
             buttonEndGame.Enabled = game != null;
             buttonAutoPlay.Enabled = game != null && game.GameStarted;
+            buttonPlayTurn.Enabled = game != null && game.GameStarted;
         }
 
         private void ButtonEndGame_Click(object sender, EventArgs e)
@@ -110,6 +111,19 @@ namespace WarUI
             game.EndGame();
             game = null;
             SetControls();
+        }
+
+        private void buttonPlayTurn_Click(object sender, EventArgs e)
+        {
+            if (game != null)
+            {
+                game.PlayRound();
+                SetControls();
+                if (game != null && game.Winner != null)
+                {
+                    MessageBox.Show($"Winner is {game.Winner.PlayerName}");
+                }
+            }
         }
 
         private void ButtonAutoPlay_Click(object sender, EventArgs e)
@@ -120,7 +134,7 @@ namespace WarUI
                 {
                     game.PlayRound();
                     SetControls();
-                    Thread.Sleep(3000);
+                    Thread.Sleep(100);
                 }
                 MessageBox.Show($"Winner is {game.Winner.PlayerName}");
                 SetControls();

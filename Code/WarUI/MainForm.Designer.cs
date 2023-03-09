@@ -37,6 +37,7 @@
             labelPlayerOne = new Label();
             comboPlayerOne = new ComboBox();
             panelGame = new Panel();
+            buttonPlayTurn = new Button();
             lvCardsPlayerTwo = new ListView();
             card = new ColumnHeader();
             lvCardsPlayerOne = new ListView();
@@ -127,6 +128,7 @@
             // 
             // panelGame
             // 
+            panelGame.Controls.Add(buttonPlayTurn);
             panelGame.Controls.Add(lvCardsPlayerTwo);
             panelGame.Controls.Add(lvCardsPlayerOne);
             panelGame.Controls.Add(labelPlayerTwoOnTable);
@@ -140,6 +142,16 @@
             panelGame.Name = "panelGame";
             panelGame.Size = new Size(799, 506);
             panelGame.TabIndex = 1;
+            // 
+            // buttonPlayTurn
+            // 
+            buttonPlayTurn.Location = new Point(113, 56);
+            buttonPlayTurn.Name = "buttonPlayTurn";
+            buttonPlayTurn.Size = new Size(237, 36);
+            buttonPlayTurn.TabIndex = 6;
+            buttonPlayTurn.Text = "Play turn";
+            buttonPlayTurn.UseVisualStyleBackColor = true;
+            buttonPlayTurn.Click += buttonPlayTurn_Click;
             // 
             // lvCardsPlayerTwo
             // 
@@ -312,7 +324,7 @@
         private Label labelPlayerTwo;
         private ComboBox comboPlayerTwo;
         private Button buttonEndGame;
-        private Button button1;
+        private Button buttonPlayTurn;
         private Button buttonStartGame;
         private Button buttonAutoPlay;
         private Label labelPlayerOneCardsOnHand;
