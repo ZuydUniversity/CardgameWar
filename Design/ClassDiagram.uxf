@@ -6,17 +6,17 @@
     <coordinates>
       <x>261</x>
       <y>54</y>
-      <w>126</w>
+      <w>252</w>
       <h>126</h>
     </coordinates>
     <panel_attributes>Card
 -
-- suit : Suit
-- rank : Rank
-- deck? : Deck
-- player? : Player
++ Suit : Suit
++ Rank : Rank
++ Deck : Deck?
++ Player : Player?
 -
-</panel_attributes>
+Card(Suit, Rank, Deck, Player);</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -29,27 +29,28 @@
     </coordinates>
     <panel_attributes>Deck
 -
-- cards : List&lt;Card&gt;
-- game : Game
+- cards : Queue&lt;Card&gt;
+- game : Game?
 -
-+ Deck()
++ Deck(Game);
 + void ShuffleCards();
-+ Card? GetCard();</panel_attributes>
++ Card? GetCard();
++ void ReceiveCard(Card);</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>378</x>
+      <x>504</x>
       <y>90</y>
-      <w>288</w>
+      <w>162</w>
       <h>45</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=0..1
 m2=0..52
 &lt; Exists of</panel_attributes>
-    <additional_attributes>300.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>160.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -62,16 +63,19 @@ m2=0..52
     <panel_attributes>Player
 -
 - playerNumber : int	
-- playerName : string
-- wins : int
-- games : int
-- currentGame : Game
++ PlayerName : string
++ Wins : int
++ Games : int
++ CurrentGame : Game
 - cardsOnHand : Queue&lt;Card&gt;
 -
-+ void RecieveCard()
-+ Card? PlayCard()
-+ Queue&lt;Card&gt;? PlayWarCards()
-+ AddScore(bool win)
++ int CardCount();
++ Player(name);
++ Player(number, name, wins, games);
++ void RecieveCard(Card);
++ Card? PlayCard();
++ Queue&lt;Card&gt;? PlayWarCards();
++ AddScore(bool win);
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -130,25 +134,27 @@ Ace</panel_attributes>
 -
 - deck : Deck
 - playerOne : Player
-- playerOneCards : Stack&lt;Cards&gt;
++ PlayerOneCards : Stack&lt;Cards&gt;
 - playerTwo : Player
-- playerTwoCards : Stack&lt;Cards&gt;
-- winner : Player
++ PlayerTwoCards : Stack&lt;Cards&gt;
++ Winner : Player?
 - turn : PlayerTurn
+- endGame : bool
 -
-+ Game(Player1, Player2)
-+ StartGame()
-- DealCards()
-- DetermineStartPlayer()
-+ bool PlayRound()
-+ SetEndGame()
-- EndGame()
-- PlayerTurn DetermineHighest()
-- HandCardsToWinningPlayer(Player)
-- ReturnCardsFromPlayer(Player)
-- PlayWar()
-- FinishGame()
-+ GetWinner()</panel_attributes>
++ Game(Player1, Player2);
++ StartGame();
+- DealCards();
+- DetermineStartPlayer();
++ PlayerTurn PlayRound();
+- static bool PlayCard(player, playercards);
+- static bool PlayWarCards(player, playercards);
+- PlayerTurn PlayWar();
++ EndGame();
+- ReturnCardsFromPlayer(Player);
+- PlayerTurn DetermineHighest();
+- static int RankToValue(Rank);
+- HandCardsToWinningPlayer(Player);
+- static void StackToPlayer(stack, player);</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -205,8 +211,8 @@ Plays &gt;</panel_attributes>
 -
 
 -
-+Card? PlayCard()
-+Queue&lt;Card&gt;? PlayWarCards()</panel_attributes>
++Card? PlayCard();
++Queue&lt;Card&gt;? PlayWarCards();</panel_attributes>
     <additional_attributes/>
   </element>
   <element>

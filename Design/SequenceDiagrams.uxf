@@ -4,7 +4,7 @@
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates>
-      <x>36</x>
+      <x>0</x>
       <y>0</y>
       <w>513</w>
       <h>225</h>
@@ -22,7 +22,7 @@ b.&gt;a : Player; off=b
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates>
-      <x>36</x>
+      <x>0</x>
       <y>873</y>
       <w>1071</w>
       <h>504</h>
@@ -52,21 +52,19 @@ a.&gt;gate; off=a
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates>
-      <x>36</x>
+      <x>0</x>
       <y>234</y>
-      <w>1125</w>
-      <h>621</h>
+      <w>792</w>
+      <h>585</h>
     </coordinates>
     <panel_attributes>title=SD: Start game
 obj=:Player1~a ACTOR EXECUTION
 obj=:Game~b 
-obj=:Deck~c CREATED_LATER EXECUTION
+obj=:Deck~c 
 obj=:Player1~d
 obj=:Player2~e
-a-&gt;&gt;&gt;b : StartGame(SecondPlayer); on=b
-b.&gt;c : Deck(); 
-
-b-&gt;&gt;&gt;c : ShuffleCards();
+a-&gt;&gt;&gt;b : StartGame(); on=b
+b-&gt;&gt;&gt;c : ShuffleCards(); on=c
 c.&gt;b; off=c
 combinedFragment=loop~loop1 b e; e:[Deck.Cards &gt; 0]
 	b-&gt;&gt;&gt;c : GetCard(); on=c
