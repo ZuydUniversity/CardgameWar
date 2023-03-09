@@ -16,10 +16,12 @@ namespace WarUI
 
         private void LoadPlayers()
         {
-            var players = Player.ReadPlayersData();
-            comboPlayerOne.DataSource = players;
+            var playersBoxOne = Player.ReadPlayersData();
+            var playersBoxTwo = playersBoxOne.ToList();
+
+            comboPlayerOne.DataSource = playersBoxOne;
             comboPlayerOne.DisplayMember = "PlayerName";
-            comboPlayerTwo.DataSource = players;
+            comboPlayerTwo.DataSource = playersBoxTwo;
             comboPlayerTwo.DisplayMember = comboPlayerOne.DisplayMember;
         }
 
@@ -32,7 +34,7 @@ namespace WarUI
             SetControlsVisibility();
         }
 
-        private void menuItemHighScore_Click(object sender, EventArgs e)
+        private void MenuItemHighScore_Click(object sender, EventArgs e)
         {
             Form form = new HighScoreForm();
             form.ShowDialog();
@@ -46,12 +48,26 @@ namespace WarUI
             SetControlsVisibility();
         }
 
-        private void buttonStartGame_Click(object sender, EventArgs e)
+        private void ButtonCreateGame_Click(object sender, EventArgs e)
         {
-            Player p1 = comboPlayerOne.SelectedItem as Player;
-            Player p2 = comboPlayerTwo.SelectedItem as Player;
-            game = new Game(p1, p2);
-            SetControlsVisibility();
+            if (comboPlayerOne.SelectedItem is Player p1
+                    && comboPlayerTwo.SelectedItem is Player p2)
+            {
+                if (p1.Equals(p2))
+                {
+                    MessageBox.Show("Select two different players!");
+                }
+                else
+                {
+                    game = new Game(p1, p2);
+                    SetControlsVisibility();
+                }
+            }
+            else
+            {
+                MessageBox.Show("No player selected");
+            }
+
         }
 
         private void SetControlsVisibility()
@@ -59,16 +75,38 @@ namespace WarUI
             comboPlayerOne.Enabled = game == null;
             comboPlayerTwo.Enabled = game == null;
             buttonCreateGame.Enabled = game == null;
-            buttonStartGame.Enabled = game != null;
+            buttonStartGame.Enabled = game != null && !game.GameStarted;
             buttonEndGame.Enabled = game != null;
-            checkBoxAutoPlay.Enabled = false;
+            buttonAutoPlay.Enabled = game != null && game.GameStarted;
         }
 
-        private void buttonEndGame_Click(object sender, EventArgs e)
+        private void ButtonEndGame_Click(object sender, EventArgs e)
         {
             game.EndGame();
             game = null;
             SetControlsVisibility();
+        }
+
+        private void buttonAutoPlay_Click(object sender, EventArgs e)
+        {
+            if (game != null)
+            {
+                while (game.Winner == null)
+                {
+                    game.PlayRound();
+                }
+                MessageBox.Show($"Winner is {game.Winner.PlayerName}");
+                SetControlsVisibility();
+            }
+        }
+
+        private void buttonStartGame_Click(object sender, EventArgs e)
+        {
+            if (game != null)
+            {
+                game.StartGame();
+                SetControlsVisibility();
+            }
         }
     }
 }

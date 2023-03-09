@@ -36,7 +36,7 @@
             labelPlayerOne = new Label();
             comboPlayerOne = new ComboBox();
             panelGame = new Panel();
-            checkBoxAutoPlay = new CheckBox();
+            buttonAutoPlay = new Button();
             buttonEndGame = new Button();
             buttonStartGame = new Button();
             buttonCreateGame = new Button();
@@ -70,7 +70,7 @@
             menuItemHighScore.Name = "menuItemHighScore";
             menuItemHighScore.Size = new Size(73, 20);
             menuItemHighScore.Text = "Highscore";
-            menuItemHighScore.Click += menuItemHighScore_Click;
+            menuItemHighScore.Click += MenuItemHighScore_Click;
             // 
             // MenuItemAbout
             // 
@@ -108,7 +108,7 @@
             // 
             // panelGame
             // 
-            panelGame.Controls.Add(checkBoxAutoPlay);
+            panelGame.Controls.Add(buttonAutoPlay);
             panelGame.Controls.Add(buttonEndGame);
             panelGame.Controls.Add(buttonStartGame);
             panelGame.Controls.Add(buttonCreateGame);
@@ -118,27 +118,25 @@
             panelGame.Size = new Size(799, 506);
             panelGame.TabIndex = 1;
             // 
-            // checkBoxAutoPlay
+            // buttonAutoPlay
             // 
-            checkBoxAutoPlay.AutoSize = true;
-            checkBoxAutoPlay.Checked = true;
-            checkBoxAutoPlay.CheckState = CheckState.Checked;
-            checkBoxAutoPlay.Location = new Point(275, 31);
-            checkBoxAutoPlay.Name = "checkBoxAutoPlay";
-            checkBoxAutoPlay.Size = new Size(77, 19);
-            checkBoxAutoPlay.TabIndex = 1;
-            checkBoxAutoPlay.Text = "Auto play";
-            checkBoxAutoPlay.UseVisualStyleBackColor = true;
+            buttonAutoPlay.Location = new Point(194, 27);
+            buttonAutoPlay.Name = "buttonAutoPlay";
+            buttonAutoPlay.Size = new Size(75, 23);
+            buttonAutoPlay.TabIndex = 1;
+            buttonAutoPlay.Text = "Autoplay";
+            buttonAutoPlay.UseVisualStyleBackColor = true;
+            buttonAutoPlay.Click += buttonAutoPlay_Click;
             // 
             // buttonEndGame
             // 
-            buttonEndGame.Location = new Point(194, 26);
+            buttonEndGame.Location = new Point(275, 27);
             buttonEndGame.Name = "buttonEndGame";
             buttonEndGame.Size = new Size(75, 23);
             buttonEndGame.TabIndex = 0;
             buttonEndGame.Text = "End game";
             buttonEndGame.UseVisualStyleBackColor = true;
-            buttonEndGame.Click += buttonEndGame_Click;
+            buttonEndGame.Click += ButtonEndGame_Click;
             // 
             // buttonStartGame
             // 
@@ -158,7 +156,7 @@
             buttonCreateGame.TabIndex = 0;
             buttonCreateGame.Text = "Create game";
             buttonCreateGame.UseVisualStyleBackColor = true;
-            buttonCreateGame.Click += buttonStartGame_Click;
+            buttonCreateGame.Click += ButtonCreateGame_Click;
             // 
             // panelPlayerTwo
             // 
@@ -205,7 +203,6 @@
             panelPlayerOne.ResumeLayout(false);
             panelPlayerOne.PerformLayout();
             panelGame.ResumeLayout(false);
-            panelGame.PerformLayout();
             panelPlayerTwo.ResumeLayout(false);
             panelPlayerTwo.PerformLayout();
             ResumeLayout(false);
@@ -229,6 +226,6 @@
         private Button buttonEndGame;
         private Button button1;
         private Button buttonStartGame;
-        private CheckBox checkBoxAutoPlay;
+        private Button buttonAutoPlay;
     }
 }

@@ -50,6 +50,7 @@ namespace War.Model
                 {
                     playerOne.AddScore(value.Equals(playerOne));
                     playerTwo.AddScore(value.Equals(playerTwo));
+                    GameStarted = false;
                 }
                 winner  = value;
             }            
@@ -65,7 +66,11 @@ namespace War.Model
         /// </summary>
         private bool endGame;
 
-        
+        /// <summary>
+        /// Shows is the game has started
+        /// </summary>
+        public bool GameStarted { get; private set; }
+
         public Game(Player playerOne, Player playerTwo)
         {
             this.playerOne = playerOne ?? throw new ArgumentNullException(nameof(playerOne));
@@ -81,6 +86,8 @@ namespace War.Model
 
             deck = new Deck(this);
             deck.ShuffleCards();
+
+            GameStarted = false;
         }
 
         /// <summary>
@@ -110,6 +117,7 @@ namespace War.Model
             DetermineStartPlayer();
             deck.ShuffleCards();
             DealCards();
+            GameStarted = true;
         }
 
         /// <summary>
@@ -164,6 +172,10 @@ namespace War.Model
             if (Winner != null)
             {
                 throw new GameStoppedException($"Player {Winner.PlayerName} won!");
+            }
+            if (!GameStarted)
+            {
+                throw new GameStoppedException($"Game not even started!");
             }
 
             // play a round
@@ -329,6 +341,7 @@ namespace War.Model
             // if the game is set to end, reset all
             ReturnCardsFromPlayer(playerOne);
             ReturnCardsFromPlayer(playerTwo);
+            GameStarted = false;
         }
 
         /// <summary>

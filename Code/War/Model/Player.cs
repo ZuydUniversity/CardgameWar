@@ -139,6 +139,8 @@ namespace War.Model
         {
             Games++;
             Wins = win ? Wins + 1 : Wins;
+            // update in database
+            UpdatePlayerData();
         }
 
         // data access
