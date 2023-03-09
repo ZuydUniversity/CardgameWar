@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace WarUI
 {
-    public partial class AnderForm : Form
+    public partial class HighScoreForm : Form
     {
-        public AnderForm()
+        public HighScoreForm()
         {
             InitializeComponent();
         }
