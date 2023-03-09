@@ -10,17 +10,16 @@ namespace War.DataAccess
     /// <summary>
     /// Interface for data access layer implementation
     /// </summary>
-    public interface iDAL
+    public interface IDAL
     {
-            
-        public void CreatePlayer(Player player);
+        public void CreatePlayerData(Player player);
         
-        public List<Player> ReadPlayers();
+        public List<Player> ReadPlayersData();
 
-        public Player ReadPlayer(int playerNumber);
+        public Player? ReadPlayerData(int playerNumber);
 
-        public void UpdatePlayer(Player player);
+        public void UpdatePlayerData(Player player);
 
-        public void DeletePlayer(int playerNumber);
+        public void DeletePlayerData(int playerNumber);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using War.DataAccess;
 
 namespace War.Model
 {
@@ -11,10 +12,25 @@ namespace War.Model
     /// </summary>
     public class Player
     {
+        private int playerNumber;
         /// <summary>
         /// The unique number of the player
         /// </summary>
-        private readonly int playerNumber;
+        public int PlayerNumber {
+            get { return playerNumber; }  
+            set
+            {
+                if (playerNumber == 0)
+                {
+                    playerNumber = value;
+                }
+                else
+                {
+                    throw new Exception("Not allowed to change player number!");
+                }
+            }
+        }
+
         /// <summary>
         /// The unique name of the player
         /// </summary>
@@ -64,7 +80,7 @@ namespace War.Model
 
         public Player(int playerNumber, string playerName, int wins, int games) : this(playerName)
         {
-            this.playerNumber = playerNumber;
+            this.PlayerNumber = playerNumber;
             Wins = wins;
             Games = games;
         }
@@ -123,6 +139,60 @@ namespace War.Model
         {
             Games++;
             Wins = win ? Wins + 1 : Wins;
+        }
+
+        // data access
+
+        /// <summary>
+        /// Persist the player in the data layer
+        /// </summary>
+        public void CreatePlayerData()
+        {
+            if (this.playerNumber == 0)
+            {
+                IDAL dal = new DataAccessLayer();
+                dal.CreatePlayerData(this);
+            }
+        }
+
+        /// <summary>
+        /// Read all players from data access layer
+        /// </summary>
+        /// <returns>The list of all players</returns>
+        public static List<Player> ReadPlayersData()
+        {
+            IDAL dal = new DataAccessLayer();
+            return dal.ReadPlayersData();
+        }
+
+        /// <summary>
+        /// Read a specific player from the data access layer
+        /// </summary>
+        /// <param name="playerNumber">The number of the player</param>
+        /// <returns>The player</returns>
+        public static Player? ReadPlayerData(int playerNumber)
+        {
+            IDAL dal = new DataAccessLayer();
+            return dal.ReadPlayerData(playerNumber);
+        }
+
+        /// <summary>
+        /// Update the player in the data access layer
+        /// </summary>
+        public void UpdatePlayerData()
+        {
+            IDAL dal = new DataAccessLayer();
+            dal.UpdatePlayerData(this);
+        }
+
+        /// <summary>
+        /// Delete player from data access layer
+        /// </summary>
+        /// <param name="playerNumber">The number of the player to delete</param>
+        public static void DeletePlayerData(int playerNumber)
+        {
+            IDAL dal = new DataAccessLayer();
+            dal.DeletePlayerData(playerNumber);
         }
     }
 }
