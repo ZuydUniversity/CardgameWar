@@ -26,9 +26,10 @@ namespace War
                     Console.WriteLine(ex.Message);
                     ended = true;
                 }
-                game.EndGame();
+                //game.EndGame();
             }
             Console.WriteLine($"Game won by {game.Winner?.PlayerName}");
+            
 
             game.StartGame();
         }

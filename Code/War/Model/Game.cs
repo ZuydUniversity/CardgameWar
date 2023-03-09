@@ -15,54 +15,72 @@ namespace War.Model
         /// <summary>
         /// The deck to play with
         /// </summary>
-        private Deck Deck { get; set; }
+        private readonly Deck deck;
         /// <summary>
         /// Player one
         /// </summary>
-        private Player PlayerOne { get; set; }
+        private readonly Player playerOne;
         /// <summary>
         /// Cards played by player one. Stack because order should be contained (LIFO)
         /// </summary>
-        private Stack<Card> PlayerOnePlayedCards { get; set; }
+        public Stack<Card> PlayerOnePlayedCards { get; private set; }
         /// <summary>
         /// Player two
         /// </summary>
-        private Player PlayerTwo { get; set; }
+        private readonly Player playerTwo;
         /// <summary>
         /// Cards played by player two. Stack because order should be contained (LIFO)
         /// </summary>
-        private Stack<Card> PlayerTwoPlayedCards { get; set; }
+        public Stack<Card> PlayerTwoPlayedCards { get; private set; }
+
+        private Player? winner;
         /// <summary>
         /// The winner of the game, null when game in progress/ no winner
+        /// Change score of players when setting the winner
         /// </summary>
-        public Player? Winner { get; private set; }
-
+        public Player? Winner 
+        {
+            get
+            {
+                return winner;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    playerOne.AddScore(value.Equals(playerOne));
+                    playerTwo.AddScore(value.Equals(playerTwo));
+                }
+                winner  = value;
+            }            
+        }
+ 
         /// <summary>
         /// Wich players turn? 1 or 2
         /// </summary>
-        PlayerTurn turn;
+        private PlayerTurn turn;
 
         /// <summary>
         /// While endGame is false the game continues
         /// </summary>
-        bool endGame;
+        private bool endGame;
 
         
         public Game(Player playerOne, Player playerTwo)
         {
-            PlayerOne = playerOne ?? throw new ArgumentNullException(nameof(playerOne));
-            PlayerOne.CurrentGame = this;
+            this.playerOne = playerOne ?? throw new ArgumentNullException(nameof(playerOne));
+            this.playerOne.CurrentGame = this;
             PlayerOnePlayedCards = new Stack<Card>();
-            PlayerTwo = playerTwo ?? throw new ArgumentNullException(nameof(playerTwo));
-            PlayerTwo.CurrentGame = this;
+            this.playerTwo = playerTwo ?? throw new ArgumentNullException(nameof(playerTwo));
+            this.playerTwo.CurrentGame = this;
             PlayerTwoPlayedCards = new Stack<Card>();
 
             Winner = null;
             endGame = false;
             turn = PlayerTurn.None;
 
-            Deck = new Deck(this);
-            Deck.ShuffleCards();
+            deck = new Deck(this);
+            deck.ShuffleCards();
         }
 
         /// <summary>
@@ -75,22 +93,22 @@ namespace War.Model
             Winner = null;
 
             // get all cards back from players
-            ReturnCardsFromPlayer(PlayerOne);
-            ReturnCardsFromPlayer(PlayerTwo);
+            ReturnCardsFromPlayer(playerOne);
+            ReturnCardsFromPlayer(playerTwo);
 
             // check cards on table
             for (int i = 0; i < PlayerOnePlayedCards.Count; i++)
             {
-                Deck.ReceiveCard(PlayerOnePlayedCards.Pop());
+                deck.ReceiveCard(PlayerOnePlayedCards.Pop());
             }
             for (int i = 0; i < PlayerTwoPlayedCards.Count; i++)
             {
-                Deck.ReceiveCard(PlayerTwoPlayedCards.Pop());
+                deck.ReceiveCard(PlayerTwoPlayedCards.Pop());
             }
 
             // restart game
             DetermineStartPlayer();
-            Deck.ShuffleCards();
+            deck.ShuffleCards();
             DealCards();
         }
 
@@ -99,27 +117,27 @@ namespace War.Model
         /// </summary>
         private void DealCards()
         {
-            if (Deck == null)
-                throw new NullReferenceException(nameof(Deck));
+            if (deck == null)
+                throw new NullReferenceException(nameof(deck));
 
-            Card? card = Deck.GetCard();
+            Card? card = deck.GetCard();
             PlayerTurn startDealingPlayer = turn == PlayerTurn.PlayerOne ? PlayerTurn.PlayerTwo : PlayerTurn.PlayerOne;
             while (card != null)
             {
                 switch (startDealingPlayer)
                 {
                     case PlayerTurn.PlayerOne:
-                        PlayerOne.ReceiveCard(card);
+                        playerOne.ReceiveCard(card);
                         startDealingPlayer = PlayerTurn.PlayerTwo;
                         break;
                     case PlayerTurn.PlayerTwo:
-                        PlayerTwo.ReceiveCard(card);
+                        playerTwo.ReceiveCard(card);
                         startDealingPlayer = PlayerTurn.PlayerOne;
                         break;
                     default:
                         break;
                 }
-                card = Deck.GetCard();
+                card = deck.GetCard();
             }
         }
 
@@ -155,39 +173,39 @@ namespace War.Model
             switch (turn)
             {
                 case PlayerTurn.PlayerOne:
-                    noGameWinner = noGameWinner && PlayCard(PlayerOne, PlayerOnePlayedCards);
+                    noGameWinner = noGameWinner && PlayCard(playerOne, PlayerOnePlayedCards);
                     if (noGameWinner)
                     {
-                        noGameWinner = noGameWinner && PlayCard(PlayerTwo, PlayerTwoPlayedCards);
+                        noGameWinner = noGameWinner && PlayCard(playerTwo, PlayerTwoPlayedCards);
                         if (!noGameWinner)
                         {
                             roundWinner = PlayerTurn.PlayerOne;
-                            Winner = PlayerOne;
+                            Winner = playerOne;
                         }
                     }
                     else
                     {
                         // player one has no cards so player two wins
                         roundWinner = PlayerTurn.PlayerTwo;
-                        Winner = PlayerTwo;
+                        Winner = playerTwo;
                     }
                     break;
                 case PlayerTurn.PlayerTwo:
-                    noGameWinner = noGameWinner && PlayCard(PlayerTwo, PlayerTwoPlayedCards);
+                    noGameWinner = noGameWinner && PlayCard(playerTwo, PlayerTwoPlayedCards);
                     if (noGameWinner)
                     {
-                        noGameWinner = noGameWinner && PlayCard(PlayerOne, PlayerOnePlayedCards);
+                        noGameWinner = noGameWinner && PlayCard(playerOne, PlayerOnePlayedCards);
                         if (!noGameWinner)
                         {
                             roundWinner = PlayerTurn.PlayerTwo;
-                            Winner = PlayerTwo;
+                            Winner = playerTwo;
                         }
                     }
                     else
                     {
                         // player two has no cards so player one wins
                         roundWinner = PlayerTurn.PlayerOne;
-                        Winner = PlayerOne;
+                        Winner = playerOne;
                     }
                     break;
                 default:
@@ -254,36 +272,36 @@ namespace War.Model
             switch (turn)
             {
                 case PlayerTurn.PlayerOne:
-                    noWinner = noWinner && PlayWarCards(PlayerOne, PlayerOnePlayedCards);
+                    noWinner = noWinner && PlayWarCards(playerOne, PlayerOnePlayedCards);
                     if (noWinner)
                     {
-                        noWinner = noWinner && PlayWarCards(PlayerTwo, PlayerTwoPlayedCards);
+                        noWinner = noWinner && PlayWarCards(playerTwo, PlayerTwoPlayedCards);
                         if (!noWinner)
                         {
-                            Winner = PlayerOne;
+                            Winner = playerOne;
                             return PlayerTurn.PlayerOne;
                         }
                     }
                     else
                     {
-                        Winner = PlayerTwo;
+                        Winner = playerTwo;
                         return PlayerTurn.PlayerTwo;
                     }
                     break;
                 case PlayerTurn.PlayerTwo:
-                    noWinner = noWinner && PlayWarCards(PlayerTwo, PlayerTwoPlayedCards);
+                    noWinner = noWinner && PlayWarCards(playerTwo, PlayerTwoPlayedCards);
                     if (noWinner)
                     {
-                        noWinner = noWinner && PlayWarCards(PlayerOne, PlayerOnePlayedCards);
+                        noWinner = noWinner && PlayWarCards(playerOne, PlayerOnePlayedCards);
                         if (!noWinner)
                         {
-                            Winner = PlayerTwo;
+                            Winner = playerTwo;
                             return PlayerTurn.PlayerTwo;
                         }
                     }
                     else
                     {
-                        Winner = PlayerOne;
+                        Winner = playerOne;
                         return PlayerTurn.PlayerOne;
                     }
                     break;
@@ -309,8 +327,8 @@ namespace War.Model
         {
             endGame = true;
             // if the game is set to end, reset all
-            ReturnCardsFromPlayer(PlayerOne);
-            ReturnCardsFromPlayer(PlayerTwo);
+            ReturnCardsFromPlayer(playerOne);
+            ReturnCardsFromPlayer(playerTwo);
         }
 
         /// <summary>
@@ -319,13 +337,13 @@ namespace War.Model
         /// <param name="player">The plater to get the cards for</param>
         private void ReturnCardsFromPlayer(Player player)
         {
-            if (Deck == null)
+            if (deck == null)
                 throw new NullReferenceException();
 
             Card? card = player.PlayCard();
             while (card != null)
             {
-                Deck.ReceiveCard(card);
+                deck.ReceiveCard(card);
                 card = player.PlayCard();
             }
         }
@@ -361,6 +379,31 @@ namespace War.Model
             }
         }
 
+        private void HandCardsToWinningPlayer(PlayerTurn winningPlayer)
+        {
+            Stack<Card> fromPlayerCards = new Stack<Card>();
+            Player toPlayer = playerTwo;
+            Stack<Card> toPlayerCards = new Stack<Card>();
+
+            switch (winningPlayer)
+            {
+                case PlayerTurn.PlayerOne:
+                    fromPlayerCards = PlayerTwoPlayedCards;
+                    toPlayer = playerOne;
+                    toPlayerCards = PlayerOnePlayedCards;
+                    break;
+                case PlayerTurn.PlayerTwo:
+                    fromPlayerCards = PlayerOnePlayedCards;
+                    toPlayer = playerTwo;
+                    toPlayerCards = PlayerTwoPlayedCards;
+                    break;
+                default:
+                    break;
+            }
+            StackToPlayer(fromPlayerCards, toPlayer);
+            StackToPlayer(toPlayerCards, toPlayer);
+        }
+
         /// <summary>
         /// Convert the rank of the card to a value for this game
         /// </summary>
@@ -370,30 +413,6 @@ namespace War.Model
         {
             // enum value is the rank only ace is 14 instead of 1
             return rank == Rank.Ace ? 14 : (int)rank;
-        }
-        private void HandCardsToWinningPlayer(PlayerTurn winningPlayer)
-        {
-            Stack<Card> fromPlayerCards = new Stack<Card>();
-            Player toPlayer = PlayerTwo;
-            Stack<Card> toPlayerCards = new Stack<Card>();
-
-            switch (winningPlayer)
-            {
-                case PlayerTurn.PlayerOne:
-                    fromPlayerCards = PlayerTwoPlayedCards;
-                    toPlayer = PlayerOne;
-                    toPlayerCards = PlayerOnePlayedCards;
-                    break;
-                case PlayerTurn.PlayerTwo:
-                    fromPlayerCards = PlayerOnePlayedCards;
-                    toPlayer = PlayerTwo;
-                    toPlayerCards = PlayerTwoPlayedCards;
-                    break;
-                default:
-                    break;
-            }
-            StackToPlayer(fromPlayerCards, toPlayer);
-            StackToPlayer(toPlayerCards, toPlayer);
         }
 
         /// <summary>

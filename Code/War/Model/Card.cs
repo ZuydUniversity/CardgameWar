@@ -28,12 +28,24 @@ namespace War.Model
         /// </summary>
         public Player? Player { get; set; }
 
-        public Card(Suit suit, Rank rank, Deck deck)
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="suit">The suit of the card</param>
+        /// <param name="rank">The rank of the card</param>
+        /// <param name="deck">The deck, can be null</param>
+        /// <param name="player">The player, can be null</param>
+        public Card(Suit suit, Rank rank, Deck? deck, Player? player)
         {
             Suit = suit;
             Rank = rank;
+
+            // Player or deck should be filled
+            if (deck == null && player == null)
+                throw new ArgumentException("Player or deck should not be null");
+
             Deck = deck;
-            Player = null;
+            Player = player;
         }
     }
 }

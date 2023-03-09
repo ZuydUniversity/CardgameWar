@@ -14,7 +14,7 @@ namespace War.Model
         /// <summary>
         /// The unique number of the player
         /// </summary>
-        public int PlayerNumber { get; private set; }
+        private readonly int playerNumber;
         /// <summary>
         /// The unique name of the player
         /// </summary>
@@ -34,14 +34,14 @@ namespace War.Model
         /// <summary>
         /// The cards the player has on hand
         /// </summary>
-        private Queue<Card> CardsOnHand { get; set; }
+        private readonly Queue<Card> cardsOnHand;
 
         /// <summary>
         /// The number of cards on hand
         /// </summary>
         public int CardCount 
         { 
-            get {  return CardsOnHand.Count; }
+            get {  return cardsOnHand.Count; }
         }
 
         /// <summary>
@@ -57,14 +57,14 @@ namespace War.Model
             }
             PlayerName = playerName;
             CurrentGame = null;
-            CardsOnHand = new Queue<Card>();
+            cardsOnHand = new Queue<Card>();
             Wins = 0;
             Games = 0;
         }
 
         public Player(int playerNumber, string playerName, int wins, int games) : this(playerName)
         {
-            PlayerNumber = playerNumber;
+            this.playerNumber = playerNumber;
             Wins = wins;
             Games = games;
         }
@@ -78,7 +78,7 @@ namespace War.Model
             if (card != null)
             {
                 card.Player = this;
-                CardsOnHand.Enqueue(card);
+                cardsOnHand.Enqueue(card);
             }
         }
 
@@ -88,9 +88,9 @@ namespace War.Model
         /// <returns>The card, null if hand is empty</returns>
         public virtual Card? PlayCard()
         {
-            if (CardsOnHand.Count > 0)
+            if (cardsOnHand.Count > 0)
             {
-                var c = CardsOnHand.Dequeue();
+                var c = cardsOnHand.Dequeue();
                 c.Player = null;
                 return c;
             }
@@ -105,10 +105,10 @@ namespace War.Model
         {
             Queue<Card> cardsToPlay = new Queue<Card>();
 
-            int count = Math.Min(CardsOnHand.Count, 4);
+            int count = Math.Min(cardsOnHand.Count, 4);
             for (int i = 0; i < count; i++)
             {
-                var c = CardsOnHand.Dequeue();
+                var c = cardsOnHand.Dequeue();
                 c.Player = null;
                 cardsToPlay.Enqueue(c);
             }

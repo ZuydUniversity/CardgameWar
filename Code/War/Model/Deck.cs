@@ -14,27 +14,28 @@ namespace War.Model
         /// <summary>
         /// The cards
         /// </summary>
-        private Queue<Card> Cards { get; set; }
+        private Queue<Card> cards;
+
         /// <summary>
         /// The game the deck is used in
         /// </summary>
-        private Game Game { get; set; }
+        private readonly Game? game;
 
         /// <summary>
         /// Constructor: create the full deck of cards
         /// </summary>
-        public Deck(Game game)
+        public Deck(Game? game)
         {
             // initialize
-            Game = game;
-            Cards = new Queue<Card>();
+            this.game = game;
+            cards = new Queue<Card>();
 
             // create the deck
             foreach (Suit s in Enum.GetValues(typeof(Suit)))
             {
                 foreach (Rank r in Enum.GetValues(typeof(Rank)))
                 {
-                    Cards.Enqueue(new Card(s, r, this));
+                    cards.Enqueue(new Card(s, r, this, null));
                 }
             }
         }
@@ -44,17 +45,17 @@ namespace War.Model
         /// </summary>
         public void ShuffleCards()
         {
-            List<Card>? cardsToList = Cards.ToList();
+            List<Card>? cardsToList = cards.ToList();
             Random random = new Random();
             Queue<Card> newQueue = new Queue<Card>();
-            int cnt = Cards.Count;
+            int cnt = cards.Count;
             for (int i = 0; i < cnt; i++)
             {
                 int randomElementInList = random.Next(0, cardsToList.Count);
                 newQueue.Enqueue(cardsToList[randomElementInList]);
                 cardsToList.Remove(cardsToList[randomElementInList]);
             }
-            Cards = newQueue;
+            cards = newQueue;
         }
 
         /// <summary>
@@ -63,9 +64,9 @@ namespace War.Model
         /// <returns>The card or null when no cards on deck</returns>
         public Card? GetCard()
         {
-            if (Cards.Count > 0)
+            if (cards.Count > 0)
             {
-                var c = Cards.Dequeue();
+                var c = cards.Dequeue();
                 // card will leave the deck so set to null
                 c.Deck = null;
                 return c;
@@ -79,7 +80,7 @@ namespace War.Model
         /// <param name="card">The card to receive</param>
         public void ReceiveCard(Card card)
         {
-            Cards.Enqueue((Card)card);
+            cards.Enqueue((Card)card);
         }
     }
 }
