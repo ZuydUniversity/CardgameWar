@@ -37,6 +37,14 @@ namespace War.Model
         private Queue<Card> CardsOnHand { get; set; }
 
         /// <summary>
+        /// The number of cards on hand
+        /// </summary>
+        public int CardCount 
+        { 
+            get {  return CardsOnHand.Count; }
+        }
+
+        /// <summary>
         /// Constructor to create a player
         /// </summary>
         /// <param name="playerName">The required name of the player</param>

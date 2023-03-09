@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using War.Exceptions;
 
 namespace War.Model
 {
@@ -34,7 +35,7 @@ namespace War.Model
         /// <summary>
         /// The winner of the game, null when game in progress/ no winner
         /// </summary>
-        private Player? Winner { get; set; }
+        public Player? Winner { get; private set; }
 
         /// <summary>
         /// Wich players turn? 1 or 2
@@ -78,14 +79,6 @@ namespace War.Model
             Winner = null;
             DetermineStartPlayer();
             DealCards();
-            while (Winner == null && endGame == false)
-            {
-                PlayRound();
-            }
-            if (endGame)
-            {
-                EndGame();
-            }
         }
 
         /// <summary>
@@ -129,8 +122,19 @@ namespace War.Model
         /// <summary>
         /// Play a round
         /// </summary>
-        public void PlayRound()
+        /// <returns>The winner of the round</returns>
+        /// <exception cref="GameStoppedException">The game has stopped</exception>
+        public PlayerTurn PlayRound()
         {
+            if (endGame)
+            {
+                throw new GameStoppedException("Game has ended!");
+            }
+            if (Winner != null)
+            {
+                throw new GameStoppedException($"Player {Winner.PlayerName} won!");
+            }
+
             // play a round
             // stop as soon there is a winner
             bool noGameWinner = true;
@@ -186,6 +190,7 @@ namespace War.Model
                 }
             }
             HandCardsToWinningPlayer(roundWinner);
+            return roundWinner;
         }
 
         /// <summary>
@@ -285,18 +290,11 @@ namespace War.Model
         }
 
         /// <summary>
-        /// Sets the running game to end
-        /// </summary>
-        public void SetEndGame()
-        {
-            endGame = false;
-        }
-
-        /// <summary>
         /// Actually end the game
         /// </summary>
-        private void EndGame()
+        public void EndGame()
         {
+            endGame = true;
             // if the game is set to end, reset all
             ReturnCardsFromPlayer(PlayerOne);
             ReturnCardsFromPlayer(PlayerTwo);
