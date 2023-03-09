@@ -58,6 +58,7 @@ Niet functionele requirements gaan over kwaliteitskenmerken zoals omschreven in 
 - De code is herbruikbaar voor een toekomstige web applicatie (reusability)
 
 ## Ontwerp
+Ontwerpen zijn gemaakt met UMLet en opgeslagen in de map "Design".
 ### Conceptueel class diagram
 ![Conceptueel class diagram](ClassDiagramConceptueel.jpg)
 
@@ -75,3 +76,10 @@ Niet functionele requirements gaan over kwaliteitskenmerken zoals omschreven in 
 
 
 ### Wireframes
+
+
+## Verdieping
+Verdiepingsopdrachten voor studenten.
+Maak een fork van deze repository en kies één van de onderstaande opdrachten. Idealiter 
+- Implementeer requirement T5 en T5.1, de valsspeler (oefenen met afgeleide classes en polymorfisme)
+- Implementeer requirement O3 en O4, savegame (oefenen met database en DAL)
