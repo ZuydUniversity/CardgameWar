@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using War.Model;
+﻿using War.Model;
 
 namespace War.DataAccess
 {
@@ -13,7 +8,7 @@ namespace War.DataAccess
     public interface IDAL
     {
         public void CreatePlayerData(Player player);
-        
+
         public List<Player> ReadPlayersData();
 
         public Player? ReadPlayerData(int playerNumber);

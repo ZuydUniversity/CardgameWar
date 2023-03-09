@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using War.Exceptions;
+﻿using War.Exceptions;
 
 namespace War.Model
 {
@@ -38,7 +33,7 @@ namespace War.Model
         /// The winner of the game, null when game in progress/ no winner
         /// Change score of players when setting the winner
         /// </summary>
-        public Player? Winner 
+        public Player? Winner
         {
             get
             {
@@ -52,10 +47,10 @@ namespace War.Model
                     playerTwo.AddScore(value.Equals(playerTwo));
                     GameStarted = false;
                 }
-                winner  = value;
-            }            
+                winner = value;
+            }
         }
- 
+
         /// <summary>
         /// Wich players turn? 1 or 2
         /// </summary>

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
+﻿using System.Data.SqlClient;
 using War.Model;
 
 namespace War.DataAccess
@@ -78,7 +72,7 @@ namespace War.DataAccess
                     int addId = (int)command.ExecuteScalar();
                     player.PlayerNumber = addId;
                 }
-            }           
+            }
         }
 
         /// <summary>
@@ -109,7 +103,7 @@ namespace War.DataAccess
                             var winsString = reader[2].ToString() ?? "0";
                             var gamesString = reader[3].ToString() ?? "0";
 
-                            return new Player(                                
+                            return new Player(
                                 Int32.Parse(idString),
                                 nameString,
                                 Int32.Parse(winsString),

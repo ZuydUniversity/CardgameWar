@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using War.DataAccess;
+﻿using War.DataAccess;
 
 namespace War.Model
 {
@@ -16,8 +11,9 @@ namespace War.Model
         /// <summary>
         /// The unique number of the player
         /// </summary>
-        public int PlayerNumber {
-            get { return playerNumber; }  
+        public int PlayerNumber
+        {
+            get { return playerNumber; }
             set
             {
                 if (playerNumber == 0)
@@ -55,9 +51,9 @@ namespace War.Model
         /// <summary>
         /// The number of cards on hand
         /// </summary>
-        public int CardCount 
-        { 
-            get {  return cardsOnHand.Count; }
+        public int CardCount
+        {
+            get { return cardsOnHand.Count; }
         }
 
         /// <summary>
