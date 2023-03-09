@@ -151,7 +151,7 @@
             buttonPlayTurn.TabIndex = 6;
             buttonPlayTurn.Text = "Play turn";
             buttonPlayTurn.UseVisualStyleBackColor = true;
-            buttonPlayTurn.Click += buttonPlayTurn_Click;
+            buttonPlayTurn.Click += ButtonPlayTurn_Click;
             // 
             // lvCardsPlayerTwo
             // 

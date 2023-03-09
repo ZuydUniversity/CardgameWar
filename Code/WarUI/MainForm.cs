@@ -5,9 +5,9 @@ namespace WarUI
 {
     public partial class MainForm : Form
     {
-        private Game game;
-        private Player p1;
-        private Player p2;
+        private Game? game;
+        private Player? p1;
+        private Player? p2;
 
         public MainForm()
         {
@@ -107,12 +107,12 @@ namespace WarUI
 
         private void ButtonEndGame_Click(object sender, EventArgs e)
         {
-            game.EndGame();
+            game?.EndGame();
             game = null;
             SetControls();
         }
 
-        private void buttonPlayTurn_Click(object sender, EventArgs e)
+        private void ButtonPlayTurn_Click(object sender, EventArgs e)
         {
             if (game != null)
             {
@@ -145,7 +145,7 @@ namespace WarUI
         /// </summary>
         /// <param name="lvc"></param>
         /// <param name="stack"></param>
-        private void StackToListviewItemCollection(ListViewItemCollection lvc, Stack<Card>? stack)
+        private static void StackToListviewItemCollection(ListViewItemCollection lvc, Stack<Card>? stack)
         {
             lvc.Clear();
 
