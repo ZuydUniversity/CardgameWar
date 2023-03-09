@@ -49,6 +49,8 @@ Requirements vloeien allen voort uit de bovenstaande speluitleg en doelstelling 
 
 - O1 (C) De speler bekijkt de score van alle spelers van hoge score naar lage score
 - O2 (C) Het spel kan automatisch gespeeld worden zonder gebruikers interactie (kaarten worden automatisch gelegd)
+- O3 (C) De speler slaat het spel tussentijds op
+- O4 (C) De speler laadt een eerder opgeslagen spel
 
 
 ### Niet functionele requirements
