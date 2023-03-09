@@ -58,12 +58,20 @@ Niet functionele requirements gaan over kwaliteitskenmerken zoals omschreven in 
 - De code is herbruikbaar voor een toekomstige web applicatie (reusability)
 
 ## Ontwerp
-### Class diagram
+### Conceptueel class diagram
+![Conceptueel class diagram](ClassDiagramConceptueel.jpg)
+
+### Implementatie class diagram
+![Implementatie class diagram](ClassDiagram.jpg)
 
 ### Usecase diagram
+![Usacase diagram](UsecaseDiagram.jpg)
 
 ### Usecase desciptions
+// todo
 
 ### Sequence diagrams
+![Sequence diagram](SequenceDiagrams.jpg)
+
 
 ### Wireframes
