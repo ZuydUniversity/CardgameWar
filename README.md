@@ -69,7 +69,42 @@ Ontwerpen zijn gemaakt met UMLet en opgeslagen in de map "Design".
 ![Usacase diagram](UsecaseDiagram.jpg)
 
 ### Usecase desciptions
-// todo
+| Usecase | UC1: Register ||
+|:------------- |:-------------|:-|
+| **Beschrijving**  | Speler registreert een unieke naam|
+| **Actor** |Speler|
+| **Trigger(s)** |De speler klikt op de button "Create new player"|
+| **Pre-Conditions** | - Er is geen lopend spel|
+| **Post-Conditions** | - Spleler is opgeslagen met een unieke naam||
+| **Stappen** |**Actor speler**|**Systeem**|
+| |1. Speler klikt op de button "Create new player"||
+| ||2. Systeem toont de nieuwe speler dialog 
+| |3. Speler vult een unieke naam in||
+| |4. Speler klikt op ok||
+| ||5. Systeem controleert of unieke naam al bestaat
+| ||6. Systeem slaat de gegevens op
+| ||7. Systeem geeft resultaat succes melding
+| |8. Speler klikt op cancel||
+| ||9. Systeem geeft foutmelding
+| **Main success scenario**|1, 2, 3, 4, 5, 6, 7|
+| **Alternatieve scenario's**|1, 8 <br> 1, 2, 3, 4, 5, 9|
+
+| Usecase | UC2: Start game ||
+|:------------- |:-------------|:-|
+| **Beschrijving**  |Speler start het spel|
+| **Actor** |Speler|
+| **Trigger(s)** |De speler wilt een spel starten|
+| **Pre-Conditions** |- Er is geen lopend spel <br> - Er zijn minimaal twee spelers aangemaakt|
+| **Post-Conditions** |||
+| **Stappen** |**Actor**|**Systeem**|
+| |1. Speler kiest twee spelers ||
+| |2. Speler klikt op "Create game" om het spel aan te maken ||
+| ||3. Het systeem maakt het spel aan
+| |4. Speler klikt op "start game" om het spel te starten ||
+| ||5. Het systeem schudt het deck
+| ||6. Het systeem deelt de kaarten
+| **Main success scenario**| 1, 2, 3, 4, 5, 6|
+| **Alternatieve scenario's**||
 
 ### Sequence diagrams
 ![Sequence diagram](SequenceDiagrams.jpg)
