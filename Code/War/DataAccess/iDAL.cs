@@ -11,6 +11,8 @@ namespace War.DataAccess
 
         public List<Player> ReadPlayersData();
 
+        public List<Player> ReadHighscoreData();
+
         public Player? ReadPlayerData(int playerNumber);
 
         public void UpdatePlayerData(Player player);

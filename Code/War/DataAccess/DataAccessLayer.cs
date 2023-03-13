@@ -203,5 +203,39 @@ namespace War.DataAccess
                 }
             }
         }
+
+        public List<Player> ReadHighscoreData()
+        {
+            List<Player> players = new List<Player>();
+            using (SqlConnection connection = new SqlConnection())
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    connection.ConnectionString = ConnectionString();
+                    connection.Open();
+                    command.Connection = connection;
+                    command.CommandText = "select top 3 playernumber, playername, wins, games from player order by wins desc";
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader != null)
+                            while (reader.Read())
+                            {
+                                // prevent null reference warnings
+                                var idString = reader[0].ToString() ?? "0";
+                                var nameString = reader[1].ToString() ?? string.Empty;
+                                var winsString = reader[2].ToString() ?? "0";
+                                var gamesString = reader[3].ToString() ?? "0";
+
+                                players.Add(new Player(
+                                    Int32.Parse(idString), nameString, Int32.Parse(winsString), Int32.Parse(gamesString))
+                                );
+
+                            }
+                    }
+                }
+            }
+            return players;
+        }
     }
 }

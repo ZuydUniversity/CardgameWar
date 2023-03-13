@@ -164,6 +164,16 @@ namespace War.Model
         }
 
         /// <summary>
+        /// Read highscores from data access layer
+        /// </summary>
+        /// <returns>Sorted list with higscores</returns>
+        public static List<Player> ReadPlayersHigscoreData()
+        {
+            IDAL dal = new DataAccessLayer();
+            return dal.ReadHighscoreData();
+        }
+
+        /// <summary>
         /// Read a specific player from the data access layer
         /// </summary>
         /// <param name="playerNumber">The number of the player</param>
