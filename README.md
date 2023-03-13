@@ -89,6 +89,23 @@ Ontwerpen zijn gemaakt met UMLet en opgeslagen in de map "Design".
 | **Main success scenario**|1, 2, 3, 4, 5, 6, 7|
 | **Alternatieve scenario's**|1, 8 <br> 1, 2, 3, 4, 5, 9|
 
+| Usecase | UC2: Start game ||
+|:------------- |:-------------|:-|
+| **Beschrijving**  |Speler start het spel|
+| **Actor** |Speler|
+| **Trigger(s)** |De speler wilt een spel starten|
+| **Pre-Conditions** |- Er is geen lopend spel <br> - Er zijn minimaal twee spelers aangemaakt|
+| **Post-Conditions** |||
+| **Stappen** |**Actor**|**Systeem**|
+| |1. Speler kiest twee spelers ||
+| |2. Speler klikt op "Create game" om het spel aan te maken ||
+| ||3. Het systeem maakt het spel aan
+| |4. Speler klikt op "start game" om het spel te starten ||
+| ||5. Het systeem schudt het deck
+| ||6. Het systeem deelt de kaarten
+| **Main success scenario**| 1, 2, 3, 4, 5, 6|
+| **Alternatieve scenario's**||
+
 ### Sequence diagrams
 ![Sequence diagram](SequenceDiagrams.jpg)
 
