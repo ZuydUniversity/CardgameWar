@@ -69,7 +69,25 @@ Ontwerpen zijn gemaakt met UMLet en opgeslagen in de map "Design".
 ![Usacase diagram](UsecaseDiagram.jpg)
 
 ### Usecase desciptions
-// todo
+| Usecase | UC1: Register ||
+|:------------- |:-------------|:-|
+| **Beschrijving**  | Speler registreert een unieke naam|
+| **Actor** |Speler|
+| **Trigger(s)** |De speler klikt op de button "Create new player"|
+| **Pre-Conditions** | - Er is geen lopend spel|
+| **Post-Conditions** | - Spleler is opgeslagen met een unieke naam||
+| **Stappen** |**Actor speler**|**Systeem**|
+| |1. Speler klikt op de button "Create new player"||
+| ||2. Systeem toont de nieuwe speler dialog 
+| |3. Speler vult een unieke naam in||
+| |4. Speler klikt op ok||
+| ||5. Systeem controleert of unieke naam al bestaat
+| ||6. Systeem slaat de gegevens op
+| ||7. Systeem geeft resultaat succes melding
+| |8. Speler klikt op cancel||
+| ||9. Systeem geeft foutmelding
+| **Main success scenario**|1, 2, 3, 4, 5, 6, 7|
+| **Alternatieve scenario's**|1, 8 <br> 1, 2, 3, 4, 5, 9|
 
 ### Sequence diagrams
 ![Sequence diagram](SequenceDiagrams.jpg)
