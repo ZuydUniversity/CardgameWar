@@ -27,7 +27,7 @@ Onderstaande zijn randvoorwaarden, geen requirements.
 | Nummer | MoSCoW | Beschrijving |
 |:--- |:---- |:----|
 |P1| **S**hould have |De speler registreert een unieke naam|
-|P2| **S**hould have |De speler slaat zijn gegevens op|
+|P2| **S**hould have |De speler slaat zijn unieke naam op|
 |G1| **C**ould have |De speler beëindigt een spel|
 |G2| **M**ust have |De speler kiest een tegenspeler|
 |G3| **M**ust have |De speler start een nieuw spel|
