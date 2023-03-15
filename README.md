@@ -28,7 +28,7 @@ Onderstaande zijn randvoorwaarden, geen requirements.
 |:- |:- |:-|
 |P1|De speler voert een unieke naam in|**S**hould have|
 |P2|De speler slaat zijn unieke naam op|**S**hould have|
-|G1|De speler beëindigt een spel|**C**ould have|
+|G1|De speler beëindigt het spel|**C**ould have|
 |G2|De speler kiest een tegenspeler|**M**ust have|
 |G3|De speler start een nieuw spel|**M**ust have|
 |G4|Het spel heeft een standaard deck van 52 kaarten zonder jokers|**M**ust have|
