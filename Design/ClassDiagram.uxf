@@ -66,7 +66,7 @@ m2=0..52
 + PlayerName : string
 + Wins : int
 + Games : int
-+ CurrentGame : Game
++ CurrentGame : Game?
 - cardsOnHand : Queue&lt;Card&gt;
 -
 + int CardCount();
@@ -195,7 +195,7 @@ has on hand ^</panel_attributes>
     </coordinates>
     <panel_attributes>lt=-
 m1=2
-m2=0..n
+m2=0..1
 Plays &gt;</panel_attributes>
     <additional_attributes>10.0;20.0;150.0;20.0</additional_attributes>
   </element>
