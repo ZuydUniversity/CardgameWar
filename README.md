@@ -24,32 +24,32 @@ Onderstaande zijn randvoorwaarden, geen requirements.
 - Opdrachtgever is eigenaar van alle requirements.
 - Requirements vloeien allen voort uit de bovenstaande speluitleg en doelstelling van het project.
 
-| Nummer | MoSCoW | Beschrijving |
-|:--- |:---- |:----|
-|P1| **S**hould have |De speler registreert een unieke naam|
-|P2| **S**hould have |De speler slaat zijn unieke naam op|
-|G1| **C**ould have |De speler beëindigt een spel|
-|G2| **M**ust have |De speler kiest een tegenspeler|
-|G3| **M**ust have |De speler start een nieuw spel|
-|G4| **M**ust have |Het spel heeft een standaard deck van 52 kaarten zonder jokers|
-|G5| **M**ust have |De kaarten in het deck hebben een oplopende waarde van 2, 3, 4, 5, 6, 7, 8, 9, 10, B, V, H, A.|
-|G6| **M**ust have |De kaarten worden evenredig random verdeeld|
-|G8| **S**hould have |Het spel bepaalt random de startspeler|
-|G9| **M**ust have |Het spel eindigt zodra één speler geen kaarten meer heeft|
-|G10| **M**ust have |Het spel roept de winnaar uit |
-|G11| **S**hould have |Het spel werkt de persoonlijke score van de speler bij|
-|T1| **M**ust have |De speler speelt de eerste kaart van zijn stapel op tafel|
-|T2| **M**ust have |De speler met de hoogste kaart wint alle kaarten op tafel|
-|T3| **M**ust have |De gespeelde kaart is van gelijke waarde waardoor oorlog wordt gevoerd|
-|T3.1| **M**ust have |De speler speelt vier kaarten van zijn stapel bij het voeren van oorlog|
-|T3.2| **M**ust have |De waarde van de vierde kaart bepaalt wie de winnaar is|
-|T4| **M**ust have |De speler legt alle gewonnen kaarten onderaan zijn stapel speelkaarten|
-|T5| **C**ould have |Een speler kan vals spelen|
-|T5.1| **C**ould have |De valsspeler speelt in zijn beurt indien beschikbaar een kaart uit zijn stapel die hoger is dan de door de tegenstander gespeelde kaart|
-|O1| **C**ould have |De speler bekijkt de score van alle spelers van hoge score naar lage score|
-|O2| **C**ould have |Het spel kan automatisch gespeeld worden zonder gebruikers interactie (kaarten worden automatisch gelegd)|
-|O3| **C**ould have |De speler slaat het spel tussentijds op|
-|O4| **C**ould have |De speler laadt een eerder opgeslagen spel|
+| Nummer | Beschrijving | MoSCoW |
+|:- |:- |:-|
+|P1|De speler voert een unieke naam in|**S**hould have|
+|P2|De speler slaat zijn unieke naam op|**S**hould have|
+|G1|De speler beëindigt een spel|**C**ould have|
+|G2|De speler kiest een tegenspeler|**M**ust have|
+|G3|De speler start een nieuw spel|**M**ust have|
+|G4|Het spel heeft een standaard deck van 52 kaarten zonder jokers|**M**ust have|
+|G5|De kaarten in het deck hebben een oplopende waarde van 2, 3, 4, 5, 6, 7, 8, 9, 10, B, V, H, A.|**M**ust have|
+|G6|De kaarten worden evenredig random verdeeld|**M**ust have|
+|G8|Het spel bepaalt random de startspeler|**S**hould have|
+|G9|Het spel eindigt zodra één speler geen kaarten meer heeft|**M**ust have|
+|G10|Het spel roept de winnaar uit|**M**ust have|
+|G11|Het spel werkt de persoonlijke score van de speler bij|**S**hould have|
+|T1|De speler speelt de eerste kaart van zijn stapel op tafel|**M**ust have|
+|T2|De speler met de hoogste kaart wint alle kaarten op tafel|**M**ust have|
+|T3|De gespeelde kaart is van gelijke waarde waardoor oorlog wordt gevoerd|**M**ust have|
+|T3.1|De speler speelt vier kaarten van zijn stapel bij het voeren van oorlog|**M**ust have|
+|T3.2|De waarde van de vierde kaart bepaalt wie de winnaar is|**M**ust have|
+|T4|De speler legt alle gewonnen kaarten onderaan zijn stapel speelkaarten|**M**ust have|
+|T5|Een speler kan vals spelen|**C**ould have|
+|T5.1|De valsspeler speelt in zijn beurt indien beschikbaar een kaart uit zijn stapel die hoger is dan de door de tegenstander gespeelde kaart|**C**ould have|
+|O1|De speler bekijkt de score van alle spelers van hoge score naar lage score|**C**ould have|
+|O2|Het spel kan automatisch gespeeld worden zonder gebruikers interactie (kaarten worden automatisch gelegd)|**C**ould have|
+|O3|De speler slaat het spel tussentijds op|**C**ould have|
+|O4|De speler laadt een eerder opgeslagen spel|**C**ould have|
 
 ### Niet functionele requirements
 Niet functionele requirements gaan over kwaliteitskenmerken zoals omschreven in [ISO25010](https://nl.wikipedia.org/wiki/ISO_25010)
