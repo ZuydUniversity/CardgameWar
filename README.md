@@ -12,7 +12,7 @@ Oorlog is een zeer eenvoudig spel zonder veel strategie of tactiek, maar het is 
 
 ## Requirements
 
-### Constraints
+### Randvoorwaarden
 Onderstaande zijn randvoorwaarden, geen requirements.
 - Gegevens worden opgeslagen in Microsoft SQL server
 - De applicatie wordt geprogrammeerd in dotnet core met winforms
@@ -24,7 +24,7 @@ Onderstaande zijn randvoorwaarden, geen requirements.
 - Opdrachtgever is eigenaar van alle requirements.
 - Requirements vloeien allen voort uit de bovenstaande speluitleg en doelstelling van het project.
 
-| Nummer | Beschrijving | MoSCoW |
+| Identificatie | Beschrijving | MoSCoW |
 |:- |:- |:-|
 |P1|De speler voert een unieke naam in|**S**hould have|
 |P2|De speler slaat zijn unieke naam op|**S**hould have|
