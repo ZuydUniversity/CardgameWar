@@ -32,7 +32,7 @@ Oorlog is een zeer eenvoudig spel zonder veel strategie of tactiek, maar het is 
 
 > Requirements worden opgehaald bij de opdrachtgever, of zelf samengesteld op basis van informatie die beschikbaar is (onderzoek naar andere systemen, opdrachtomschrijving, etc). In dit geval de omschrijving van het spel zoals hierboven vermeld.
 >
-> Het opstellen van requirements is reeds in een eerdere onderwijs eenheid behandeld en is dus een herhaling. 
+> Het opstellen van requirements is reeds in een eerdere onderwijs eenheid behandeld en is dus een herhaling. Er wordt niet opnieuw aandacht besteed aan de theorie betreffende het maken van requirements.
 > Requirements:
 > - zijn opgesplitst in randvoorwaarden, functionele- en niet funcionele requirements
 > - zijn uniek identificeerbaar
