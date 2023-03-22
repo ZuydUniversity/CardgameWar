@@ -58,9 +58,8 @@ namespace War.DataAccess
             // add player
             using (SqlConnection connection = new SqlConnection(ConnectionString()))
             {
-                string sql = "insert into Player(PlayerName, Wins, Games) VALUES (@name, @wins, @games)";
+                string sql = "insert into Player (PlayerName, Wins, Games) VALUES (@name, @wins, @games)";
                 connection.Open();
-
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
                     command.Parameters.AddWithValue("@name", player.PlayerName);
@@ -72,6 +71,7 @@ namespace War.DataAccess
                     int addId = (int)command.ExecuteScalar();
                     player.PlayerNumber = addId;
                 }
+                connection.Close();
             }
         }
 
@@ -110,6 +110,7 @@ namespace War.DataAccess
                                 Int32.Parse(gamesString));
                         }
                     }
+                    connection.Close();
                 }
             }
             return null;
@@ -148,6 +149,7 @@ namespace War.DataAccess
 
                             }
                     }
+                    connection.Close();
                 }
             }
             return players;
@@ -182,6 +184,7 @@ namespace War.DataAccess
                         command.Parameters.AddWithValue("@playernumber", player.PlayerNumber);
                         command.ExecuteNonQuery();
                     }
+                    connection.Close();
                 }
             }
         }
@@ -201,6 +204,7 @@ namespace War.DataAccess
                     command.Parameters.AddWithValue("@playerNumber", playerNumber);
                     command.ExecuteNonQuery();
                 }
+                connection.Close();
             }
         }
 
@@ -219,6 +223,7 @@ namespace War.DataAccess
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         if (reader != null)
+                        {
                             while (reader.Read())
                             {
                                 // prevent null reference warnings
@@ -232,7 +237,9 @@ namespace War.DataAccess
                                 );
 
                             }
+                        }
                     }
+                    connection.Close();
                 }
             }
             return players;

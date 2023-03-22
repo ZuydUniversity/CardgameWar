@@ -139,17 +139,27 @@ namespace War.Model
             UpdatePlayerData();
         }
 
-        // data access
+        // data access methods
 
         /// <summary>
         /// Persist the player in the data layer
         /// </summary>
-        public void CreatePlayerData()
+        /// <returns>true on success</returns>
+        public bool CreatePlayerData()
         {
-            if (this.playerNumber == 0)
+            try
             {
+                if (this.playerNumber == 0)
+                {
                 IDAL dal = new DataAccessLayer();
-                dal.CreatePlayerData(this);
+                    dal.CreatePlayerData(this);
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
 
@@ -159,48 +169,87 @@ namespace War.Model
         /// <returns>The list of all players</returns>
         public static List<Player> ReadPlayersData()
         {
-            IDAL dal = new DataAccessLayer();
-            return dal.ReadPlayersData();
+            try
+            {
+                IDAL dal = new DataAccessLayer();
+                return dal.ReadPlayersData();
+            }
+            catch (Exception)
+            {
+                return new List<Player>();
+            }
         }
 
         /// <summary>
         /// Read highscores from data access layer
         /// </summary>
-        /// <returns>Sorted list with higscores</returns>
+        /// <returns>Sorted list with higscores, null on error</returns>
         public static List<Player> ReadPlayersHigscoreData()
         {
-            IDAL dal = new DataAccessLayer();
-            return dal.ReadHighscoreData();
+            try
+            {
+                IDAL dal = new DataAccessLayer();
+                return dal.ReadHighscoreData();
+            }
+            catch (Exception)
+            {
+                return new List<Player>();
+            }
         }
 
         /// <summary>
         /// Read a specific player from the data access layer
         /// </summary>
         /// <param name="playerNumber">The number of the player</param>
-        /// <returns>The player</returns>
+        /// <returns>The player, null if no player or error occurred</returns>
         public static Player? ReadPlayerData(int playerNumber)
         {
-            IDAL dal = new DataAccessLayer();
-            return dal.ReadPlayerData(playerNumber);
+            try
+            {
+                IDAL dal = new DataAccessLayer();
+                return dal.ReadPlayerData(playerNumber);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         /// <summary>
         /// Update the player in the data access layer
         /// </summary>
-        public void UpdatePlayerData()
+        /// <returns>True on success</returns>
+        public bool UpdatePlayerData()
         {
-            IDAL dal = new DataAccessLayer();
-            dal.UpdatePlayerData(this);
+            try
+            {
+                IDAL dal = new DataAccessLayer();
+                dal.UpdatePlayerData(this);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         /// <summary>
         /// Delete player from data access layer
         /// </summary>
         /// <param name="playerNumber">The number of the player to delete</param>
-        public static void DeletePlayerData(int playerNumber)
+        /// <returns>True on success</returns>
+        public static bool DeletePlayerData(int playerNumber)
         {
-            IDAL dal = new DataAccessLayer();
-            dal.DeletePlayerData(playerNumber);
+            try
+            {
+                IDAL dal = new DataAccessLayer();
+                dal.DeletePlayerData(playerNumber);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

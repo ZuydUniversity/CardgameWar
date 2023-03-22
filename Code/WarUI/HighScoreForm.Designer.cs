@@ -39,8 +39,9 @@
             panelHighScore.Controls.Add(dataGridViewHighScores);
             panelHighScore.Dock = DockStyle.Fill;
             panelHighScore.Location = new Point(0, 0);
+            panelHighScore.Margin = new Padding(3, 4, 3, 4);
             panelHighScore.Name = "panelHighScore";
-            panelHighScore.Size = new Size(800, 450);
+            panelHighScore.Size = new Size(605, 532);
             panelHighScore.TabIndex = 0;
             // 
             // dataGridViewHighScores
@@ -48,17 +49,20 @@
             dataGridViewHighScores.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewHighScores.Dock = DockStyle.Fill;
             dataGridViewHighScores.Location = new Point(0, 0);
+            dataGridViewHighScores.Margin = new Padding(3, 4, 3, 4);
             dataGridViewHighScores.Name = "dataGridViewHighScores";
+            dataGridViewHighScores.RowHeadersWidth = 51;
             dataGridViewHighScores.RowTemplate.Height = 25;
-            dataGridViewHighScores.Size = new Size(800, 450);
+            dataGridViewHighScores.Size = new Size(605, 532);
             dataGridViewHighScores.TabIndex = 0;
             // 
             // HighScoreForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(605, 532);
             Controls.Add(panelHighScore);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "HighScoreForm";
             Text = "Highscore";
             panelHighScore.ResumeLayout(false);
