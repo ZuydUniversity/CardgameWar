@@ -1,5 +1,23 @@
 # CardGameWar
 
+Dit project is een voorbeelduitwerking voor studenten en docenten van de Academie ICT. Middels dit project wordt getoond hoe een software ontwerp en realisatie eruit zouden *kunnen* zien. Voor zowel ontwerp als realisatie geldt dat er meerdere oplossingen mogelijk zijn. In dit project wordt aangegeven hoe de docenten van de academie *verwachten* dat je het moet doen en hoe het werk van een student dus beoordeeld wordt. Zie het als een afspraak zoals bij een bedrijf: dit is zoals we het nu doen, er zijn echter ook andere manieren maar die laten we even buiten beschouwing om diverse redenen.
+
+Deze afspraken gelden voor de development onderwijs eenheden van de Academie ICT in het eerste en tweede leerjaar.
+
+|Code|Omschrijving|
+|:-|:-|
+|A1D1|Programming Concepts|
+|B1C2|Introduction to development|
+|A2D1|Web application development|
+|B2C2|Web applications|
+|A2D2|Mobile application development|
+|B2C4|Mobile|
+
+
+> Leesaanwijzing: 
+> Alle gewone tekst geeft aan hoe het software ontwerp eruit ziet. Alle tekst in dit soort blokken geeft een extra toelichting betreffende de manier waarop beoordeeld wordt.
+
+
 ## Speluitleg
 Oorlog is een kaartspel dat meestal door twee spelers wordt gespeeld en het doel is om alle kaarten te verzamelen. Hier zijn de regels voor het kaartspel oorlog:
 
@@ -12,17 +30,38 @@ Oorlog is een zeer eenvoudig spel zonder veel strategie of tactiek, maar het is 
 
 ## Requirements
 
+Requirements worden opgehaald bij de opdrachtgever, of zelf samengesteld op basis van informatie die beschikbaar is (onderzoek naar andere systemen, opdrachtomschrijving, etc). In dit geval de omschrijving van het spel zoals hierboven vermeld.
+
+> Het opstellen van requirements is reeds in een eerdere onderwijs eenheid behandeld en is dus een herhaling. 
+> Requirements:
+> - zijn opgesplitst in randvoorwaarden, functionele- en niet funcionele requirements
+> - zijn uniek identificeerbaar
+> - zijn grammaticaal correct
+> - beginnen met een actor en hebbenminimaal één werkwoord
+> - zijn atomair
+> - bevatten geen ontwerpaspecten
+> - zijn meetbaar
+> - zijn onderling consistent
+> - zijn geprioriteerd
+> - zijn traceerbaar
+> 
+> De requirements die door de student worden opgesteld dienen effectief te zijn voor de vervolgstappen van het ontwerp en dus ondersteunend te zijn aan het proces. De  docent zal nooit alle requirements op de letter controleren en goedkeuren, maar zal wel kijken of er consistentie is en de juiste requirements leiden tot de juiste usecases (bijvoorbeeld).
+
 ### Randvoorwaarden
-Onderstaande zijn randvoorwaarden, geen requirements.
+> Onderstaande zijn randvoorwaarden, geen requirements.
+
 - Gegevens worden opgeslagen in Microsoft SQL server
 - De applicatie wordt geprogrammeerd in dotnet core met winforms
 - Geldende wetgeving wordt nageleefd (eigenlijk overbodig te vermelden)
 
 ### Functionele requirements
+
 - Requirements geïdentificeerd door nummering met afkorting betekenend: **P**layer, **G**ame, **T**urn, **O**verall
 - Prioritisering middels MoSCoW. Zie ook:[MoSCoW](https://nl.wikipedia.org/wiki/MoSCoW-methode). 
 - Opdrachtgever is eigenaar van alle requirements.
 - Requirements vloeien allen voort uit de bovenstaande speluitleg en doelstelling van het project.
+
+> In dit voorbeeld wordt MoSCoW gebruikt als methode om te prioriteren. Deze methode wordt gebruikt om te bepalen wat een stakeholder belangrijk vindt. Verschillende stakeholders kunnen verschillende zaken belangrijk vinden dus de student wordt uitgenodigd een andere manier van prioriteren te kiezen.
 
 | Identificatie | Beschrijving | MoSCoW |
 |:- |:- |:-|
@@ -52,7 +91,9 @@ Onderstaande zijn randvoorwaarden, geen requirements.
 |O4|De speler laadt een eerder opgeslagen spel|**C**ould have|
 
 ### Niet functionele requirements
-Niet functionele requirements gaan over kwaliteitskenmerken zoals omschreven in [ISO25010](https://nl.wikipedia.org/wiki/ISO_25010)
+> Niet functionele requirements gaan over kwaliteitskenmerken zoals omschreven in [ISO25010](https://nl.wikipedia.org/wiki/ISO_25010). Alle requirements die hier genoemd worden dienen dus te passen bij de genoemde kwaliteitskenmerken.
+> Als voorbeeld de requirement "Een gebruiker moet inloggen": dit is een niet functionele requirement en tevens een ontwerpaspect. De requirements zou bijvoorbeeld moeten gaan over tracability: "Het systeem moet loggen welke gebruiker de actie heeft uitgevoerd". Dit zorgt ervoor dat in het ontwerp waarschijnlijk ergens de keuze wordt gemaakt om een login te maken.
+
 - De code is herbruikbaar voor een toekomstige web applicatie (reusability)
 
 ## Ontwerp
