@@ -14,7 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\War\War.csproj" />
+    <ProjectReference Include="..\War\WarBusinessLogic.csproj" />
   </ItemGroup>
 
   <ItemGroup>

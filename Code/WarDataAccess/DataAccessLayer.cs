@@ -1,5 +1,5 @@
 ﻿using System.Data.SqlClient;
-using War.Model;
+using WarDataAccess;
 
 namespace War.DataAccess
 {
@@ -46,7 +46,7 @@ namespace War.DataAccess
         /// <param name="player">The player to create</param>
         /// <returns>The player including the playernumber</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public void CreatePlayerData(Player player)
+        public void CreatePlayerData(IPlayerData player)
         {
             // checks
             if (player == null) throw new ArgumentNullException(nameof(player));
@@ -75,12 +75,14 @@ namespace War.DataAccess
             }
         }
 
+
         /// <summary>
-        /// Read the player with the unique playernumber
+        /// Read the player with the unique player number
         /// </summary>
+        /// <typeparam name="T">The type of return object to create</typeparam>
         /// <param name="playerNumber">The number of the player</param>
-        /// <returns>The player</returns>
-        public Player? ReadPlayerData(int playerNumber)
+        /// <returns>The object of type T representing the player</returns>
+        public T? ReadPlayerData<T>(int playerNumber)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -103,26 +105,25 @@ namespace War.DataAccess
                             var winsString = reader[2].ToString() ?? "0";
                             var gamesString = reader[3].ToString() ?? "0";
 
-                            return new Player(
-                                Int32.Parse(idString),
-                                nameString,
-                                Int32.Parse(winsString),
-                                Int32.Parse(gamesString));
+                            // use of generic T, create a new object of T using a constructor on T with 4 params
+                            var returnValue = Activator.CreateInstance(typeof(T), new object[] { Int32.Parse(idString), nameString, Int32.Parse(winsString), Int32.Parse(gamesString) });
+                            if (returnValue != null)
+                                return (T)returnValue;
                         }
                     }
                     connection.Close();
                 }
             }
-            return null;
+            return default;
         }
 
         /// <summary>
         /// Read all players
         /// </summary>
         /// <returns>List with all players</returns>
-        public List<Player> ReadPlayersData()
+        public List<T> ReadPlayersData<T>()
         {
-            List<Player> players = new List<Player>();
+            List<T> players = new List<T>();
             using (SqlConnection connection = new SqlConnection())
             {
                 using (SqlCommand command = new SqlCommand())
@@ -143,10 +144,10 @@ namespace War.DataAccess
                                 var winsString = reader[2].ToString() ?? "0";
                                 var gamesString = reader[3].ToString() ?? "0";
 
-                                players.Add(new Player(
-                                    Int32.Parse(idString), nameString, Int32.Parse(winsString), Int32.Parse(gamesString))
-                                );
-
+                                // use of generic T, create a new object of T using a constructor on T with 4 params                            
+                                var playerAdd = Activator.CreateInstance(typeof(T), new object[] { Int32.Parse(idString), nameString, Int32.Parse(winsString), Int32.Parse(gamesString) });
+                                if (playerAdd != null)
+                                    players.Add((T)playerAdd);    
                             }
                     }
                     connection.Close();
@@ -161,13 +162,13 @@ namespace War.DataAccess
         /// </summary>
         /// <param name="player">The player to update</param>
         /// <exception cref="ArgumentNullException">The exception thrown if there is no player</exception>
-        public void UpdatePlayerData(Player player)
+        public void UpdatePlayerData(IPlayerData player)
         {
             if (player == null) throw new ArgumentNullException(nameof(player));
             if (player.PlayerNumber == 0)
             {
-                // create player instead of update
-                player.CreatePlayerData();
+                // cannot update a player that doesn't exist in the database
+                throw new Exception("Cannot update a player that doesn't exist in the database");
             }
             else
             {
@@ -208,9 +209,9 @@ namespace War.DataAccess
             }
         }
 
-        public List<Player> ReadHighscoreData()
+        public List<T> ReadHighscoreData<T>()
         {
-            List<Player> players = new List<Player>();
+            List<T> players = new List<T>();
             using (SqlConnection connection = new SqlConnection())
             {
                 using (SqlCommand command = new SqlCommand())
@@ -232,10 +233,10 @@ namespace War.DataAccess
                                 var winsString = reader[2].ToString() ?? "0";
                                 var gamesString = reader[3].ToString() ?? "0";
 
-                                players.Add(new Player(
-                                    Int32.Parse(idString), nameString, Int32.Parse(winsString), Int32.Parse(gamesString))
-                                );
-
+                                // use of generic T, create a new object of T using a constructor on T with 4 params                            
+                                var playerAdd = Activator.CreateInstance(typeof(T), new object[] { Int32.Parse(idString), nameString, Int32.Parse(winsString), Int32.Parse(gamesString) });
+                                if (playerAdd != null)
+                                    players.Add((T)playerAdd);
                             }
                         }
                     }

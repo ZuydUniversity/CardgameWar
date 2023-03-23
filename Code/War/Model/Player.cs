@@ -1,11 +1,12 @@
 ﻿using War.DataAccess;
+using WarDataAccess;
 
 namespace War.Model
 {
     /// <summary>
     /// Represents a player of the game
     /// </summary>
-    public class Player
+    public class Player : IPlayerData
     {
         private int playerNumber;
         /// <summary>
@@ -172,7 +173,7 @@ namespace War.Model
             try
             {
                 IDAL dal = new DataAccessLayer();
-                return dal.ReadPlayersData();
+                return dal.ReadPlayersData<Player>();
             }
             catch (Exception)
             {
@@ -189,7 +190,7 @@ namespace War.Model
             try
             {
                 IDAL dal = new DataAccessLayer();
-                return dal.ReadHighscoreData();
+                return dal.ReadHighscoreData<Player>();
             }
             catch (Exception)
             {
@@ -207,7 +208,7 @@ namespace War.Model
             try
             {
                 IDAL dal = new DataAccessLayer();
-                return dal.ReadPlayerData(playerNumber);
+                return dal.ReadPlayerData<Player>(playerNumber);
             }
             catch (Exception)
             {
