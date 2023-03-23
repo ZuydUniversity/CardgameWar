@@ -44,7 +44,6 @@ Oorlog is een zeer eenvoudig spel zonder veel strategie of tactiek, maar het is 
 > - meetbaar zijn 
 > - onderling consistent zijn
 > - geprioriteerd zijn
-> - traceerbaar zijn
 > 
 > De requirements die door de student worden opgesteld dienen effectief te zijn voor de vervolgstappen van het ontwerp en dus ondersteunend te zijn aan het proces. De  docent zal nooit alle requirements op de letter controleren en goedkeuren, maar zal wel kijken of er consistentie is en de juiste requirements leiden tot de juiste usecases (bijvoorbeeld).
 
