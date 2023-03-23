@@ -139,7 +139,7 @@ namespace War.Model
             UpdatePlayerData();
         }
 
-        // data access methods
+        // data access methods according to the "Active record pattern" https://en.wikipedia.org/wiki/Active_record_pattern
 
         /// <summary>
         /// Persist the player in the data layer
