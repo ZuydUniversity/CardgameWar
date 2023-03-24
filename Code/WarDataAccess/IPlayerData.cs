@@ -15,6 +15,5 @@ namespace WarDataAccess
         public string PlayerName { get; }
         public int Wins { get; }
         public int Games { get; }
-
     }
 }

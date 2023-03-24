@@ -1,4 +1,5 @@
 ﻿using System.Data.SqlClient;
+using System.Runtime.InteropServices;
 using WarDataAccess;
 
 namespace War.DataAccess
@@ -84,6 +85,10 @@ namespace War.DataAccess
         /// <returns>The object of type T representing the player</returns>
         public T? ReadPlayerData<T>(int playerNumber)
         {
+            // check if T implements IPlayerData
+            if (typeof(T) is not IPlayerData)
+                throw new Exception($"Invalid type {typeof(T)}");
+
             using (SqlConnection connection = new SqlConnection())
             {
                 using (SqlCommand command = new SqlCommand())
@@ -123,6 +128,10 @@ namespace War.DataAccess
         /// <returns>List with all players</returns>
         public List<T> ReadPlayersData<T>()
         {
+            // check if T implements IPlayerData
+            if (typeof(T) is not IPlayerData)
+                throw new Exception($"Invalid type {typeof(T)}");
+
             List<T> players = new List<T>();
             using (SqlConnection connection = new SqlConnection())
             {
@@ -211,6 +220,10 @@ namespace War.DataAccess
 
         public List<T> ReadHighscoreData<T>()
         {
+            // check if T implements IPlayerData
+            if (typeof(T) is not IPlayerData)
+                throw new Exception($"Invalid type {typeof(T)}");
+            
             List<T> players = new List<T>();
             using (SqlConnection connection = new SqlConnection())
             {
