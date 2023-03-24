@@ -76,18 +76,18 @@ namespace War.DataAccess
             }
         }
 
-
         /// <summary>
         /// Read the player with the unique player number
         /// </summary>
-        /// <typeparam name="T">The type of return object to create</typeparam>
+        /// <typeparam name="T">The type of return object to create, should implement IPlayerData</typeparam>
         /// <param name="playerNumber">The number of the player</param>
         /// <returns>The object of type T representing the player</returns>
+        /// <exception cref="InvalidTypeException">Type doesn't implement IPlayerData</exception>
         public T? ReadPlayerData<T>(int playerNumber)
         {
             // check if T implements IPlayerData
-            if (typeof(T) is not IPlayerData)
-                throw new Exception($"Invalid type {typeof(T)}");
+            if (!typeof(IPlayerData).IsAssignableFrom(typeof(T)))
+                throw new InvalidTypeException(typeof(T), typeof(IPlayerData));
 
             using (SqlConnection connection = new SqlConnection())
             {
@@ -125,12 +125,14 @@ namespace War.DataAccess
         /// <summary>
         /// Read all players
         /// </summary>
-        /// <returns>List with all players</returns>
+        /// <typeparam name="T">The type of return object to create, should implement IPlayerData</typeparam>
+        /// <returns>The list of objects of type T representing the players</returns>
+        /// <exception cref="InvalidTypeException">Type doesn't implement IPlayerData</exception>
         public List<T> ReadPlayersData<T>()
         {
             // check if T implements IPlayerData
-            if (typeof(T) is not IPlayerData)
-                throw new Exception($"Invalid type {typeof(T)}");
+            if (!typeof(IPlayerData).IsAssignableFrom(typeof(T)))
+                throw new InvalidTypeException(typeof(T), typeof(IPlayerData));
 
             List<T> players = new List<T>();
             using (SqlConnection connection = new SqlConnection())
@@ -218,11 +220,17 @@ namespace War.DataAccess
             }
         }
 
+        /// <summary>
+        /// Get the highscores
+        /// </summary>
+        /// <typeparam name="T">The type of return object to create, should implement IPlayerData</typeparam>
+        /// <returns>List with highscores</returns>
+        /// <exception cref="Exception">Invalid type</exception>
         public List<T> ReadHighscoreData<T>()
         {
             // check if T implements IPlayerData
-            if (typeof(T) is not IPlayerData)
-                throw new Exception($"Invalid type {typeof(T)}");
+            if (!typeof(IPlayerData).IsAssignableFrom(typeof(T)))
+                throw new InvalidTypeException(typeof(T), typeof(IPlayerData));
             
             List<T> players = new List<T>();
             using (SqlConnection connection = new SqlConnection())
