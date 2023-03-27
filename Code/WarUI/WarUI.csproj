@@ -14,6 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Advanced_War\Advanced_War.csproj" />
     <ProjectReference Include="..\War\War.csproj" />
   </ItemGroup>
 

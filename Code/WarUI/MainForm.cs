@@ -1,13 +1,17 @@
-using War.Model;
+using System.Data.SqlClient;
+using Advanced_War.Domain.GameDevelopment;
+using Advanced_War.Domain.GameTheory;
+using Advanced_War.Domain.GameTheory.Interfaces;
+using Advanced_War.Domain.WarDeck;
 using static System.Windows.Forms.ListView;
 
 namespace WarUI
 {
     public partial class MainForm : Form
     {
-        private Game? game;
-        private Player? p1;
-        private Player? p2;
+        private GameEngine? currentGame;
+        private Player? firstPlayer;
+        private Player? secondPlayer;
 
         public MainForm()
         {
@@ -18,15 +22,18 @@ namespace WarUI
 
         private void LoadPlayers()
         {
-            var playersBoxOne = Player.ReadPlayersData();
+            var connectionString = "Server=.;Database=CardGameExample;Trusted_Connection=True;";
+            IPlayerRepository playerRepository= new RepositoryFactory().CreateRepository(connectionString);
+            var playersBoxOne = playerRepository.Get();
             var playersBoxTwo = playersBoxOne.ToList();
 
             comboPlayerOne.DataSource = playersBoxOne;
-            comboPlayerOne.DisplayMember = "PlayerName";
+            comboPlayerOne.DisplayMember = "Name";
             comboPlayerTwo.DataSource = playersBoxTwo;
             comboPlayerTwo.DisplayMember = comboPlayerOne.DisplayMember;
         }
 
+        #region defaulMenuItems section
         private void MenuItemManagePlayers_Click(object sender, EventArgs e)
         {
             Form form = new ManagePlayersForm();
@@ -49,21 +56,27 @@ namespace WarUI
             form.ShowDialog();
             SetControls();
         }
+        #endregion
 
         private void ButtonCreateGame_Click(object sender, EventArgs e)
         {
-            if (comboPlayerOne.SelectedItem is Player p1
-                    && comboPlayerTwo.SelectedItem is Player p2)
+            if (comboPlayerOne.SelectedItem is Player firstPlayer
+                && comboPlayerTwo.SelectedItem is Player secondPlayer)
             {
-                if (p1.Equals(p2))
+                if (firstPlayer.Equals(secondPlayer))
                 {
                     MessageBox.Show("Select two different players!");
                 }
                 else
                 {
-                    this.p1 = p1;
-                    this.p2 = p2;
-                    game = new Game(this.p1, this.p2);
+                    this.firstPlayer = firstPlayer;
+                    this.secondPlayer = secondPlayer;
+                    currentGame = new GameEngine(new List<Player> { this.firstPlayer, this.secondPlayer });
+                    currentGame.GameStarted += this.CurrentGameOnGameStarted;
+                    currentGame.GameEnded += this.CurrentGameOnGameEnded;
+                    currentGame.TurnStarted += this.CurrentGameOnTurnStarted;
+                    currentGame.TurnEnded += this.CurrentGameOnTurnEnded;
+                    currentGame.StartNewGame();
                     SetControls();
                 }
             }
@@ -73,71 +86,80 @@ namespace WarUI
             }
         }
 
+        private void CurrentGameOnGameStarted(object? sender, GameEventArgs e)
+        {
+            buttonStartGame.Enabled = true;
+            buttonAutoPlay.Enabled = true;
+            buttonPlayTurn.Enabled = true;
+            buttonEndGame.Enabled = true;
+            SetPlayerInfo();
+            SetControls();
+        }
+        
+        private void CurrentGameOnTurnStarted(object? sender, GameEventArgs e)
+        {
+            SetPlayerInfo();
+        }
+        
+        private void CurrentGameOnTurnEnded(object? sender, GameEventArgs e)
+        {
+            SetPlayerInfo();
+        }
+
+        private void CurrentGameOnGameEnded(object? sender, GameEventArgs e)
+        {
+            MessageBox.Show(e.Message);
+            SetControls();
+        }
         private void SetControls()
         {
-            // values
-            labelPlayerOneOnTable.Text = $"Cards from {p1?.PlayerName} on table:";
-            labelPlayerOneCardsOnHand.Text = $"Cards on hand {p1?.CardCount}";
-            labelPlayerTwoOnTable.Text = $"Cards from {p2?.PlayerName} on table:";
-            labelPlayerTwoCardsOnHand.Text = $"Cards on hand {p2?.CardCount}";
-            StackToListviewItemCollection(lvCardsPlayerOne.Items, game?.PlayerOnePlayedCards);
-            StackToListviewItemCollection(lvCardsPlayerTwo.Items, game?.PlayerTwoPlayedCards);
-            buttonPlayTurn.Text = game != null ? $"Play turn: {game.Turn} starts" : string.Empty;
+            // visibility
+            labelPlayerOneOnTable.Visible = firstPlayer != null;
+            labelPlayerOneCardsOnHand.Visible = firstPlayer != null;
+            labelPlayerTwoOnTable.Visible = secondPlayer != null;
+            labelPlayerTwoCardsOnHand.Visible = secondPlayer != null;
 
+            comboPlayerOne.Enabled = currentGame == null;
+            comboPlayerTwo.Enabled = currentGame == null;
+            buttonCreateGame.Enabled = currentGame == null;
+        }
+        
+        private void SetPlayerInfo()
+        {
+            labelPlayerOneOnTable.Text = $"Cards from {firstPlayer?.Name} on table:";
+            labelPlayerOneCardsOnHand.Text = $"Cards on hand {firstPlayer?.CardCount}";
+            labelPlayerTwoOnTable.Text = $"Cards from {secondPlayer?.Name} on table:";
+            labelPlayerTwoCardsOnHand.Text = $"Cards on hand {secondPlayer?.CardCount}";
+
+            StackToListviewItemCollection(lvCardsPlayerOne.Items, firstPlayer?.PlayedCards);
+            StackToListviewItemCollection(lvCardsPlayerTwo.Items, secondPlayer?.PlayedCards);
+            
             // refresh
             lvCardsPlayerOne.Refresh();
             lvCardsPlayerTwo.Refresh();
             labelPlayerOneCardsOnHand.Refresh();
             labelPlayerTwoCardsOnHand.Refresh();
-
-            // visibility
-            labelPlayerOneOnTable.Visible = p1 != null;
-            labelPlayerOneCardsOnHand.Visible = p1 != null;
-            labelPlayerTwoOnTable.Visible = p2 != null;
-            labelPlayerTwoCardsOnHand.Visible = p2 != null;
-
-            comboPlayerOne.Enabled = game == null;
-            comboPlayerTwo.Enabled = game == null;
-            buttonCreateGame.Enabled = game == null;
-            buttonStartGame.Enabled = game != null && !game.GameStarted;
-            buttonEndGame.Enabled = game != null;
-            buttonAutoPlay.Enabled = game != null && game.GameStarted;
-            buttonPlayTurn.Enabled = game != null && game.GameStarted;
         }
-
         private void ButtonEndGame_Click(object sender, EventArgs e)
         {
-            game?.EndGame();
-            game = null;
-            SetControls();
+            currentGame?.StartNewGame();
+            currentGame = null;
+           
         }
 
         private void ButtonPlayTurn_Click(object sender, EventArgs e)
         {
-            if (game != null)
-            {
-                game.PlayRound();
-                SetControls();
-                if (game != null && game.Winner != null)
-                {
-                    MessageBox.Show($"Winner is {game.Winner.PlayerName}");
-                }
-            }
+            currentGame?.StartTurn();
         }
 
         private void ButtonAutoPlay_Click(object sender, EventArgs e)
         {
-            if (game != null)
+            if (currentGame == null) return;
+
+            Invoke(async () =>
             {
-                while (game.Winner == null)
-                {
-                    game.PlayRound();
-                    SetControls();
-                    Thread.Sleep(100);
-                }
-                MessageBox.Show($"Winner is {game.Winner.PlayerName}");
-                SetControls();
-            }
+                await this.currentGame.AutoPlayAsync(100);
+            });
         }
 
         /// <summary>
@@ -160,11 +182,7 @@ namespace WarUI
 
         private void ButtonStartGame_Click(object sender, EventArgs e)
         {
-            if (game != null)
-            {
-                game.StartGame();
-                SetControls();
-            }
+            currentGame?.StartNewGame();
         }
 
     }
