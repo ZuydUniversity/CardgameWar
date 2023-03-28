@@ -3,7 +3,7 @@
 namespace War.DataAccess
 {
     /// <summary>
-    /// Interface for data access layer implementation
+    /// Interface for data access layer implementation 
     /// </summary>
     public interface IDAL
     {
