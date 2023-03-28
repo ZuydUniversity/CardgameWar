@@ -59,13 +59,14 @@ namespace War.DataAccess
             // add player
             using (SqlConnection connection = new SqlConnection(ConnectionString()))
             {
-                string sql = "insert into Player (PlayerName, Wins, Games) VALUES (@name, @wins, @games)";
+                string sql = "insert into Player (PlayerName, Wins, Games, PlayerType) VALUES (@name, @wins, @games, @playertype)";
                 connection.Open();
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
                     command.Parameters.AddWithValue("@name", player.PlayerName);
                     command.Parameters.AddWithValue("@wins", player.Wins);
                     command.Parameters.AddWithValue("@games", player.Games);
+                    command.Parameters.AddWithValue("@playertype", player.ToString());
                     command.ExecuteNonQuery();
 
                     command.CommandText = "SELECT CAST(@@Identity as INT);";
