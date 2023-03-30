@@ -1,4 +1,5 @@
 using System.Data.SqlClient;
+using System.Text;
 using Advanced_War.Domain.GameDevelopment;
 using Advanced_War.Domain.GameTheory;
 using Advanced_War.Domain.GameTheory.Interfaces;
@@ -71,11 +72,12 @@ namespace WarUI
                 {
                     this.firstPlayer = firstPlayer;
                     this.secondPlayer = secondPlayer;
+
                     currentGame = new GameEngine(new List<Player> { this.firstPlayer, this.secondPlayer });
-                    currentGame.GameStarted += this.CurrentGameOnGameStarted;
-                    currentGame.GameEnded += this.CurrentGameOnGameEnded;
-                    currentGame.TurnStarted += this.CurrentGameOnTurnStarted;
-                    currentGame.TurnEnded += this.CurrentGameOnTurnEnded;
+                    currentGame.GameStarted += CurrentGameOnGameStarted;
+                    currentGame.GameEnded += CurrentGameOnGameEnded;
+                    currentGame.TurnStarted += CurrentGameOnTurnStarted;
+                    currentGame.TurnEnded += CurrentGameOnTurnEnded;
                     currentGame.StartNewGame();
                     SetControls();
                 }
@@ -126,25 +128,47 @@ namespace WarUI
         
         private void SetPlayerInfo()
         {
-            labelPlayerOneOnTable.Text = $"Cards from {firstPlayer?.Name} on table:";
-            labelPlayerOneCardsOnHand.Text = $"Cards on hand {firstPlayer?.CardCount}";
-            labelPlayerTwoOnTable.Text = $"Cards from {secondPlayer?.Name} on table:";
-            labelPlayerTwoCardsOnHand.Text = $"Cards on hand {secondPlayer?.CardCount}";
+            StringBuilder sbPlayerOne = new();
+            sbPlayerOne.Append("Cards from ");
+            sbPlayerOne.Append(firstPlayer?.Name);
+            sbPlayerOne.Append(" on table:");
+            labelPlayerOneOnTable.Text = sbPlayerOne.ToString();
+
+            StringBuilder sbPlayerOneCards = new();
+            sbPlayerOneCards.Append("Cards on hand ");
+            sbPlayerOneCards.Append(firstPlayer?.CardCount);
+            labelPlayerOneCardsOnHand.Text = sbPlayerOneCards.ToString();
+
+            StringBuilder sbPlayerTwo = new();
+            sbPlayerTwo.Append("Cards from ");
+            sbPlayerTwo.Append(secondPlayer?.Name);
+            sbPlayerTwo.Append(" on table:");
+            labelPlayerTwoOnTable.Text = sbPlayerTwo.ToString();
+
+            StringBuilder sbPlayerTwoCards = new();
+            sbPlayerTwoCards.Append("Cards on hand ");
+            sbPlayerTwoCards.Append(secondPlayer?.CardCount);
+            labelPlayerTwoCardsOnHand.Text = sbPlayerTwoCards.ToString();
 
             StackToListviewItemCollection(lvCardsPlayerOne.Items, firstPlayer?.PlayedCards);
             StackToListviewItemCollection(lvCardsPlayerTwo.Items, secondPlayer?.PlayedCards);
-            
-            // refresh
-            lvCardsPlayerOne.Refresh();
-            lvCardsPlayerTwo.Refresh();
-            labelPlayerOneCardsOnHand.Refresh();
-            labelPlayerTwoCardsOnHand.Refresh();
+    
+            // Invalidate instead of Refresh
+            lvCardsPlayerOne.Invalidate();
+            lvCardsPlayerTwo.Invalidate();
+            labelPlayerOneCardsOnHand.Invalidate();
+            labelPlayerTwoCardsOnHand.Invalidate();
         }
+        
         private void ButtonEndGame_Click(object sender, EventArgs e)
         {
-            currentGame?.StartNewGame();
+            currentGame?.EndGame();
             currentGame = null;
-           
+            this.firstPlayer = null;
+            this.secondPlayer = null;
+            LoadPlayers();
+            this.SetControls();
+            this.SetPlayerInfo();
         }
 
         private void ButtonPlayTurn_Click(object sender, EventArgs e)
@@ -158,7 +182,7 @@ namespace WarUI
 
             Invoke(async () =>
             {
-                await this.currentGame.AutoPlayAsync(100);
+                await this.currentGame.AutoPlayAsync(25);
             });
         }
 

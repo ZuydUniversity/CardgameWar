@@ -9,6 +9,7 @@ public class GameEngine{
     private readonly Deck deck;
     private int currentPlayerIndex = 0;
     private List<Card> cardsOnTable;
+    private bool gameHasEnded;
     public Player CurrentPlayer => players[currentPlayerIndex];
 
     public event EventHandler<GameEventArgs> GameStarted = null!;
@@ -29,6 +30,7 @@ public class GameEngine{
     
     public void StartNewGame()
     {
+        gameHasEnded = false;
         deck.Shuffle();
         DealCards();
         cardsOnTable = new List<Card>();
@@ -39,7 +41,7 @@ public class GameEngine{
     {
         this.TurnStarted += OnTurnStarted;
         this.GameEnded += OnGameEnded;
-
+        
         if (deck.CardsLeft != 0)
         {
             StartNewGame();
@@ -47,7 +49,6 @@ public class GameEngine{
 
         async void OnTurnStarted(object sender, GameEventArgs e)
         {
-            // Introduce a small delay to simulate thinking time
             await Task.Delay(autospeed);
             StartTurn();
         }
@@ -63,9 +64,10 @@ public class GameEngine{
 
     public void StartTurn()
     {
+        if (gameHasEnded) return;
         if (players[0].CardCount == 0 || players[1].CardCount == 0)
         {
-            throw new InvalidOperationException("Cannot start a new turn. One of the players has no cards left.");
+            this.GameEnded?.Invoke(this, new GameEventArgs("Cannot start a new turn. One of the players has no cards left."));
         }
 
         if (currentPlayerIndex == 0)
@@ -88,7 +90,11 @@ public class GameEngine{
         // Check for game end
         if (players[0].CardCount == 0 || players[1].CardCount == 0)
         {
+            gameHasEnded = true; 
             var gameWinner = players[0].CardCount > 0 ? players[0] : players[1];
+            var gameLoser = players[0].CardCount <= 0 ? players[0] : players[1];
+            gameWinner.AddPlayedGame(true);
+            gameLoser.AddPlayedGame(false);
             GameEnded?.Invoke(this, new GameEventArgs($"Game winner: {gameWinner.Name}"));
         }
     }
@@ -97,13 +103,13 @@ public class GameEngine{
         var firstPlayerLastPlayedCard = players[0].PlayedCards.Peek();
         var secondPlayerLastPlayedCard = players[1].PlayedCards.Peek();
 
-        if (firstPlayerLastPlayedCard.Rank > secondPlayerLastPlayedCard.Rank)
+        if (firstPlayerLastPlayedCard.GetValue() > secondPlayerLastPlayedCard.GetValue())
         {
             players[0].AddCardToHand(cardsOnTable);
             TurnEnded?.Invoke(this, new GameEventArgs($"Player {players[0].Name} wins the round."));
             ClearGameRound();
         }
-        else if (firstPlayerLastPlayedCard.Rank < secondPlayerLastPlayedCard.Rank)
+        else if (firstPlayerLastPlayedCard.GetValue() < secondPlayerLastPlayedCard.GetValue())
         {
             players[1].AddCardToHand(cardsOnTable);
             TurnEnded?.Invoke(this, new GameEventArgs($"Player {players[1].Name} wins the round."));
@@ -113,6 +119,11 @@ public class GameEngine{
         {
             TurnEnded?.Invoke(this, new GameEventArgs("It's a tie. Let's play on."));
         }
+    }
+
+    public void EndGame()
+    {
+        this.GameEnded?.Invoke(this, new GameEventArgs($"Game ended. There is no winner!"));
     }
 
     private void ClearGameRound()

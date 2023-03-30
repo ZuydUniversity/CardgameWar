@@ -4,11 +4,13 @@ namespace Advanced_War.Domain.GameTheory;
 
 public class Player
 {
+    private List<Card> hand;
+    
+    private Random random;
     public int Id { get; set; }
     public string Name { get; init; }
     public int Wins { get; private set; }
     public int Games { get; private set; }
-    private Queue<Card> Hand { get; set; }
     
     public Stack<Card> PlayedCards { get; private set; } = new Stack<Card>();
 
@@ -22,7 +24,8 @@ public class Player
         Id = playerNumber;
         Wins = wins;
         Games = games;
-        Hand = new Queue<Card>();
+        hand = new List<Card>();
+        random = new Random();
     }
 
     public void AddPlayedGame(bool victory)
@@ -47,7 +50,7 @@ public class Player
             throw new ArgumentNullException(nameof(card));
         } 
         
-        Hand.Enqueue(card);
+        this.hand.Add(card);
     }
 
     public void ResetPlayedCards()
@@ -57,15 +60,18 @@ public class Player
 
     public Card PlayCard()
     {
-        if (Hand.Count == 0)
+        if (this.hand.Count == 0)
         {
             throw new InvalidOperationException("Player has no cards left to play.");
         }
 
-        var playedCard = Hand.Dequeue();
-        PlayedCards.Push(playedCard);
-        return playedCard;
+        int randomIndex = random.Next(hand.Count);
+        Card selectedCard = hand[randomIndex];
+        hand.RemoveAt(randomIndex);
+        this.PlayedCards.Push(selectedCard);
+
+        return selectedCard;
     }
 
-    public int CardCount => Hand.Count;
+    public int CardCount => this.hand.Count;
 }
