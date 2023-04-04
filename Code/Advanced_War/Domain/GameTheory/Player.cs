@@ -35,7 +35,7 @@ public class Player
     }
     
     
-    public void AddCardToHand(List<Card> cards)
+    public void AddCardsToHand(List<Card> cards)
     {
         foreach (var card in cards)
         {

@@ -105,13 +105,13 @@ public class GameEngine{
 
         if (firstPlayerLastPlayedCard.GetValue() > secondPlayerLastPlayedCard.GetValue())
         {
-            players[0].AddCardToHand(cardsOnTable);
+            players[0].AddCardsToHand(cardsOnTable);
             TurnEnded?.Invoke(this, new GameEventArgs($"Player {players[0].Name} wins the round."));
             ClearGameRound();
         }
         else if (firstPlayerLastPlayedCard.GetValue() < secondPlayerLastPlayedCard.GetValue())
         {
-            players[1].AddCardToHand(cardsOnTable);
+            players[1].AddCardsToHand(cardsOnTable);
             TurnEnded?.Invoke(this, new GameEventArgs($"Player {players[1].Name} wins the round."));
             ClearGameRound();
         }
