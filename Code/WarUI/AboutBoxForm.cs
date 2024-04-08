@@ -30,7 +30,7 @@ namespace WarUI
                         return titleAttribute.Title;
                     }
                 }
-                return Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);
+                return Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location);
             }
         }
 
@@ -38,7 +38,11 @@ namespace WarUI
         {
             get
             {
-                return Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                var version = Assembly.GetExecutingAssembly().GetName().Version;
+                if (version != null)
+                    return version.ToString();
+                else
+                    return string.Empty;
             }
         }
 
