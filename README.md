@@ -97,7 +97,14 @@ Oorlog is een zeer eenvoudig spel zonder veel strategie of tactiek, maar het is 
 
 ## Ontwerp
 Ontwerpen zijn gemaakt met UMLet en opgeslagen in de map "Design".
+
 ### Conceptueel class diagram
+Een conceptueel class diagram is een statische, schematische weergave van het idee van de structuur van een informatiesysteem. Het heeft een hoog abstractieniveau en is bedoeld om de structuur van het systeem vast te leggen. 
+
+> - Een class diagram geeft entiteiten weer in een rechthoek met daarin de naam van de entiteit als zelfstandig naamwoord in enkelvoud. Associaties worden getekend met een lijn. Optioneel kun je schrijven boven deze lijn wat de associatie betekent. Het opschrijven van deze betekenis is dus niet verplicht maar kan wel duidelijkheid verschaffen betreffende hetgeen de ontwerper bedoelt. Het is dus aan te bevelen dit wel te doen. In onderstaande voorbeeld staat dus als verduidelijking vermeld dat de spelers een aantal kaarten "on hand" heeft. 
+> - De multipliciteit van de associatie wordt aangegeven met specifieke getallen of n of * indien niet gedefinieerd als specifiek getal. In onderstaand voorbeeld heeft een Deck 0 tot 52 kaarten. Een speler kan 0 of 1 spel aan het spelen zijn. n of * is niet gebruikt in het voorbeeld.
+> - We kunnen niet spreken van één juist diagram. Wat getekend wordt geeft een interpretatie van degene die het model maakt. Zo zou de multipliciteit van de speler naar het spel ook 0..n kunnen zijn: een speler speelt meerdere spellen. In dit voorbeeld is er echter voor gekozen dat de speler maximaal 1 spel tegelijk speelt. Dat wil niet zeggen dat alles altijd goed is. In dit voorbeeld zou een deck met maximaal 1 kaart niet te verdedigen zijn.
+
 ![Conceptueel class diagram](ClassDiagramConceptueel.jpg)
 
 ### Implementatie class diagram
