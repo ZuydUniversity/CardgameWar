@@ -38,8 +38,11 @@ namespace WarUI
         {
             get
             {
-                var version = Assembly.GetExecutingAssembly().GetName().Version?.ToString();
-                return version;
+                var version = Assembly.GetExecutingAssembly().GetName().Version;
+                if (version != null)
+                    return version.ToString();
+                else
+                    return string.Empty;
             }
         }
 
