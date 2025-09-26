@@ -1,66 +1,86 @@
 # CardGameWar
 
-Dit project is een voorbeelduitwerking voor studenten en docenten van de Academie ICT. Middels dit project wordt getoond hoe een software ontwerp en realisatie eruit zouden *kunnen* zien. Voor zowel ontwerp als realisatie geldt dat er meerdere oplossingen mogelijk zijn. In dit project wordt aangegeven hoe de docenten van de academie *verwachten* dat je het moet doen en hoe het werk van een student dus beoordeeld wordt. Zie het als een afspraak zoals bij een bedrijf: dit is zoals we het nu doen, er zijn echter ook andere manieren maar die laten we even buiten beschouwing om diverse redenen.
+## 📖 Projectbeschrijving
 
-Deze afspraken gelden voor de development onderwijs eenheden van de Academie ICT in het eerste en tweede leerjaar.
+Dit project is een voorbeelduitwerking voor studenten en docenten van de Academie ICT. Het demonstreert hoe een softwareontwerp en -realisatie eruit kunnen zien. Voor zowel ontwerp als realisatie bestaan er meerdere oplossingen. Dit project toont hoe de docenten van de academie verwachten dat je het moet aanpakken en hoe studentenwerk wordt beoordeeld.
 
-|Code|Omschrijving|
-|:-|:-|
-|A1D1|Programming Concepts|
-|B1C2|Introduction to development|
-|A2D1|Web application development|
-|B2C2|Web applications|
-|A2D2|Mobile application development|
-|B2C4|Mobile|
+Zie het als een afspraak zoals bij een bedrijf: dit is de manier waarop we het nu doen. Er zijn ook andere benaderingen mogelijk, maar die laten we buiten beschouwing om de focus te behouden.
+
+> **💡 Leesaanwijzing:** 
+> Alle gewone tekst beschrijft het softwareontwerp. Tekst in deze blokken geeft extra toelichting over de beoordelingscriteria.
+
+## 📑 Inhoudsopgave
+
+- [Speluitleg](#-speluitleg)
+- [Requirements](#-requirements)
+  - [Randvoorwaarden](#-randvoorwaarden)
+  - [Functionele Requirements](#️-functionele-requirements)
+  - [Niet-functionele Requirements](#-niet-functionele-requirements)
+- [Ontwerp](#-ontwerp)
+  - [Conceptueel Klassendiagram](#️-conceptueel-klassendiagram)
+  - [Implementatie Klassendiagram](#-implementatie-klassendiagram)
+  - [Use Case Diagram](#-use-case-diagram)
+  - [Use Case Beschrijvingen](#-use-case-beschrijvingen)
+  - [Sequentiediagrammen](#-sequentiediagrammen)
+- [Verdiepingsopdrachten](#-verdiepingsopdrachten)
 
 
-> Leesaanwijzing: 
-> Alle gewone tekst geeft aan hoe het software ontwerp eruit ziet. Alle tekst in dit soort blokken geeft een extra toelichting betreffende de manier waarop beoordeeld wordt.
+## 🎮 Speluitleg
 
+**War (Oorlog)** is een klassiek kaartspel voor twee spelers waarbij het doel is om alle kaarten te verzamelen.
 
-## Speluitleg
-Oorlog is een kaartspel dat meestal door twee spelers wordt gespeeld en het doel is om alle kaarten te verzamelen. Hier zijn de regels voor het kaartspel oorlog:
+### Spelregels
 
-- Het spel wordt gespeeld met een standaard deck van 52 kaarten zonder jokers. De kaarten worden geschud en verdeeld over de twee spelers.
-- De spelers draaien elk de bovenste kaart van hun stapel om. De speler met de hoogste kaart wint de ronde en verzamelt de twee kaarten. De kaartwaarden worden als volgt gerangschikt: Aas (hoogste kaart), Koning, Vrouw, Boer, 10, 9, 8, 7, 6, 5, 4, 3, 2.
-- Als beide spelers kaarten hebben van gelijke waarde, dan begint er een "oorlog". Elke speler legt dan drie kaarten met de rug naar boven op de tafel en draait de vierde kaart om. De speler met de hoogste kaart wint de oorlog en verzamelt alle kaarten van die ronde. Als de kaarten weer gelijk zijn, dan wordt dit proces herhaald.
-- Het spel gaat door totdat één speler alle kaarten heeft verzameld. Die speler wint het spel.
+1. **Setup**: Het spel wordt gespeeld met een standaarddeck van 52 kaarten (zonder jokers). De kaarten worden geschud en gelijk verdeeld over beide spelers.
 
-Oorlog is een zeer eenvoudig spel zonder veel strategie of tactiek, maar het is leuk om te spelen voor kinderen en beginners die net beginnen met het spelen van kaartspellen.
+2. **Speelronde**: 
+   - Beide spelers draaien gelijktijdig de bovenste kaart van hun stapel om
+   - De speler met de hoogste kaart wint beide kaarten
+   - **Kaartwaarden** (hoogste naar laagste): Aas, Koning, Vrouw, Boer, 10, 9, 8, 7, 6, 5, 4, 3, 2
 
-## Requirements
+3. **Oorlog**:
+   - Bij gelijke kaartwaarden ontstaat "oorlog"
+   - Elke speler legt drie kaarten gedekt neer en draait de vierde kaart om
+   - De hoogste vierde kaart wint alle kaarten van die ronde
+   - Bij opnieuw gelijke waarden wordt dit proces herhaald
 
-> Requirements worden opgehaald bij de opdrachtgever, of zelf samengesteld op basis van informatie die beschikbaar is (onderzoek naar andere systemen, opdrachtomschrijving, etc). In dit geval de omschrijving van het spel zoals hierboven vermeld.
->
-> Het opstellen van requirements is reeds in een eerdere onderwijs eenheid behandeld en is dus een herhaling. Er wordt niet opnieuw aandacht besteed aan de theorie betreffende het maken van requirements.
+4. **Winnen**: Het spel eindigt wanneer één speler alle kaarten heeft verzameld
+
+### Kenmerken
+- Eenvoudig spel zonder strategie of tactiek
+- Geschikt voor beginners en kinderen
+- Volledig gebaseerd op geluk
+
+## 📋 Requirements
+
+Requirements zijn opgesteld op basis van de speluitleg en projectdoelstellingen. Ze vormen de basis voor het ontwerp en de implementatie.
+
+> **🎯 Beoordelingscriteria voor requirements:**
+> - Opgesplitst in randvoorwaarden, functionele en niet-functionele requirements
+> - Uniek identificeerbaar en grammaticaal correct
+> - Beginnen met een actor en bevatten minimaal één werkwoord
+> - Atomair (niet verder op te splitsen)
+> - Geen ontwerpaspecten, wel meetbaar
+> - Onderling consistent en geprioriteerd
 > 
-> Voor beoordeling wordt verwacht dat requirements:
-> - zijn opgesplitst in randvoorwaarden, functionele- en niet funcionele requirements
-> - uniek identificeerbaar zijn
-> - grammaticaal correct zijn
-> - beginnen met een actor en minimaal één werkwoord hebben
-> - atomair zijn
-> - geen ontwerpaspecten bevatten
-> - meetbaar zijn 
-> - onderling consistent zijn
-> - geprioriteerd zijn
-> 
-> De requirements die door de student worden opgesteld dienen effectief te zijn voor de vervolgstappen van het ontwerp en dus ondersteunend te zijn aan het proces. De  docent zal nooit alle requirements op de letter controleren en goedkeuren, maar zal wel kijken of er consistentie is en de juiste requirements leiden tot de juiste usecases (bijvoorbeeld).
+> Requirements moeten effectief zijn voor vervolgstappen in het ontwerpproces. Consistentie en bruikbaarheid voor use cases zijn belangrijker dan perfecte formulering.### 
 
-### Randvoorwaarden
+### 🔧 Randvoorwaarden
 
-- Gegevens worden opgeslagen in Microsoft SQL server
-- De applicatie wordt geprogrammeerd in dotnet core met winforms
-- Geldende wetgeving wordt nageleefd (eigenlijk overbodig te vermelden)
+- **Database**: Gegevens worden opgeslagen in Microsoft SQL Server
+- **Technologie**: De applicatie wordt ontwikkeld in .NET Core met WinForms
+- **Compliance**: Geldende wetgeving wordt nageleefd
 
-### Functionele requirements
+### ⚙️ Functionele Requirements
 
-- Requirements geïdentificeerd door nummering met afkorting betekenend: **P**layer, **G**ame, **T**urn, **O**verall
-- Prioritisering middels MoSCoW. Zie ook:[MoSCoW](https://nl.wikipedia.org/wiki/MoSCoW-methode). 
-- Opdrachtgever is eigenaar van alle requirements.
-- Requirements vloeien allen voort uit de bovenstaande speluitleg en doelstelling van het project.
+**Identificatie en prioritering:**
+- **Nummering**: **P**layer, **G**ame, **T**urn, **O**verall
+- **Prioritering**: [MoSCoW-methode](https://nl.wikipedia.org/wiki/MoSCoW-methode)
+- **Eigenaarschap**: Opdrachtgever is eigenaar van alle requirements
+- **Bron**: Gebaseerd op speluitleg en projectdoelstellingen
 
-> In dit voorbeeld wordt MoSCoW gebruikt als methode om te prioriteren. Deze methode wordt gebruikt om te bepalen wat een stakeholder belangrijk vindt. Verschillende stakeholders kunnen verschillende zaken belangrijk vinden dus de student wordt uitgenodigd een andere manier van prioriteren te kiezen.
+> **📊 MoSCoW Prioritering:**
+> Deze methode bepaalt wat stakeholders belangrijk vinden. Verschillende stakeholders kunnen verschillende prioriteiten hebben. Studenten kunnen alternatieve prioriteringsmethoden kiezen.
 
 | Identificatie | Beschrijving | Prioritering |
 |:- |:- |:-|
@@ -89,31 +109,42 @@ Oorlog is een zeer eenvoudig spel zonder veel strategie of tactiek, maar het is 
 |O3|De speler slaat het spel tussentijds op|**C**ould have|
 |O4|De speler laadt een eerder opgeslagen spel|**C**ould have|
 
-### Niet functionele requirements
-> Niet functionele requirements gaan over kwaliteitskenmerken zoals omschreven in [ISO25010](https://nl.wikipedia.org/wiki/ISO_25010). Alle requirements die hier genoemd worden dienen dus te passen bij de genoemde kwaliteitskenmerken.
-> Als voorbeeld de requirement "Een gebruiker moet inloggen": dit is een niet functionele requirement en tevens een ontwerpaspect. De requirements zou bijvoorbeeld moeten gaan over tracability: "Het systeem moet loggen welke gebruiker de actie heeft uitgevoerd". Dit zorgt ervoor dat in het ontwerp waarschijnlijk ergens de keuze wordt gemaakt om een login te maken.
+### 🔧 Niet-functionele Requirements
 
-- De code is herbruikbaar voor een toekomstige web applicatie (reusability)
+- **Herbruikbaarheid**: De code is herbruikbaar voor een toekomstige webapplicatie
 
-## Ontwerp
-Ontwerpen zijn gemaakt met UMLet en opgeslagen in de map "Design".
+> **📚 Kwaliteitskenmerken volgens [ISO 25010](https://nl.wikipedia.org/wiki/ISO_25010):**
+> Niet-functionele requirements beschrijven kwaliteitsaspecten van het systeem. Ze moeten passen bij gestandaardiseerde kwaliteitskenmerken.
+> 
+> **Voorbeeld van goede formulering:**
+> - ❌ "Een gebruiker moet inloggen" (ontwerpaspect)
+> - ✅ "Het systeem moet loggen welke gebruiker acties uitvoert" (kwaliteitseis voor traceerbaarheid)
 
-### Conceptueel class diagram
-Een conceptueel class diagram is een statische, schematische weergave van het idee van de structuur van een informatiesysteem. Het heeft een hoog abstractieniveau en is bedoeld om de structuur van het systeem vast te leggen. 
+## 🎨 Ontwerp
 
-> - Een class diagram geeft entiteiten weer in een rechthoek met daarin de naam van de entiteit als zelfstandig naamwoord in enkelvoud. Associaties worden getekend met een lijn. Optioneel kun je schrijven boven deze lijn wat de associatie betekent. Het opschrijven van deze betekenis is dus niet verplicht maar kan wel duidelijkheid verschaffen betreffende hetgeen de ontwerper bedoelt. Het is dus aan te bevelen dit wel te doen. In onderstaande voorbeeld staat dus als verduidelijking vermeld dat de spelers een aantal kaarten "on hand" heeft. 
-> - De multipliciteit van de associatie wordt aangegeven met specifieke getallen of n of * indien niet gedefinieerd als specifiek getal. In onderstaand voorbeeld heeft een Deck 0 tot 52 kaarten. Een speler kan 0 of 1 spel aan het spelen zijn. n of * is niet gebruikt in het voorbeeld.
-> - We kunnen niet spreken van één juist diagram. Wat getekend wordt geeft een interpretatie van degene die het model maakt. Zo zou de multipliciteit van de speler naar het spel ook 0..n kunnen zijn: een speler speelt meerdere spellen. In dit voorbeeld is er echter voor gekozen dat de speler maximaal 1 spel tegelijk speelt. Dat wil niet zeggen dat alles altijd goed is. In dit voorbeeld zou een deck met maximaal 1 kaart niet te verdedigen zijn.
+Alle diagrammen zijn gemaakt met UMLet en opgeslagen in de map `Design/`.
 
-![Conceptueel class diagram](ClassDiagramConceptueel.jpg)
+### 🏗️ Conceptueel Klassendiagram
 
-### Implementatie class diagram
-![Implementatie class diagram](ClassDiagram.jpg)
+Een conceptueel klassendiagram toont de abstracte structuur van het informatiesysteem op hoog niveau. Het legt de kernentiteiten en hun onderlinge relaties vast.
 
-### Usecase diagram
-![Usacase diagram](UsecaseDiagram.jpg)
+> **📐 UML Klassendiagram Richtlijnen:**
+> - **Entiteiten**: Rechthoeken met enkelvoudige zelfstandige naamwoorden
+> - **Associaties**: Lijnen tussen entiteiten (optioneel met betekenis-labels)
+> - **Multipliciteit**: Specifieke getallen, `n` of `*` voor onbepaalde aantallen
+> - **Interpretatie**: Geen "juist" diagram bestaat - verschillende interpretaties zijn mogelijk
+> 
+> **Voorbeeld:** Een speler heeft kaarten "on hand" (0..26), een deck bevat kaarten (0..52). De keuze dat een speler maximaal 1 spel tegelijk speelt is een ontwerpbeslissing.
 
-### Usecase desciptions
+![Conceptueel Klassendiagram](ClassDiagramConceptueel.jpg)
+
+### 🔧 Implementatie Klassendiagram
+![Implementatie Klassendiagram](ClassDiagram.jpg)
+
+### 👤 Use Case Diagram
+![Use Case Diagram](UsecaseDiagram.jpg)
+
+### 📝 Use Case Beschrijvingen
 | Usecase | UC1: Register ||
 |:------------- |:-------------|:-|
 | **Beschrijving**  | Speler registreert een unieke naam|
@@ -151,15 +182,63 @@ Een conceptueel class diagram is een statische, schematische weergave van het id
 | **Main success scenario**| 1, 2, 3, 4, 5, 6|
 | **Alternatieve scenario's**||
 
-### Sequence diagrams
-![Sequence diagram](SequenceDiagrams.jpg)
+### 🔄 Sequentiediagrammen
+![Sequentiediagrammen](SequenceDiagrams.jpg)
 
+### 🖼️ Wireframes
+*Nog te implementeren*
 
-### Wireframes
-// todo
+## 🛠️ Technische Details
 
-## Verdieping
-Verdiepingsopdrachten voor studenten.
-Maak een fork van deze repository en kies één van de onderstaande opdrachten. Idealiter 
-- Implementeer requirement T5 en T5.1, de valsspeler (oefenen met afgeleide classes en polymorfisme)
-- Implementeer requirement O3 en O4, savegame (oefenen met database en DAL)
+### Projectstructuur
+```
+📦 CardGameWar/
+├── 📁 Code/
+│   ├── 📄 CardgameWar.sln          # Visual Studio Solution
+│   ├── 📁 War/                     # Core Game Logic
+│   │   ├── 📄 Program.cs
+│   │   ├── 📁 Model/               # Domain Models
+│   │   ├── 📁 DataAccess/          # Data Access Layer
+│   │   └── 📁 Exceptions/          # Custom Exceptions
+│   └── 📁 WarUI/                   # WinForms User Interface
+├── 📁 DatabaseScripts/             # SQL Database Scripts
+├── 📁 Design/                      # UML Design Files
+└── 📄 README.md                    # Dit bestand
+```
+
+### Technologiestack
+- **Framework**: .NET Core
+- **UI**: Windows Forms
+- **Database**: Microsoft SQL Server
+- **Modellering**: UMLet
+
+### 🚀 Ontwikkelomgeving
+- **IDE**: Visual Studio 2019/2022
+- **Vereisten**: .NET Core SDK, SQL Server
+
+## 🚀 Verdiepingsopdrachten
+
+Voor studenten die hun kennis willen uitbreiden:
+
+### 📥 Aan de slag
+1. **Fork** deze repository
+2. Kies één van onderstaande opdrachten
+3. Implementeer de gekozen functionaliteit
+
+### 🎯 Opdrachten
+
+#### 🃏 **Valsspeler** (Object-Oriented Programming)
+- **Requirements**: T5 en T5.1
+- **Leerdoelen**: Afgeleide klassen en polymorfisme
+- **Beschrijving**: Implementeer een speler die vals kan spelen door strategisch kaarten te kiezen
+
+#### 💾 **Save Game** (Database & Data Access)
+- **Requirements**: O3 en O4
+- **Leerdoelen**: Database-interactie en Data Access Layer
+- **Beschrijving**: Voeg functionaliteit toe om spellen op te slaan en later te hervatten
+
+### 🏆 Beoordelingscriteria
+- Code kwaliteit en architectuur
+- Correcte implementatie van OOP-principes
+- Werkende functionaliteit volgens requirements
+- Documentatie van gemaakte keuzes
