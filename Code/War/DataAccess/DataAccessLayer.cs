@@ -17,7 +17,8 @@ namespace War.DataAccess
         /// The generated connection string
         /// </summary>
         /// <returns></returns>
-        private string ConnectionString() => $"Data Source={serverName};Initial Catalog={databaseName};Integrated Security=True";
+        private string ConnectionString() => $"Data Source={serverName};Initial Catalog={databaseName};Integrated Security=True"; // Connection string met Windows authenticatie (werkt niet in Docker met SQL Server)
+        //private string ConnectionString() => $"Data Source={serverName};Initial Catalog={databaseName};User ID=sa;Password=DevPassword123!"; // Nieuwe connection string voor SQL Server in Docker met gebruiker 'sa' en wachtwoord 'DevPassword123!'
 
         /// <summary>
         /// default constructor
